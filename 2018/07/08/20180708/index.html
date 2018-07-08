@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="本文参考http://www.cnblogs.com/simengphp/p/6261687.html 仅供个人记录收藏学习 cookie(1)Cookie的由来以及介绍 Cookie是作为互联网的产物随之产生的，也是为了保存用户的一些基本的信息，也可以理解为服务器在你计算机上暂时保存的一些信息，下次来的时候先看看这些信息资料，然后直接加载这些资料，送出特定的信息。 (2)Cookie的机制 Co">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-08T10:27:03.128Z">
+<meta property="og:updated_time" content="2018-07-08T10:33:23.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="cookie与session">
 <meta name="twitter:description" content="本文参考http://www.cnblogs.com/simengphp/p/6261687.html 仅供个人记录收藏学习 cookie(1)Cookie的由来以及介绍 Cookie是作为互联网的产物随之产生的，也是为了保存用户的一些基本的信息，也可以理解为服务器在你计算机上暂时保存的一些信息，下次来的时候先看看这些信息资料，然后直接加载这些资料，送出特定的信息。 (2)Cookie的机制 Co">
@@ -332,8 +332,7 @@
 <p><2>缺点：a.客户端大小受限制 b.用户禁用Cookie那么就废用了 c.不安全</2></p>
 <p>(6)Cookie和Session的区别和联系</p>
 <p><1>联系：Cookie可以在客户端为session保存唯一标识</1></p>
-<p><2>区别：Cookie机制采用的是在客户端(浏览器)保持状态的方案，而session机制采用的是在服务器端保持状态的方案</2></p>
-<p>7）Cookie的使用</p>
+<p><2>区别：Cookie机制采用的是在客户端(浏览器)保持状态的方案，而session机制采用的是在服务器端保持状态的方案<br><a id="more"></a><br>7）Cookie的使用</2></p>
 <p><1>创建和更新：setCookie($cookieName,$value,time()+秒数)；<br>实例：setcookie(“UserName”,”imooc”,time()+2<em>7</em>24*3600);</1></p>
 <p>取值：$uName=$_COOKIE[‘UserName’];</p>
 <p><2>删除Cookie<br>setcookie($cookieName,value,time()-秒数)；<br>//或者 setcookie($cookiename, ‘’);<br>//或者 setcookie($cookiename, NULL);</2></p>
