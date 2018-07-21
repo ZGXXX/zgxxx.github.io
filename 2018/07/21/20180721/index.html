@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="PHPExcel读取表格  先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类">
+<meta name="description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自行脑补">
+<meta property="og:title" content="PHPExcel读取表格">
 <meta property="og:url" content="http://yoursite.com/2018/07/21/20180721/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="PHPExcel读取表格  先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类">
+<meta property="og:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-21T03:38:42.938Z">
+<meta property="og:updated_time" content="2018-07-21T03:45:23.198Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自行脑补">
-<meta name="twitter:description" content="PHPExcel读取表格  先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类">
+<meta name="twitter:title" content="PHPExcel读取表格">
+<meta name="twitter:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | 自行脑补</title>
+  <title>PHPExcel读取表格 | 自行脑补</title>
   
 
 
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">PHPExcel读取表格</h1>
         
 
         <div class="post-meta">
@@ -319,9 +319,7 @@
       
 
       
-        <p>PHPExcel读取表格</p>
-<hr>
-<p>先引入类IOFactory.php</p>
+        <p>先引入类IOFactory.php</p>
 <pre><code>require_once &apos;../PHPExcel/IOFactory.php&apos;;
 $filePath = &quot;test.xlsx&quot;;  // 测试文件
 </code></pre><p>加载测试文件</p>
@@ -341,7 +339,8 @@ $filePath = &quot;test.xlsx&quot;;  // 测试文件
 } catch(Exception $e) {
     unlink($filePath) &amp;&amp; str_alert(-1,&apos;加载文件发生错误：”&apos;.pathinfo($filePath,PATHINFO_BASENAME).&apos;”: &apos;.$e-&gt;getMessage());
     }
-</code></pre><h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3><pre><code>$sheet = $objPHPExcel-&gt;getSheet(0);
+</code></pre><h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3><a id="more"></a>
+<pre><code>$sheet = $objPHPExcel-&gt;getSheet(0);
 //或者
 $sheet = $objPHPExcel-&gt;getActiveSheet();
 </code></pre><h3 id="获取工作表行数和列数"><a href="#获取工作表行数和列数" class="headerlink" title="获取工作表行数和列数"></a>获取工作表行数和列数</h3><pre><code>$highestRow = $sheet-&gt;getHighestRow();

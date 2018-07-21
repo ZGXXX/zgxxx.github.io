@@ -271,7 +271,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/21/20180721/" itemprop="url">未命名</a></h1>
+                <a class="post-title-link" href="/2018/07/21/20180721/" itemprop="url">PHPExcel读取表格</a></h1>
         
 
         <div class="post-meta">
@@ -322,10 +322,7 @@
 
       
         
-          
-            <p>PHPExcel读取表格</p>
-<hr>
-<p>先引入类IOFactory.php</p>
+          <p>先引入类IOFactory.php</p>
 <pre><code>require_once &apos;../PHPExcel/IOFactory.php&apos;;
 $filePath = &quot;test.xlsx&quot;;  // 测试文件
 </code></pre><p>加载测试文件</p>
@@ -345,38 +342,14 @@ $filePath = &quot;test.xlsx&quot;;  // 测试文件
 } catch(Exception $e) {
     unlink($filePath) &amp;&amp; str_alert(-1,&apos;加载文件发生错误：”&apos;.pathinfo($filePath,PATHINFO_BASENAME).&apos;”: &apos;.$e-&gt;getMessage());
     }
-</code></pre><h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3><pre><code>$sheet = $objPHPExcel-&gt;getSheet(0);
-//或者
-$sheet = $objPHPExcel-&gt;getActiveSheet();
-</code></pre><h3 id="获取工作表行数和列数"><a href="#获取工作表行数和列数" class="headerlink" title="获取工作表行数和列数"></a>获取工作表行数和列数</h3><pre><code>$highestRow = $sheet-&gt;getHighestRow();
-$highestColumn = $sheet-&gt;getHighestColumn();
-</code></pre><p>注意:有时候你会发现你的表格明明有内容的行数就5行,但是获取到的$highestRow却有7,8行或者更多,这可能是因为你在操作你的表格的时候不小心点击了其它行数,虽然没有填写内容,但getHighestRow也是能够识别出行数;<br>想要获取有内容的行数应该使用getHighestDataRow和getHighestDataColumn<br>源码注释是这样介绍的string Highest row number that contains data,即包含数据的字符串最高行数.</p>
-<h3 id="单元格具体内容"><a href="#单元格具体内容" class="headerlink" title="单元格具体内容"></a>单元格具体内容</h3><p>xlsx类型的表格单元格是通过类似xy轴坐标来获取的,</p>
-<p> 可通过类似</p>
-<pre><code>$sheet-&gt;getCell(&quot;A1&quot;)-&gt;getValue();
-$sheet-&gt;getCell(&quot;B2&quot;)-&gt;getValue();
-</code></pre><p>  获取相应位置的内容,<br>  如果不想通过字母了来遍历获取,可以用数字索引方法</p>
-<pre><code>$sheet-&gt;getCellByColumnAndRow(0,1);
-$sheet-&gt;getCellByColumnAndRow(1,2);
-</code></pre><p>  注意坐标中第一个参数从0开始,0代表A,1代表B…,第二个参数从1开始.<br>  下面是遍历表格获取全部单元格内容:</p>
-<pre><code>$dataSet=array();
-for ($column = &quot;A&quot;; $column &lt;= $highestColumn; $column++) {//列数是以A列开始
-    for ($row = 4; $row &lt;= $highestRow; $row++) { //行数是以第4行开始
-        $cell = $sheet-&gt;getCell($column . $row)-&gt;getValue();
-        if($cell instanceof PHPExcel_RichText) { //富文本转换字符串
-            $cell = $cell-&gt;__toString();
-        }
-        $dataSet[$row][] = $cell;
-    }
-}
-</code></pre><p>其中富文本转换字符串,是使用$cell instanceof PHPExcel_RichText判断是否为富文本,查阅资料发现如果你的单元格中字符串包含两种以上的字体会自动被设为富文本,这时候需要__toString()转换</p>
-<h3 id="判断合并单元格是否位于最左上角"><a href="#判断合并单元格是否位于最左上角" class="headerlink" title="判断合并单元格是否位于最左上角"></a>判断合并单元格是否位于最左上角</h3><p>当我们循环输出所有单元格后发现,一些被合并的单元格只有最左上坐标的是有内容的,其他都是null<br>例如A4,A5合并成一个单元格,getCell(“A4”)是有正常内容的,但是getCell(“A5”)是null.<br>isMergeRangeValueCell可以用来判断某个具体的单元格是否为最左上角</p>
-<pre><code>$sheet-&gt;getCell(&apos;A&apos; . $row)-&gt;isMergeRangeValueCell()
-</code></pre><p>当$row为4的时候是返回true,5的时候返回false</p>
-<h3 id="转换时间"><a href="#转换时间" class="headerlink" title="转换时间"></a>转换时间</h3><p>获取表格中时间格式的内容,需要PHPExcel_Shared_Date::ExcelToPHP()来转换为php可识别的时间格式</p>
-<pre><code>date(&apos;Y-m-d&apos;,PHPExcel_Shared_Date::ExcelToPHP($sometime);
-</code></pre>
-          
+</code></pre><h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/21/20180721/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
