@@ -327,9 +327,9 @@
 $filePath = &quot;test.xlsx&quot;;  // 测试文件
 </code></pre><p>加载测试文件</p>
 <ol>
-<li>\$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型</li>
-<li>\$objReader = PHPExcel_IOFactory::createReader(\$inputFileType); 实例化类型对象</li>
-<li>\$objPHPExcel = $objReader-&gt;load(\$filePath); 加载文件</li>
+<li>$inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型</li>
+<li>$objReader = PHPExcel_IOFactory::createReader($inputFileType); 实例化类型对象</li>
+<li>$objPHPExcel = $objReader-&gt;load($filePath); 加载文件</li>
 </ol>
 <p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件</p>
 <pre><code>try {

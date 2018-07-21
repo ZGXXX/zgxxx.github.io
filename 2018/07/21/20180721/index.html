@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
+<meta name="description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHPExcel读取表格">
 <meta property="og:url" content="http://yoursite.com/2018/07/21/20180721/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
+<meta property="og:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-21T03:45:23.198Z">
+<meta property="og:updated_time" content="2018-07-21T03:46:49.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHPExcel读取表格">
-<meta name="twitter:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  \$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型 \$objReader">
+<meta name="twitter:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
 
 
 
@@ -324,9 +324,9 @@
 $filePath = &quot;test.xlsx&quot;;  // 测试文件
 </code></pre><p>加载测试文件</p>
 <ol>
-<li>\$inputFileType = PHPExcel_IOFactory::identify(\$filePath) 判断文件类型</li>
-<li>\$objReader = PHPExcel_IOFactory::createReader(\$inputFileType); 实例化类型对象</li>
-<li>\$objPHPExcel = $objReader-&gt;load(\$filePath); 加载文件</li>
+<li>$inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型</li>
+<li>$objReader = PHPExcel_IOFactory::createReader($inputFileType); 实例化类型对象</li>
+<li>$objPHPExcel = $objReader-&gt;load($filePath); 加载文件</li>
 </ol>
 <p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件</p>
 <pre><code>try {
