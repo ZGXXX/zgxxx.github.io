@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="设计模式六大原则 开放封闭原则：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。里氏替换原则：所有引用基类的地方必须能透明地使用其子类的对象.依赖倒置原则：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。单一职责原则：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。接口隔离原则：客户端不应该依赖它不需要的接口；一个类对另一个类的依">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-28T17:23:02.701Z">
+<meta property="og:updated_time" content="2018-07-28T17:30:57.262Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP设计模式（一）">
 <meta name="twitter:description" content="设计模式六大原则 开放封闭原则：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。里氏替换原则：所有引用基类的地方必须能透明地使用其子类的对象.依赖倒置原则：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。单一职责原则：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。接口隔离原则：客户端不应该依赖它不需要的接口；一个类对另一个类的依">
@@ -498,11 +498,20 @@ $lakersPlayer-&gt;rebound();
 </code></pre><p>所以工厂模式：不需要NBA这个背后大boss亲自去创建球员，只需要定义一个想要创建球员这样的接口，实例工作就交给子类也就是球队去创建就行了，当我们想要增加一个自己喜欢的球员来玩，只需要添加一个具体的球员，然后设置他有什么动作呀，能力呀，再对应你想要他在哪一支队伍就ok了，这样就不需要修改现有系统代码，系统的扩展性变得很好，符合面向对象编程的开闭原则</p>
 <p>整体代码如下：</p>
 <pre><code>&lt;?php
+
+/**
+ *  球员动作
+ * Interface Player
+ */
 interface Player{
     public function shot();
     public function rebound();
 }
 
+/**
+ * 设置韦德投篮以及抢篮板
+ * Class Wade
+ */
 class Wade implements Player
 {
     public function shot()
@@ -515,6 +524,10 @@ class Wade implements Player
     }
 }
 
+/**
+ * 设置科比投篮以及抢篮板
+ * Class Kobe
+ */
 class Kobe implements Player
 {
     public function shot()
@@ -527,15 +540,29 @@ class Kobe implements Player
     }
 }
 
+/**
+ * 整个游戏NBA具备创建球员这一项功能
+ * Class NbaFactory
+ */
 abstract class NbaFactory{
     abstract  static function createPlayer();
 }
+
+/**
+ * 热火队创建了韦德这样的球员
+ * Class HeatTeam
+ */
 class HeatTeam extends NbaFactory{
     public static function createPlayer()
     {
         return new Wade();
     }
 }
+
+/**
+ * 湖人队创建了科比这样的球员
+ * Class LakersTeam
+ */
 class LakersTeam extends  NbaFactory{
     public static function createPlayer()
     {
@@ -543,10 +570,16 @@ class LakersTeam extends  NbaFactory{
     }
 }
 
+/**
+ *  选择热火队，并且测试韦德的动作
+ */
 $heatPlayer = HeatTeam::createPlayer();
 $heatPlayer-&gt;shot();
 $heatPlayer-&gt;rebound();
 
+/**
+ *  选择湖人队，并且测试科比的动作
+ */
 $lakersPlayer = LakersTeam::createPlayer();
 $lakersPlayer-&gt;shot();
 $lakersPlayer-&gt;rebound();
