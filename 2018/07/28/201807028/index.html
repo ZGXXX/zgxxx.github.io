@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="设计模式六大原则 开放封闭原则：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。里氏替换原则：所有引用基类的地方必须能透明地使用其子类的对象.依赖倒置原则：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。单一职责原则：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。接口隔离原则：客户端不应该依赖它不需要的接口；一个类对另一个类的依">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-29T16:25:58.340Z">
+<meta property="og:updated_time" content="2018-07-29T16:29:51.801Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP设计模式（一）">
 <meta name="twitter:description" content="设计模式六大原则 开放封闭原则：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。里氏替换原则：所有引用基类的地方必须能透明地使用其子类的对象.依赖倒置原则：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。单一职责原则：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。接口隔离原则：客户端不应该依赖它不需要的接口；一个类对另一个类的依">
@@ -321,54 +321,364 @@
       
         <p>设计模式六大原则</p>
 <p>开放封闭原则：一个软件实体如类、模块和函数应该对扩展开放，对修改关闭。<br>里氏替换原则：所有引用基类的地方必须能透明地使用其子类的对象.<br>依赖倒置原则：高层模块不应该依赖低层模块，二者都应该依赖其抽象；抽象不应该依赖细节；细节应该依赖抽象。<br>单一职责原则：不要存在多于一个导致类变更的原因。通俗的说，即一个类只负责一项职责。<br>接口隔离原则：客户端不应该依赖它不需要的接口；一个类对另一个类的依赖应该建立在最小的接口上。<br>迪米特法则  ：一个对象应该对其他对象保持最少的了解。</p>
-<h3 id="单例模式-（创建设计模式）"><a href="#单例模式-（创建设计模式）" class="headerlink" title="单例模式 （创建设计模式）"></a>单例模式 （创建设计模式）</h3><p>要点：只有一个实例，作为对象的创建模式，单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。<br>常见: 数据库连接，日志错误记录（多种用途使用多种模式）<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br><span class="line">288</span><br><span class="line">289</span><br><span class="line">290</span><br><span class="line">291</span><br><span class="line">292</span><br><span class="line">293</span><br><span class="line">294</span><br><span class="line">295</span><br><span class="line">296</span><br><span class="line">297</span><br><span class="line">298</span><br><span class="line">299</span><br><span class="line">300</span><br><span class="line">301</span><br><span class="line">302</span><br><span class="line">303</span><br><span class="line">304</span><br><span class="line">305</span><br><span class="line">306</span><br><span class="line">307</span><br><span class="line">308</span><br><span class="line">309</span><br><span class="line">310</span><br><span class="line">311</span><br><span class="line">312</span><br><span class="line">313</span><br><span class="line">314</span><br><span class="line">315</span><br><span class="line">316</span><br><span class="line">317</span><br><span class="line">318</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 单例模式</span><br><span class="line"> */</span><br><span class="line">class Singleton</span><br><span class="line">&#123;</span><br><span class="line">    /**</span><br><span class="line">     * @var self[保存实例]</span><br><span class="line">     */</span><br><span class="line">    private static $instance;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * @var</span><br><span class="line">     */</span><br><span class="line">    public $mix;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * return self instance [创建一个用来实例化对象的方法]</span><br><span class="line">     */</span><br><span class="line">    public static function getInstace()</span><br><span class="line">    &#123;</span><br><span class="line">        var_dump(isset(self::$instance));</span><br><span class="line">        if (!self::$instance instanceof self) &#123;</span><br><span class="line">            self::$instance = new self();</span><br><span class="line">        &#125;</span><br><span class="line">        return self::$instance;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * Singleton constructor.构造函数为private，防止创建对象</span><br><span class="line">     */</span><br><span class="line">    private function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;实例初始化了&quot;;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private function __clone()</span><br><span class="line">    &#123;</span><br><span class="line">        // TODO: Implement __clone() method.</span><br><span class="line">        trigger_error(&apos;Clone is not allowed!&apos;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">// @Test</span><br><span class="line">$firstSingle = Singleton::getInstace();</span><br><span class="line">$secondSingle = Singleton::getInstace();</span><br><span class="line"></span><br><span class="line">$firstSingle-&gt;mix = &apos;one&apos;;</span><br><span class="line">//一开始mix是赋值‘one&apos;,所以打印出one</span><br><span class="line">print_r($firstSingle-&gt;mix);</span><br><span class="line"></span><br><span class="line">//由于getInstace该方法保证了Singleton类只能有一个实例，不会再重新new，minx依然用firstSingle的，mix被改变成’two‘</span><br><span class="line">$secondSingle-&gt;mix = &apos;two&apos;;  </span><br><span class="line">print_r($firstSingle-&gt;mix);</span><br><span class="line">print_r($secondSingle-&gt;mix);</span><br><span class="line"></span><br><span class="line">``````    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">打印结果：bool(false) 实例初始化了bool(true) onetwotwo</span><br><span class="line"></span><br><span class="line">### 简单工厂模式 （创建设计模式） ###</span><br><span class="line"></span><br><span class="line">要点：可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 简单工厂模式</span><br><span class="line"> */</span><br><span class="line"></span><br><span class="line">interface SystemFactory</span><br><span class="line">&#123;</span><br><span class="line">    public function createSystem($type);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MySystemFactory implements SystemFactory</span><br><span class="line">&#123;</span><br><span class="line">    // 实现工厂方法</span><br><span class="line">    public function createSystem($type)</span><br><span class="line">    &#123;</span><br><span class="line">        switch ($type) &#123;</span><br><span class="line">            case &apos;Mac&apos;:</span><br><span class="line">                return new MacSystem();</span><br><span class="line">            case &apos;Win&apos;:</span><br><span class="line">                return new WinSystem();</span><br><span class="line">            case &apos;Linux&apos;:</span><br><span class="line">                return new LinuxSystem();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class MacSystem</span><br><span class="line">&#123;</span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I am Mac system&lt;/br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class WinSystem</span><br><span class="line">&#123;</span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I am Win system&lt;/br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class LinuxSystem</span><br><span class="line">&#123;</span><br><span class="line">    public function __construct()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I am Linux system&lt;/br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">//创建系统工厂</span><br><span class="line">$systemObj = new MySystemFactory();</span><br><span class="line"></span><br><span class="line">$systemArray = array(&apos;Mac&apos;,&apos;Linux&apos;,&apos;Win&apos;);</span><br><span class="line">foreach ($systemArray as $val) &#123;</span><br><span class="line">    $systemObj-&gt;createSystem($val);</span><br><span class="line">&#125;</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">打印结果：</span><br><span class="line">I am Mac system</span><br><span class="line">I am Linux system</span><br><span class="line">I am Win system</span><br><span class="line"></span><br><span class="line">### 工厂模式 （创建设计模式） ###</span><br><span class="line">要点：此模式中，通过定义一个抽象的核心工厂类，并定义创建产品对象的接口，创建具体产品实例的工作延迟到其工厂子类去完成。这样做的好处是核心类只关注工厂类的接口定义，而具体的产品实例交给具体的工厂子类去创建。当系统需要新增一个产品，无需修改现有系统代码，只需要添加一个具体产品类和其对应的工厂子类，是系统的扩展性变得很好，符合面向对象编程的开闭原则;</span><br><span class="line"></span><br><span class="line">我的理解：</span><br><span class="line"></span><br><span class="line">按我平时喜欢玩的篮球游戏nba2k系列来代入。我来模拟整个NBA联盟,一开始是没有球员的，我需要不断的创建球员，具体就交给Nba底下的各个子类，也就是各个球队去创建就好</span><br><span class="line"></span><br><span class="line">首先有一个球员接口，可以定义球员的投射还有抢篮板球的动作，注意这里的每个球员暂时只有这两个动作，生产出来的球员只有投射和抢篮板动作</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">interface Player&#123;</span><br><span class="line">    public function shot();</span><br><span class="line">    public function rebound();</span><br><span class="line">&#125;</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line">然后具体到球员自己的动作</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">class Wade implements Player</span><br><span class="line">&#123;</span><br><span class="line">    public function shot()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can shot in middle distance&lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function rebound()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can crash the boards &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">class Kobe implements Player</span><br><span class="line">&#123;</span><br><span class="line">    public function shot()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can shot the three-point &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function rebound()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can crash the boards &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line">定义一个抽象的核心工厂类，也就是整个游戏有一个创建球员页面</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">abstract class NbaFactory&#123;</span><br><span class="line">    abstract  static function createPlayer();</span><br><span class="line">&#125;</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line">我喜欢热火，就来操作热火还有湖人好了，创一个韦德还有科比来玩玩</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">class HeatTeam extends NbaFactory&#123;</span><br><span class="line">    public static function createPlayer()</span><br><span class="line">    &#123;</span><br><span class="line">        return new Wade();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">class LakersTeam extends  NbaFactory&#123;</span><br><span class="line">    public static function createPlayer()</span><br><span class="line">    &#123;</span><br><span class="line">        return new Kobe();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">一切准备好了，就去场上试试能不能打：选人然后投篮抢篮板</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">$heatPlayer = HeatTeam::createPlayer();</span><br><span class="line">$heatPlayer-&gt;shot();</span><br><span class="line">$heatPlayer-&gt;rebound();</span><br><span class="line"></span><br><span class="line">$lakersPlayer = LakersTeam::createPlayer();</span><br><span class="line">$lakersPlayer-&gt;shot();</span><br><span class="line">$lakersPlayer-&gt;rebound();</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line">所以工厂模式：不需要NBA这个背后大boss亲自去创建球员，只需要定义一个想要创建球员这样的接口，实例工作就交给子类也就是球队去创建就行了，当我们想要增加一个自己喜欢的球员来玩，只需要添加一个具体的球员，然后设置他有什么动作呀，能力呀，再对应你想要他在哪一支队伍就ok了，这样就不需要修改现有系统代码，系统的扩展性变得很好，符合面向对象编程的开闭原则</span><br><span class="line"></span><br><span class="line">整体代码如下：</span><br><span class="line"></span><br><span class="line">``````  </span><br><span class="line">&lt;?php</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  球员动作</span><br><span class="line"> * Interface Player</span><br><span class="line"> */</span><br><span class="line">interface Player&#123;</span><br><span class="line">    public function shot();</span><br><span class="line">    public function rebound();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 设置韦德投篮以及抢篮板</span><br><span class="line"> * Class Wade</span><br><span class="line"> */</span><br><span class="line">class Wade implements Player</span><br><span class="line">&#123;</span><br><span class="line">    public function shot()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can shot in middle distance&lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function rebound()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can crash the boards &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 设置科比投篮以及抢篮板</span><br><span class="line"> * Class Kobe</span><br><span class="line"> */</span><br><span class="line">class Kobe implements Player</span><br><span class="line">&#123;</span><br><span class="line">    public function shot()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can shot the three-point &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">    public function rebound()</span><br><span class="line">    &#123;</span><br><span class="line">        echo &quot;I can crash the boards &lt;br&gt;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 整个游戏NBA具备创建球员这一项功能</span><br><span class="line"> * Class NbaFactory</span><br><span class="line"> */</span><br><span class="line">abstract class NbaFactory&#123;</span><br><span class="line">    abstract  static function createPlayer();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 热火队创建了韦德这样的球员</span><br><span class="line"> * Class HeatTeam</span><br><span class="line"> */</span><br><span class="line">class HeatTeam extends NbaFactory&#123;</span><br><span class="line">    public static function createPlayer()</span><br><span class="line">    &#123;</span><br><span class="line">        return new Wade();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * 湖人队创建了科比这样的球员</span><br><span class="line"> * Class LakersTeam</span><br><span class="line"> */</span><br><span class="line">class LakersTeam extends  NbaFactory&#123;</span><br><span class="line">    public static function createPlayer()</span><br><span class="line">    &#123;</span><br><span class="line">        return new Kobe();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  选择热火队，并且测试韦德的动作</span><br><span class="line"> */</span><br><span class="line">$heatPlayer = HeatTeam::createPlayer();</span><br><span class="line">$heatPlayer-&gt;shot();</span><br><span class="line">$heatPlayer-&gt;rebound();</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> *  选择湖人队，并且测试科比的动作</span><br><span class="line"> */</span><br><span class="line">$lakersPlayer = LakersTeam::createPlayer();</span><br><span class="line">$lakersPlayer-&gt;shot();</span><br><span class="line">$lakersPlayer-&gt;rebound();</span><br><span class="line">``````  </span><br><span class="line"></span><br><span class="line"></span><br><span class="line">### 抽象工厂模式 （创建设计模式） ###</span><br><span class="line"></span><br><span class="line">要点：提供一个创建一系列相关或相互依赖对象的接口。注意：这里和工厂方法的区别是：一系列（多个），而工厂方法只有一个。。在工厂方法模式中，一个具体的工厂负责生产一类具体的产品，即一对一的关系，但是，如果需要一个具体的工厂生产多种产品对象，那么就需要用到抽象工厂模式了。</span><br><span class="line"></span><br><span class="line">我的理解：</span><br><span class="line">工厂模式，一个工厂辅助生产一类具体的产品，就像上边的例子，球员创建，只有投篮还有抢篮板动作，无论创建韦德科比还是詹姆斯都是只有这两种。而抽象工厂，需要生产多种产品，例如下面有两个游戏页面，球衣样式设置和球鞋样式设置，这两个页面底下是各种包含自己的方法，球衣页面是主客场球衣设置，球鞋页面是高低帮和颜色设置。</span><br><span class="line"></span><br><span class="line">整体代码如下：</span><br></pre></td></tr></table></figure></p>
-<p>&lt;?php</p>
-<p>/**</p>
-<ul>
-<li>球衣样式设置(客场球衣&amp;主场球衣)</li>
-<li>Interface Uniform<br>*/<br>interface Uniform{<br> public function home();<br> public function away();<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>设置热火主客场球衣样式</li>
-<li><p>Class HeatUniform<br>*/<br>class HeatUniform implements Uniform<br>{<br> public function home()<br> {</p>
-<pre><code>echo &quot;Set the Heat&apos;s uniform with red and white &lt;br&gt;&quot;;
-</code></pre><p> }</p>
-<p> public function away()<br> {</p>
-<pre><code>echo &quot;Set the Heat&apos;s uniform with black and red &lt;br&gt;&lt;br&gt;&quot;;
-</code></pre><p> }<br>}</p>
-</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>球鞋样式设置(球鞋款式&amp;球鞋主颜色)</li>
-<li>Interface Shoes<br>*/<br>interface Shoes{<br> public function style();<br> public function color();<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>设置热火主客场球衣样式</li>
-<li>Class HeatUniform<br>*/<br>class HeatShoes implements Shoes<br>{<br> public function style()<br> {<pre><code>echo &quot;Set the Heat&apos;s Shoes&apos;style as height shoes &lt;br&gt;&quot;;
-</code></pre> }<br> public function color()<br> {<pre><code>echo &quot;Set the Heat&apos;s Shoes&apos;color as white &lt;br&gt;&quot;;
-</code></pre> }<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>游戏球队设置页面，包括了服装设置和球鞋设置</li>
-<li>Class TeamSetting<br>*/<br>abstract class TeamSetting{<br> abstract public static function setUniform();<br> abstract public static function setShoes();<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>热火队的球队设置页面，有热火球衣和热火球鞋设置</li>
-<li>Class HeatSetting<br>*/<br>class HeatSetting extends TeamSetting<br>{<br> public static function setUniform()<br> {<pre><code>return new HeatUniform();
-</code></pre> }<br> public static function setShoes()<br> {<pre><code>return new HeatShoes();
-</code></pre> }<br>}</li>
-</ul>
-<p>/**</p>
-<ul>
-<li>操作一：进入热火队球衣设置，主场球衣设置为红白，客场球衣设置为红黑<br>*/<br>$myControl1 = HeatSetting::setUniform();<br>$myControl1-&gt;home();<br>$myControl1-&gt;away();<br>/**</li>
-<li>操作二：进入热火队球鞋设置，球鞋样式设置为高帮，颜色设置为白色<br>*/<br>$myControl2 = HeatSetting::setShoes();<br>$myControl2-&gt;style();<br>$myControl2-&gt;color();<br><code>`</code></li>
-</ul>
+<h3 id="单例模式-（创建设计模式）"><a href="#单例模式-（创建设计模式）" class="headerlink" title="单例模式 （创建设计模式）"></a>单例模式 （创建设计模式）</h3><p>要点：只有一个实例，作为对象的创建模式，单例模式确保某一个类只有一个实例，而且自行实例化并向整个系统提供这个实例。<br>常见: 数据库连接，日志错误记录（多种用途使用多种模式）<br><a id="more"></a></p>
+<pre><code>&lt;?php
 
+/**
+ * 单例模式
+ */
+class Singleton
+{
+    /**
+     * @var self[保存实例]
+     */
+    private static $instance;
+
+    /**
+     * @var
+     */
+    public $mix;
+
+    /**
+     * return self instance [创建一个用来实例化对象的方法]
+     */
+    public static function getInstace()
+    {
+        var_dump(isset(self::$instance));
+        if (!self::$instance instanceof self) {
+            self::$instance = new self();
+        }
+        return self::$instance;
+    }
+
+    /**
+     * Singleton constructor.构造函数为private，防止创建对象
+     */
+    private function __construct()
+    {
+        echo &quot;实例初始化了&quot;;
+    }
+
+    private function __clone()
+    {
+        // TODO: Implement __clone() method.
+        trigger_error(&apos;Clone is not allowed!&apos;);
+    }
+}
+
+// @Test
+$firstSingle = Singleton::getInstace();
+$secondSingle = Singleton::getInstace();
+
+$firstSingle-&gt;mix = &apos;one&apos;;
+//一开始mix是赋值‘one&apos;,所以打印出one
+print_r($firstSingle-&gt;mix);
+
+//由于getInstace该方法保证了Singleton类只能有一个实例，不会再重新new，minx依然用firstSingle的，mix被改变成’two‘
+$secondSingle-&gt;mix = &apos;two&apos;;  
+print_r($firstSingle-&gt;mix);
+print_r($secondSingle-&gt;mix);
+
+</code></pre><p>打印结果：bool(false) 实例初始化了bool(true) onetwotwo</p>
+<h3 id="简单工厂模式-（创建设计模式）"><a href="#简单工厂模式-（创建设计模式）" class="headerlink" title="简单工厂模式 （创建设计模式）"></a>简单工厂模式 （创建设计模式）</h3><p>要点：可以根据参数的不同返回不同类的实例。简单工厂模式专门定义一个类来负责创建其他类的实例，被创建的实例通常都具有共同的父类。</p>
+<pre><code>&lt;?php
+
+/**
+ * 简单工厂模式
+ */
+
+interface SystemFactory
+{
+    public function createSystem($type);
+}
+
+class MySystemFactory implements SystemFactory
+{
+    // 实现工厂方法
+    public function createSystem($type)
+    {
+        switch ($type) {
+            case &apos;Mac&apos;:
+                return new MacSystem();
+            case &apos;Win&apos;:
+                return new WinSystem();
+            case &apos;Linux&apos;:
+                return new LinuxSystem();
+        }
+    }
+}
+
+class MacSystem
+{
+    public function __construct()
+    {
+        echo &quot;I am Mac system&lt;/br&gt;&quot;;
+    }
+}
+
+class WinSystem
+{
+    public function __construct()
+    {
+        echo &quot;I am Win system&lt;/br&gt;&quot;;
+    }
+}
+
+class LinuxSystem
+{
+    public function __construct()
+    {
+        echo &quot;I am Linux system&lt;/br&gt;&quot;;
+    }
+}
+
+//创建系统工厂
+$systemObj = new MySystemFactory();
+
+$systemArray = array(&apos;Mac&apos;,&apos;Linux&apos;,&apos;Win&apos;);
+foreach ($systemArray as $val) {
+    $systemObj-&gt;createSystem($val);
+}
+</code></pre><p>打印结果：<br>I am Mac system<br>I am Linux system<br>I am Win system</p>
+<h3 id="工厂模式-（创建设计模式）"><a href="#工厂模式-（创建设计模式）" class="headerlink" title="工厂模式 （创建设计模式）"></a>工厂模式 （创建设计模式）</h3><p>要点：此模式中，通过定义一个抽象的核心工厂类，并定义创建产品对象的接口，创建具体产品实例的工作延迟到其工厂子类去完成。这样做的好处是核心类只关注工厂类的接口定义，而具体的产品实例交给具体的工厂子类去创建。当系统需要新增一个产品，无需修改现有系统代码，只需要添加一个具体产品类和其对应的工厂子类，是系统的扩展性变得很好，符合面向对象编程的开闭原则;</p>
+<p>我的理解：</p>
+<p>按我平时喜欢玩的篮球游戏nba2k系列来代入。我来模拟整个NBA联盟,一开始是没有球员的，我需要不断的创建球员，具体就交给Nba底下的各个子类，也就是各个球队去创建就好</p>
+<p>首先有一个球员接口，可以定义球员的投射还有抢篮板球的动作，注意这里的每个球员暂时只有这两个动作，生产出来的球员只有投射和抢篮板动作</p>
+<pre><code>interface Player{
+    public function shot();
+    public function rebound();
+}
+</code></pre><p>然后具体到球员自己的动作</p>
+<pre><code>class Wade implements Player
+{
+    public function shot()
+    {
+        echo &quot;I can shot in middle distance&lt;br&gt;&quot;;
+    }
+    public function rebound()
+    {
+        echo &quot;I can crash the boards &lt;br&gt;&quot;;
+    }
+}
+
+class Kobe implements Player
+{
+    public function shot()
+    {
+        echo &quot;I can shot the three-point &lt;br&gt;&quot;;
+    }
+    public function rebound()
+    {
+        echo &quot;I can crash the boards &lt;br&gt;&quot;;
+    }
+}
+</code></pre><p>定义一个抽象的核心工厂类，也就是整个游戏有一个创建球员页面</p>
+<pre><code>abstract class NbaFactory{
+    abstract  static function createPlayer();
+}
+</code></pre><p>我喜欢热火，就来操作热火还有湖人好了，创一个韦德还有科比来玩玩</p>
+<pre><code>class HeatTeam extends NbaFactory{
+    public static function createPlayer()
+    {
+        return new Wade();
+    }
+}
+class LakersTeam extends  NbaFactory{
+    public static function createPlayer()
+    {
+        return new Kobe();
+    }
+}
+</code></pre><p>一切准备好了，就去场上试试能不能打：选人然后投篮抢篮板</p>
+<pre><code>$heatPlayer = HeatTeam::createPlayer();
+$heatPlayer-&gt;shot();
+$heatPlayer-&gt;rebound();
+
+$lakersPlayer = LakersTeam::createPlayer();
+$lakersPlayer-&gt;shot();
+$lakersPlayer-&gt;rebound();
+</code></pre><p>所以工厂模式：不需要NBA这个背后大boss亲自去创建球员，只需要定义一个想要创建球员这样的接口，实例工作就交给子类也就是球队去创建就行了，当我们想要增加一个自己喜欢的球员来玩，只需要添加一个具体的球员，然后设置他有什么动作呀，能力呀，再对应你想要他在哪一支队伍就ok了，这样就不需要修改现有系统代码，系统的扩展性变得很好，符合面向对象编程的开闭原则</p>
+<p>整体代码如下：</p>
+<pre><code>&lt;?php
+
+/**
+ *  球员动作
+ * Interface Player
+ */
+interface Player{
+    public function shot();
+    public function rebound();
+}
+
+/**
+ * 设置韦德投篮以及抢篮板
+ * Class Wade
+ */
+class Wade implements Player
+{
+    public function shot()
+    {
+        echo &quot;I can shot in middle distance&lt;br&gt;&quot;;
+    }
+    public function rebound()
+    {
+        echo &quot;I can crash the boards &lt;br&gt;&quot;;
+    }
+}
+
+/**
+ * 设置科比投篮以及抢篮板
+ * Class Kobe
+ */
+class Kobe implements Player
+{
+    public function shot()
+    {
+        echo &quot;I can shot the three-point &lt;br&gt;&quot;;
+    }
+    public function rebound()
+    {
+        echo &quot;I can crash the boards &lt;br&gt;&quot;;
+    }
+}
+
+/**
+ * 整个游戏NBA具备创建球员这一项功能
+ * Class NbaFactory
+ */
+abstract class NbaFactory{
+    abstract  static function createPlayer();
+}
+
+/**
+ * 热火队创建了韦德这样的球员
+ * Class HeatTeam
+ */
+class HeatTeam extends NbaFactory{
+    public static function createPlayer()
+    {
+        return new Wade();
+    }
+}
+
+/**
+ * 湖人队创建了科比这样的球员
+ * Class LakersTeam
+ */
+class LakersTeam extends  NbaFactory{
+    public static function createPlayer()
+    {
+        return new Kobe();
+    }
+}
+
+/**
+ *  选择热火队，并且测试韦德的动作
+ */
+$heatPlayer = HeatTeam::createPlayer();
+$heatPlayer-&gt;shot();
+$heatPlayer-&gt;rebound();
+
+/**
+ *  选择湖人队，并且测试科比的动作
+ */
+$lakersPlayer = LakersTeam::createPlayer();
+$lakersPlayer-&gt;shot();
+$lakersPlayer-&gt;rebound();
+</code></pre><h3 id="抽象工厂模式-（创建设计模式）"><a href="#抽象工厂模式-（创建设计模式）" class="headerlink" title="抽象工厂模式 （创建设计模式）"></a>抽象工厂模式 （创建设计模式）</h3><p>要点：提供一个创建一系列相关或相互依赖对象的接口。注意：这里和工厂方法的区别是：一系列（多个），而工厂方法只有一个。。在工厂方法模式中，一个具体的工厂负责生产一类具体的产品，即一对一的关系，但是，如果需要一个具体的工厂生产多种产品对象，那么就需要用到抽象工厂模式了。</p>
+<p>我的理解：<br>工厂模式，一个工厂辅助生产一类具体的产品，就像上边的例子，球员创建，只有投篮还有抢篮板动作，无论创建韦德科比还是詹姆斯都是只有这两种。而抽象工厂，需要生产多种产品，例如下面有两个游戏页面，球衣样式设置和球鞋样式设置，这两个页面底下是各种包含自己的方法，球衣页面是主客场球衣设置，球鞋页面是高低帮和颜色设置。</p>
+<p>整体代码如下：</p>
+<pre><code>&lt;?php
+
+/**
+ * 球衣样式设置(客场球衣&amp;主场球衣)
+ * Interface Uniform
+ */
+interface Uniform{
+    public function home();
+    public function away();
+}
+
+/**
+ * 设置热火主客场球衣样式
+ * Class HeatUniform
+ */
+class HeatUniform implements Uniform
+{
+    public function home()
+    {
+        echo &quot;Set the Heat&apos;s uniform with red and white &lt;br&gt;&quot;;
+    }
+
+    public function away()
+    {
+        echo &quot;Set the Heat&apos;s uniform with black and red &lt;br&gt;&lt;br&gt;&quot;;
+    }
+}
+
+/**
+ *  球鞋样式设置(球鞋款式&amp;球鞋主颜色)
+ * Interface Shoes
+ */
+interface Shoes{
+    public function style();
+    public function color();
+}
+
+/**
+ * 设置热火主客场球衣样式
+ * Class HeatUniform
+ */
+class HeatShoes implements Shoes
+{
+    public function style()
+    {
+        echo &quot;Set the Heat&apos;s Shoes&apos;style as height shoes &lt;br&gt;&quot;;
+    }
+    public function color()
+    {
+        echo &quot;Set the Heat&apos;s Shoes&apos;color as white &lt;br&gt;&quot;;
+    }
+}
+
+/**
+ * 游戏球队设置页面，包括了服装设置和球鞋设置
+ * Class TeamSetting
+ */
+abstract class TeamSetting{
+    abstract public static function setUniform();
+    abstract public static function setShoes();
+}
+
+/**
+ * 热火队的球队设置页面，有热火球衣和热火球鞋设置
+ * Class HeatSetting
+ */
+class HeatSetting extends TeamSetting
+{
+    public static function setUniform()
+    {
+        return new HeatUniform();
+    }
+    public static function setShoes()
+    {
+        return new HeatShoes();
+    }
+}
+
+/**
+ * 操作一：进入热火队球衣设置，主场球衣设置为红白，客场球衣设置为红黑
+ */
+$myControl1 = HeatSetting::setUniform();
+$myControl1-&gt;home();
+$myControl1-&gt;away();
+/**
+ * 操作二：进入热火队球鞋设置，球鞋样式设置为高帮，颜色设置为白色
+ */
+$myControl2 = HeatSetting::setShoes();
+$myControl2-&gt;style();
+$myControl2-&gt;color();
+</code></pre>
       
     </div>
     
@@ -523,7 +833,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式-（创建设计模式）"><span class="nav-number">1.</span> <span class="nav-text">单例模式 （创建设计模式）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#单例模式-（创建设计模式）"><span class="nav-number">1.</span> <span class="nav-text">单例模式 （创建设计模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#简单工厂模式-（创建设计模式）"><span class="nav-number">2.</span> <span class="nav-text">简单工厂模式 （创建设计模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工厂模式-（创建设计模式）"><span class="nav-number">3.</span> <span class="nav-text">工厂模式 （创建设计模式）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#抽象工厂模式-（创建设计模式）"><span class="nav-number">4.</span> <span class="nav-text">抽象工厂模式 （创建设计模式）</span></a></li></ol></div>
             
 
           </div>
