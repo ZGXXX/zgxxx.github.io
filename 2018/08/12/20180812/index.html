@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="手残sudo -R 777 /etc(/usr)后怎么办 再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设">
+<meta name="description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自行脑补">
+<meta property="og:title" content="手残sudo -R 777 &#x2F;etc(&#x2F;usr)后怎么办">
 <meta property="og:url" content="http://yoursite.com/2018/08/12/20180812/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="手残sudo -R 777 /etc(/usr)后怎么办 再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设">
+<meta property="og:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-12T05:11:28.307Z">
+<meta property="og:updated_time" content="2018-08-12T05:16:11.842Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自行脑补">
-<meta name="twitter:description" content="手残sudo -R 777 /etc(/usr)后怎么办 再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设">
+<meta name="twitter:title" content="手残sudo -R 777 &#x2F;etc(&#x2F;usr)后怎么办">
+<meta name="twitter:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
 
 
 
@@ -125,7 +125,7 @@
 
 
 
-  <title> | 自行脑补</title>
+  <title>手残sudo -R 777 /etc(/usr)后怎么办 | 自行脑补</title>
   
 
 
@@ -269,7 +269,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline"></h1>
+          <h1 class="post-title" itemprop="name headline">手残sudo -R 777 /etc(/usr)后怎么办</h1>
         
 
         <div class="post-meta">
@@ -319,8 +319,7 @@
       
 
       
-        <h1 id="手残sudo-R-777-etc-usr-后怎么办"><a href="#手残sudo-R-777-etc-usr-后怎么办" class="headerlink" title="手残sudo -R 777 /etc(/usr)后怎么办"></a>手残sudo -R 777 /etc(/usr)后怎么办</h1><hr>
-<p>再也不敢随便给权限，更加不能随便-R了<br>执行<code>sudo -R 777 /etc(/usr)</code>后sudo就不能使用了，会出现错误：<code>sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set</code><br>（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位）</p>
+        <p>再也不敢随便给权限，更加不能随便-R了<br>执行<code>sudo -R 777 /etc(/usr)</code>后sudo就不能使用了，会出现错误：<code>sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set</code><br>（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位）</p>
 <p>填坑过程：百度+Google<br>首先重启系统，按esc进入Ubuntu<br>grub菜单（系统不同进入方法不同），反正找到recovery mode，选择root，回车进入命令行输入<code>：mount -o remount,rw /</code>（重新挂载，让我/路径文件系统为可读可写模式）</p>
 <pre><code>chown root:root /usr/bin/sudo
 
@@ -423,17 +422,8 @@ $ chown -R root /usr/lib/sudo
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -479,22 +469,6 @@ $ chown -R root /usr/lib/sudo
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#手残sudo-R-777-etc-usr-后怎么办"><span class="nav-number">1.</span> <span class="nav-text">手残sudo -R 777 /etc(/usr)后怎么办</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
