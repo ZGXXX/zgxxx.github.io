@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:06:44.168Z">
+<meta property="og:updated_time" content="2018-08-13T15:14:11.517Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手残sudo -R 777 &#x2F;etc(&#x2F;usr)后怎么办">
 <meta name="twitter:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
@@ -211,6 +211,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -292,6 +302,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -462,15 +494,24 @@ $ chown -R root /usr/lib/sudo
             
 
             
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
 
             
               
               
               <div class="site-state-item site-state-tags">
-                
+                <a href="/tags/index.html">
                   <span class="site-state-item-count">7</span>
                   <span class="site-state-item-name">标签</span>
-                
+                </a>
               </div>
             
 
