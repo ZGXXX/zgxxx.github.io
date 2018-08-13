@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
+<meta name="description" content="先引入类IOFactory.php12require_once &apos;../PHPExcel/IOFactory.php&apos;;$filePath = &quot;test.xlsx&quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = PHPExcel_IOFactory::c">
 <meta name="keywords" content="PHP,PHP工具,踩坑">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHPExcel读取表格">
 <meta property="og:url" content="http://yoursite.com/2018/07/21/20180721/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
+<meta property="og:description" content="先引入类IOFactory.php12require_once &apos;../PHPExcel/IOFactory.php&apos;;$filePath = &quot;test.xlsx&quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = PHPExcel_IOFactory::c">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:14:23.907Z">
+<meta property="og:updated_time" content="2018-08-13T15:25:23.814Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHPExcel读取表格">
-<meta name="twitter:description" content="先引入类IOFactory.php require_once &amp;apos;../PHPExcel/IOFactory.php&amp;apos;; $filePath = &amp;quot;test.xlsx&amp;quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = P">
+<meta name="twitter:description" content="先引入类IOFactory.php12require_once &apos;../PHPExcel/IOFactory.php&apos;;$filePath = &quot;test.xlsx&quot;;  // 测试文件 加载测试文件  $inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型 $objReader = PHPExcel_IOFactory::c">
 
 
 
@@ -352,58 +352,28 @@
       
 
       
-        <p>先引入类IOFactory.php</p>
-<pre><code>require_once &apos;../PHPExcel/IOFactory.php&apos;;
-$filePath = &quot;test.xlsx&quot;;  // 测试文件
-</code></pre><p>加载测试文件</p>
+        <p>先引入类IOFactory.php<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="string">'../PHPExcel/IOFactory.php'</span>;</span><br><span class="line">$filePath = <span class="string">"test.xlsx"</span>;  <span class="comment">// 测试文件</span></span><br></pre></td></tr></table></figure></p>
+<p>加载测试文件</p>
 <ol>
 <li>$inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型</li>
 <li>$objReader = PHPExcel_IOFactory::createReader($inputFileType); 实例化类型对象</li>
 <li>$objPHPExcel = $objReader-&gt;load($filePath); 加载文件</li>
 </ol>
-<p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件</p>
-<pre><code>try {
-    $inputFileType = PHPExcel_IOFactory::identify($filePath);
-    if ($inputFileType !== &quot;Excel5&quot; &amp;&amp; $inputFileType !== &quot;Excel2007&quot; ) {
-        unlink($filePath) &amp;&amp; str_alert(-1,&quot;请确保导入的文件格式正确!&quot;);
-    }
-    $objReader = PHPExcel_IOFactory::createReader($inputFileType);
-    $objPHPExcel = $objReader-&gt;load($filePath);
-} catch(Exception $e) {
-    unlink($filePath) &amp;&amp; str_alert(-1,&apos;加载文件发生错误：”&apos;.pathinfo($filePath,PATHINFO_BASENAME).&apos;”: &apos;.$e-&gt;getMessage());
-    }
-</code></pre><h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3><a id="more"></a>
+<p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $inputFileType = PHPExcel_IOFactory::identify($filePath);</span><br><span class="line">    <span class="keyword">if</span> ($inputFileType !== <span class="string">"Excel5"</span> &amp;&amp; $inputFileType !== <span class="string">"Excel2007"</span> ) &#123;</span><br><span class="line">        unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">"请确保导入的文件格式正确!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $objReader = PHPExcel_IOFactory::createReader($inputFileType);</span><br><span class="line">    $objPHPExcel = $objReader-&gt;load($filePath);</span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">    unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">'加载文件发生错误：”'</span>.pathinfo($filePath,PATHINFO_BASENAME).<span class="string">'”: '</span>.$e-&gt;getMessage());</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="获取当前工作表"><a href="#获取当前工作表" class="headerlink" title="获取当前工作表"></a>获取当前工作表</h3><a id="more"></a>
 <pre><code>$sheet = $objPHPExcel-&gt;getSheet(0);
 //或者
 $sheet = $objPHPExcel-&gt;getActiveSheet();
-</code></pre><h3 id="获取工作表行数和列数"><a href="#获取工作表行数和列数" class="headerlink" title="获取工作表行数和列数"></a>获取工作表行数和列数</h3><pre><code>$highestRow = $sheet-&gt;getHighestRow();
-$highestColumn = $sheet-&gt;getHighestColumn();
-</code></pre><p>注意:有时候你会发现你的表格明明有内容的行数就5行,但是获取到的$highestRow却有7,8行或者更多,这可能是因为你在操作你的表格的时候不小心点击了其它行数,虽然没有填写内容,但getHighestRow也是能够识别出行数;<br>想要获取有内容的行数应该使用getHighestDataRow和getHighestDataColumn<br>源码注释是这样介绍的string Highest row number that contains data,即包含数据的字符串最高行数.</p>
+</code></pre><h3 id="获取工作表行数和列数"><a href="#获取工作表行数和列数" class="headerlink" title="获取工作表行数和列数"></a>获取工作表行数和列数</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$highestRow = $sheet-&gt;getHighestRow();</span><br><span class="line">$highestColumn = $sheet-&gt;getHighestColumn();</span><br></pre></td></tr></table></figure>
+<p>注意:有时候你会发现你的表格明明有内容的行数就5行,但是获取到的$highestRow却有7,8行或者更多,这可能是因为你在操作你的表格的时候不小心点击了其它行数,虽然没有填写内容,但getHighestRow也是能够识别出行数;<br>想要获取有内容的行数应该使用getHighestDataRow和getHighestDataColumn<br>源码注释是这样介绍的string Highest row number that contains data,即包含数据的字符串最高行数.</p>
 <h3 id="单元格具体内容"><a href="#单元格具体内容" class="headerlink" title="单元格具体内容"></a>单元格具体内容</h3><p>xlsx类型的表格单元格是通过类似xy轴坐标来获取的,</p>
-<p> 可通过类似</p>
-<pre><code>$sheet-&gt;getCell(&quot;A1&quot;)-&gt;getValue();
-$sheet-&gt;getCell(&quot;B2&quot;)-&gt;getValue();
-</code></pre><p>  获取相应位置的内容,<br>  如果不想通过字母了来遍历获取,可以用数字索引方法</p>
-<pre><code>$sheet-&gt;getCellByColumnAndRow(0,1);
-$sheet-&gt;getCellByColumnAndRow(1,2);
-</code></pre><p>  注意坐标中第一个参数从0开始,0代表A,1代表B…,第二个参数从1开始.<br>  下面是遍历表格获取全部单元格内容:</p>
-<pre><code>$dataSet=array();
-for ($column = &quot;A&quot;; $column &lt;= $highestColumn; $column++) {//列数是以A列开始
-    for ($row = 4; $row &lt;= $highestRow; $row++) { //行数是以第4行开始
-        $cell = $sheet-&gt;getCell($column . $row)-&gt;getValue();
-        if($cell instanceof PHPExcel_RichText) { //富文本转换字符串
-            $cell = $cell-&gt;__toString();
-        }
-        $dataSet[$row][] = $cell;
-    }
-}
-</code></pre><p>其中富文本转换字符串,是使用$cell instanceof PHPExcel_RichText判断是否为富文本,查阅资料发现如果你的单元格中字符串包含两种以上的字体会自动被设为富文本,这时候需要__toString()转换</p>
-<h3 id="判断合并单元格是否位于最左上角"><a href="#判断合并单元格是否位于最左上角" class="headerlink" title="判断合并单元格是否位于最左上角"></a>判断合并单元格是否位于最左上角</h3><p>当我们循环输出所有单元格后发现,一些被合并的单元格只有最左上坐标的是有内容的,其他都是null<br>例如A4,A5合并成一个单元格,getCell(“A4”)是有正常内容的,但是getCell(“A5”)是null.<br>isMergeRangeValueCell可以用来判断某个具体的单元格是否为最左上角</p>
-<pre><code>$sheet-&gt;getCell(&apos;A&apos; . $row)-&gt;isMergeRangeValueCell()
-</code></pre><p>当$row为4的时候是返回true,5的时候返回false</p>
-<h3 id="转换时间"><a href="#转换时间" class="headerlink" title="转换时间"></a>转换时间</h3><p>获取表格中时间格式的内容,需要PHPExcel_Shared_Date::ExcelToPHP()来转换为php可识别的时间格式</p>
-<pre><code>date(&apos;Y-m-d&apos;,PHPExcel_Shared_Date::ExcelToPHP($sometime);
-</code></pre>
+<p> 可通过类似<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sheet-&gt;getCell(<span class="string">"A1"</span>)-&gt;getValue();</span><br><span class="line">$sheet-&gt;getCell(<span class="string">"B2"</span>)-&gt;getValue();</span><br></pre></td></tr></table></figure></p>
+<p>  获取相应位置的内容,<br>  如果不想通过字母了来遍历获取,可以用数字索引方法<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$sheet-&gt;getCellByColumnAndRow(<span class="number">0</span>,<span class="number">1</span>);</span><br><span class="line">$sheet-&gt;getCellByColumnAndRow(<span class="number">1</span>,<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<p>  注意坐标中第一个参数从0开始,0代表A,1代表B…,第二个参数从1开始.<br>  下面是遍历表格获取全部单元格内容:</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">    $dataSet=<span class="keyword">array</span>();</span><br><span class="line">    <span class="keyword">for</span> ($column = <span class="string">"A"</span>; $column &lt;= $highestColumn; $column++) &#123;<span class="comment">//列数是以A列开始</span></span><br><span class="line">        <span class="keyword">for</span> ($row = <span class="number">4</span>; $row &lt;= $highestRow; $row++) &#123; <span class="comment">//行数是以第4行开始</span></span><br><span class="line">            $cell = $sheet-&gt;getCell($column . $row)-&gt;getValue();</span><br><span class="line">            <span class="keyword">if</span>($cell <span class="keyword">instanceof</span> PHPExcel_RichText) &#123; <span class="comment">//富文本转换字符串</span></span><br><span class="line">                $cell = $cell-&gt;__toString();</span><br><span class="line">            &#125;</span><br><span class="line">            $dataSet[$row][] = $cell;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">```    </span><br><span class="line">其中富文本转换字符串,是使用$cell <span class="keyword">instanceof</span> PHPExcel_RichText判断是否为富文本,查阅资料发现如果你的单元格中字符串包含两种以上的字体会自动被设为富文本,这时候需要__toString()转换</span><br><span class="line"></span><br><span class="line"><span class="comment">### 判断合并单元格是否位于最左上角 ###</span></span><br><span class="line">当我们循环输出所有单元格后发现,一些被合并的单元格只有最左上坐标的是有内容的,其他都是<span class="keyword">null</span></span><br><span class="line">例如A4,A5合并成一个单元格,getCell(<span class="string">"A4"</span>)是有正常内容的,但是getCell(<span class="string">"A5"</span>)是<span class="keyword">null</span>.</span><br><span class="line">isMergeRangeValueCell可以用来判断某个具体的单元格是否为最左上角</span><br><span class="line">```php</span><br><span class="line">    $sheet-&gt;getCell(<span class="string">'A'</span> . $row)-&gt;isMergeRangeValueCell()</span><br></pre></td></tr></table></figure>
+<p>当$row为4的时候是返回true,5的时候返回false</p>
+<h3 id="转换时间"><a href="#转换时间" class="headerlink" title="转换时间"></a>转换时间</h3><p>获取表格中时间格式的内容,需要PHPExcel_Shared_Date::ExcelToPHP()来转换为php可识别的时间格式<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">date(<span class="string">'Y-m-d'</span>,PHPExcel_Shared_Date::ExcelToPHP($sometime);</span><br></pre></td></tr></table></figure></p>
+
       
     </div>
     
@@ -590,7 +560,7 @@ for ($column = &quot;A&quot;; $column &lt;= $highestColumn; $column++) {//列数
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取当前工作表"><span class="nav-number">1.</span> <span class="nav-text">获取当前工作表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取工作表行数和列数"><span class="nav-number">2.</span> <span class="nav-text">获取工作表行数和列数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元格具体内容"><span class="nav-number">3.</span> <span class="nav-text">单元格具体内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断合并单元格是否位于最左上角"><span class="nav-number">4.</span> <span class="nav-text">判断合并单元格是否位于最左上角</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换时间"><span class="nav-number">5.</span> <span class="nav-text">转换时间</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取当前工作表"><span class="nav-number">1.</span> <span class="nav-text">获取当前工作表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取工作表行数和列数"><span class="nav-number">2.</span> <span class="nav-text">获取工作表行数和列数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#单元格具体内容"><span class="nav-number">3.</span> <span class="nav-text">单元格具体内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转换时间"><span class="nav-number">4.</span> <span class="nav-text">转换时间</span></a></li></ol></div>
             
 
           </div>
