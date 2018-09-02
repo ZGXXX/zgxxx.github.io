@@ -91,7 +91,7 @@
 <meta property="og:image" content="http://img2.ph.126.net/NgIDW3ZKuD1mq4rayNWt7Q==/1401745384119579089.png">
 <meta property="og:image" content="http://img1.ph.126.net/BT2EVYWLQvuxzvVZN90DAA==/6632659858537940503.png">
 <meta property="og:image" content="http://img2.ph.126.net/UYgvoyQNdW3y23hIxu_phg==/6632677450723985162.png">
-<meta property="og:updated_time" content="2018-09-02T02:49:21.269Z">
+<meta property="og:updated_time" content="2018-09-02T02:53:32.462Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Nginx与PHP的交互">
 <meta name="twitter:description" content="前言Nginx是俄国人最早开发的Webserver，现已风靡全球，基本上LNMP成了当下的标配，下面主要根据网上收集的资料，对Nginx如何与php完成交互进行介绍。">
@@ -363,7 +363,7 @@
 <p>nginx配置中注意到有fastcgi* 开头的配置，以及include引入的fastcgi.conf文件，这个文件也是有一堆fastcgi开头的配置项，这些配置项基本不改变，单独用.conf文件保存，可在多处引用<br><img src="http://img2.ph.126.net/NgIDW3ZKuD1mq4rayNWt7Q==/1401745384119579089.png" alt="avatar"></p>
 <p>通常我们都知道了Nginx与PHP打交道主要就是FastCGI，下面来了解什么事FastCGI,它与Nginx和PHP有什么关系。</p>
 <p>CGI是通用网关协议，FastCGI则是一种常住进程的CGI模式程序。我们所熟知的PHP-FPM的全称是PHP FastCGI Process Manager，即PHP-FPM会通过用户配置来管理一批FastCGI进程，例如在PHP-FPM管理下的某个FastCGI进程挂了，PHP-FPM会根据用户配置来看是否要重启补全，PHP-FPM更像是管理器，而真正衔接Nginx与PHP的则是FastCGI进程。（下图，FastCGI在请求流中的位置）<br><img src="http://img1.ph.126.net/BT2EVYWLQvuxzvVZN90DAA==/6632659858537940503.png" alt="avatar"><br>如上图所示，FastCGI的下游，是CGI-APP，在我们的LNMP架构里，这个CGI-APP就是PHP程序。而FastCGI的上游是Nginx，他们之间有一个通信载体，即图中的socket。在我们上文图的配置文件中，fastcgi_pass所配置的内容，便是告诉Nginx你接收到用户请求以后，你该往哪里转发，在我们图中是转发到本机的一个socket文件，这里fastcgi_pass也常配置为一个http接口地址（这个可以在php-fpm.conf中配置）。而上图中的Pre-fork，则对应着我们PHP-FPM的启动，也就是在我们启动PHP-FPM时便会根据用户配置启动诸多FastCGI触发器（FastCGI Wrapper）。</p>
-<p>对FastCGI在Nginx+PHP的模式中的定位有了一定了解后，我们再来了解下Nginx中为何能写很多fastcgi_*的配置项。这是因为Nginx的一个默认内置module实现了FastCGI的Client。<br><img src="http://img2.ph.126.net/UYgvoyQNdW3y23hIxu_phg==/6632677450723985162.png" alt="avatar"><br>从图中可以看到，fastcgi_param所声明的内容，将会被传递给“FastCGI server”，那这里指的就是fastcgi_pass所指向的server，也就是我们Nginx+PHP模式下的PHP-FPM所管理的FastCGI进程，或者说是那个socket文件载体。这时，有的同学会问：“为什么PHP-FPM管理的那些FastCGI进程要关心这些参数呢？”，好问题，我们一起想想我们做PHP应用开发时候有没有用到 $_ SERVER这个全局变量，它里面包含了很多服务器的信息，比如包含了用户的IP地址。同学们不想想我们的PHP身处socket文件之后，为什么能得到远端用户的IP呢？上图中的一个fastcgi_param配置 REMOTE_ADDR ，这不正是我们在PHP中用 $_ SERVER[‘REMOTE_ADDR’] 取到的用户IP么。的确，Nginx这个模块里fastcgi_param参数，就是考虑后端程序有时需要获取Webserver外部的变量以及服务器情况，</p>
+<p>对FastCGI在Nginx+PHP的模式中的定位有了一定了解后，我们再来了解下Nginx中为何能写很多fastcgi_*的配置项。这是因为Nginx的一个默认内置module实现了FastCGI的Client。<br><img src="http://img2.ph.126.net/UYgvoyQNdW3y23hIxu_phg==/6632677450723985162.png" alt="avatar"><br>从图中可以看到，fastcgi_param所声明的内容，将会被传递给“FastCGI server”，那这里指的就是fastcgi_pass所指向的server，也就是我们Nginx+PHP模式下的PHP-FPM所管理的FastCGI进程，或者说是那个socket文件载体。这时，有的同学会问：“为什么PHP-FPM管理的那些FastCGI进程要关心这些参数呢？”，好问题，我们一起想想我们做PHP应用开发时候有没有用到$_SERVER这个全局变量，它里面包含了很多服务器的信息，比如包含了用户的IP地址。同学们不想想我们的PHP身处socket文件之后，为什么能得到远端用户的IP呢？上图中的一个fastcgi_param配置REMOTE_ADDR这不正是我们在PHP中用$_SERVER[‘REMOTE_ADDR’]取到的用户IP么。的确，Nginx这个模块里fastcgi_param参数，就是考虑后端程序有时需要获取Webserver外部的变量以及服务器情况。</p>
 <h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>Nginx+PHP的工程模式下，两位主角分工明确，Nginx负责承载HTTP请求的响应与返回，以及超时控制记录日志等HTTP相关的功能，而PHP则负责处理具体请求要做的业务逻辑，它们俩的这种合作模式也是常见的分层架构设计中的一种，在它们各有专注面的同时，FastCGI又很好的将两块衔接，保障上下游通信交互，这种通过某种协议或规范来衔接好上下游的模式，在我们日常的PHP应用开发中也有这样的思想落地，譬如我们所开发的高性能API，具体的Client到底是PC、APP还是某个其他程序，我们不关心，而这些PC、APP、第三方程序也不关心我们的PHP代码实现，他们按照API的规范来请求做处理即可</p>
 
       
