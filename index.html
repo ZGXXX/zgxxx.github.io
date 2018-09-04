@@ -262,6 +262,154 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/20180904/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/04/20180904/" itemprop="url">Laravel 实现单用户登录</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T22:21:48+08:00">
+                2018-09-04 22:21:48
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>      <a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
+<p>####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</p>
+<p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)      </p>
+<p>###关键代码：</p>
+<p>在登录事件监听handle写一个制作发送token的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public function handle(LoginEvent $event) &#123;</span><br><span class="line">    $this-&gt;sendCookieToken($member, $request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 制作token,用于单用户登录验证</span><br><span class="line"> */</span><br><span class="line">public function sendCookieToken(Authenticatable $member, Request $request) &#123;</span><br><span class="line">    $time = time();</span><br><span class="line">    $sinleToken = md5($request-&gt;getClientIp().$member-&gt;id.$time);</span><br><span class="line">    \Redis::set($member-&gt;id, $time);</span><br><span class="line">    $request-&gt;session()-&gt;put(&apos;SINGLETOKEN&apos;, $sinleToken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>检查登录中间件进行验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public function handle($request, Closure $next, $guard = null) &#123;</span><br><span class="line">   </span><br><span class="line">     if (!Auth::guard(&apos;web&apos;)-&gt;check()) &#123;</span><br><span class="line">          if ($request-&gt;ajax() || $request-&gt;header(&apos;ajax&apos;) == 1) &#123;</span><br><span class="line">             $return = [</span><br><span class="line">                &apos;code&apos; =&gt; ResultCode::CODE_NOT_LOGIN,</span><br><span class="line">                &apos;message&apos; =&gt; &apos;请登录!&apos;,</span><br><span class="line">                &apos;extra&apos; =&gt; [],</span><br><span class="line">                ];</span><br><span class="line">                return response()-&gt;json($return);</span><br><span class="line">         &#125; else &#123;</span><br><span class="line">                return redirect(&apos;/login&apos;);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      if ($this-&gt;isRelogin($request)) &#123;</span><br><span class="line">          \Auth::guard(&apos;web&apos;)-&gt;logout();</span><br><span class="line">          return redirect(&apos;/login&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">    return $next($request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 比较token,判断是否需要重新登录</span><br><span class="line"> */</span><br><span class="line">protected function isRelogin($request) &#123;</span><br><span class="line">    $member = Auth::user();</span><br><span class="line">    if ($member) &#123;</span><br><span class="line">        // 获取 session 中的 token</span><br><span class="line">        $singletoken = $request-&gt;session()-&gt;get(&apos;SINGLETOKEN&apos;);</span><br><span class="line">        if ($singletoken) &#123;</span><br><span class="line">            // 从 redis 获取 time</span><br><span class="line">            $redisTime = \Redis::get($member-&gt;id);</span><br><span class="line">            // 重新获取加密参数加密</span><br><span class="line">            $ip = $request-&gt;getClientIp();</span><br><span class="line">            $secret = md5($ip . $member-&gt;id . $redisTime);</span><br><span class="line">            if ($singletoken !== $secret) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然路由还需根据自己项目来设置</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/20180902/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -845,161 +993,6 @@ $ chown -R root /usr/lib/sudo
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/20180721/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/21/20180721/" itemprop="url">PHPExcel读取表格</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T11:38:42+08:00">
-                2018-07-21 11:38:42
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>先引入类IOFactory.php</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="string">'../PHPExcel/IOFactory.php'</span>;</span><br><span class="line">$filePath = <span class="string">"test.xlsx"</span>;  <span class="comment">// 测试文件</span></span><br></pre></td></tr></table></figure>
-<p>加载测试文件</p>
-<ol>
-<li>$inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型</li>
-<li>$objReader = PHPExcel_IOFactory::createReader($inputFileType); 实例化类型对象</li>
-<li>$objPHPExcel = $objReader-&gt;load($filePath); 加载文件</li>
-</ol>
-<p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $inputFileType = PHPExcel_IOFactory::identify($filePath);</span><br><span class="line">    <span class="keyword">if</span> ($inputFileType !== <span class="string">"Excel5"</span> &amp;&amp; $inputFileType !== <span class="string">"Excel2007"</span> ) &#123;</span><br><span class="line">        unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">"请确保导入的文件格式正确!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $objReader = PHPExcel_IOFactory::createReader($inputFileType);</span><br><span class="line">    $objPHPExcel = $objReader-&gt;load($filePath);</span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">    unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">'加载文件发生错误：”'</span>.pathinfo($filePath,PATHINFO_BASENAME).<span class="string">'”: '</span>.$e-&gt;getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/07/21/20180721/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1054,7 +1047,7 @@ $ chown -R root /usr/lib/sudo
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1076,7 +1069,7 @@ $ chown -R root /usr/lib/sudo
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">8</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

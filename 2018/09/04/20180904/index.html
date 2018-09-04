@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="杂谈," />
+  <meta name="keywords" content="踩坑,PHP,Laravel," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="现状今年六月份即将毕业，已经在东莞一家公司入职了差不多一个月的时间，工作是“拍黄片”,还在慢慢适应工作，依然得保持学习的心态，埋头认真工作，每一分每一秒都是经验值，不能“漏兵”啊！ 给自己一点计划这个GitHub上的博客系统，希望能在以后每一天记录自己的点点滴滴，有学习的，有自己乱想的，有自己的日志，有想吐槽的。。。等等">
-<meta name="keywords" content="杂谈">
+<meta name="description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login      https://segmentfault.com/a/1190000007906164 ####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redi">
+<meta name="keywords" content="踩坑,PHP,Laravel">
 <meta property="og:type" content="article">
-<meta property="og:title" content="写在前面">
-<meta property="og:url" content="http://yoursite.com/2018/05/27/first.me/index.html">
+<meta property="og:title" content="Laravel 实现单用户登录">
+<meta property="og:url" content="http://yoursite.com/2018/09/04/20180904/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="现状今年六月份即将毕业，已经在东莞一家公司入职了差不多一个月的时间，工作是“拍黄片”,还在慢慢适应工作，依然得保持学习的心态，埋头认真工作，每一分每一秒都是经验值，不能“漏兵”啊！ 给自己一点计划这个GitHub上的博客系统，希望能在以后每一天记录自己的点点滴滴，有学习的，有自己乱想的，有自己的日志，有想吐槽的。。。等等">
+<meta property="og:description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login      https://segmentfault.com/a/1190000007906164 ####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redi">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-08-13T15:01:47.106Z">
+<meta property="og:updated_time" content="2018-09-04T14:21:48.727Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="写在前面">
-<meta name="twitter:description" content="现状今年六月份即将毕业，已经在东莞一家公司入职了差不多一个月的时间，工作是“拍黄片”,还在慢慢适应工作，依然得保持学习的心态，埋头认真工作，每一分每一秒都是经验值，不能“漏兵”啊！ 给自己一点计划这个GitHub上的博客系统，希望能在以后每一天记录自己的点点滴滴，有学习的，有自己乱想的，有自己的日志，有想吐槽的。。。等等">
+<meta name="twitter:title" content="Laravel 实现单用户登录">
+<meta name="twitter:description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login      https://segmentfault.com/a/1190000007906164 ####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redi">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/27/first.me/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/04/20180904/"/>
 
 
 
 
 
-  <title>写在前面 | 自行脑补</title>
+  <title>Laravel 实现单用户登录 | 自行脑补</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/27/first.me/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/20180904/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Grayson Zhao">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">写在前面</h1>
+          <h1 class="post-title" itemprop="name headline">Laravel 实现单用户登录</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-27T01:47:16+08:00">
-                2018-05-27 01:47:16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T22:21:48+08:00">
+                2018-09-04 22:21:48
               </time>
             
 
@@ -302,6 +302,28 @@
             
           </span>
 
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -330,8 +352,13 @@
       
 
       
-        <h3 id="现状"><a href="#现状" class="headerlink" title="现状"></a>现状</h3><p>今年六月份即将毕业，已经在东莞一家公司入职了差不多一个月的时间，工作是“拍黄片”,还在慢慢适应工作，依然得保持学习的心态，埋头认真工作，每一分每一秒都是经验值，不能“漏兵”啊！</p>
-<h3 id="给自己一点计划"><a href="#给自己一点计划" class="headerlink" title="给自己一点计划"></a>给自己一点计划</h3><p>这个GitHub上的博客系统，希望能在以后每一天记录自己的点点滴滴，有学习的，有自己乱想的，有自己的日志，有想吐槽的。。。等等</p>
+        <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>      <a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
+<p>####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</p>
+<p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)      </p>
+<p>###关键代码：</p>
+<p>在登录事件监听handle写一个制作发送token的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public function handle(LoginEvent $event) &#123;</span><br><span class="line">    $this-&gt;sendCookieToken($member, $request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 制作token,用于单用户登录验证</span><br><span class="line"> */</span><br><span class="line">public function sendCookieToken(Authenticatable $member, Request $request) &#123;</span><br><span class="line">    $time = time();</span><br><span class="line">    $sinleToken = md5($request-&gt;getClientIp().$member-&gt;id.$time);</span><br><span class="line">    \Redis::set($member-&gt;id, $time);</span><br><span class="line">    $request-&gt;session()-&gt;put(&apos;SINGLETOKEN&apos;, $sinleToken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>检查登录中间件进行验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public function handle($request, Closure $next, $guard = null) &#123;</span><br><span class="line">   </span><br><span class="line">     if (!Auth::guard(&apos;web&apos;)-&gt;check()) &#123;</span><br><span class="line">          if ($request-&gt;ajax() || $request-&gt;header(&apos;ajax&apos;) == 1) &#123;</span><br><span class="line">             $return = [</span><br><span class="line">                &apos;code&apos; =&gt; ResultCode::CODE_NOT_LOGIN,</span><br><span class="line">                &apos;message&apos; =&gt; &apos;请登录!&apos;,</span><br><span class="line">                &apos;extra&apos; =&gt; [],</span><br><span class="line">                ];</span><br><span class="line">                return response()-&gt;json($return);</span><br><span class="line">         &#125; else &#123;</span><br><span class="line">                return redirect(&apos;/login&apos;);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      if ($this-&gt;isRelogin($request)) &#123;</span><br><span class="line">          \Auth::guard(&apos;web&apos;)-&gt;logout();</span><br><span class="line">          return redirect(&apos;/login&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">    return $next($request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 比较token,判断是否需要重新登录</span><br><span class="line"> */</span><br><span class="line">protected function isRelogin($request) &#123;</span><br><span class="line">    $member = Auth::user();</span><br><span class="line">    if ($member) &#123;</span><br><span class="line">        // 获取 session 中的 token</span><br><span class="line">        $singletoken = $request-&gt;session()-&gt;get(&apos;SINGLETOKEN&apos;);</span><br><span class="line">        if ($singletoken) &#123;</span><br><span class="line">            // 从 redis 获取 time</span><br><span class="line">            $redisTime = \Redis::get($member-&gt;id);</span><br><span class="line">            // 重新获取加密参数加密</span><br><span class="line">            $ip = $request-&gt;getClientIp();</span><br><span class="line">            $secret = md5($ip . $member-&gt;id . $redisTime);</span><br><span class="line">            if ($singletoken !== $secret) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>当然路由还需根据自己项目来设置</p>
 
       
     </div>
@@ -349,7 +376,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/杂谈/" rel="tag"># 杂谈</a>
+            <a href="/tags/踩坑/" rel="tag"># 踩坑</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/Laravel/" rel="tag"># Laravel</a>
           
         </div>
       
@@ -362,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/26/20180527/" rel="next" title="成功使用Hexo+github搭建个人博客">
-                <i class="fa fa-chevron-left"></i> 成功使用Hexo+github搭建个人博客
+              <a href="/2018/09/02/20180902/" rel="next" title="Nginx与PHP的交互">
+                <i class="fa fa-chevron-left"></i> Nginx与PHP的交互
               </a>
             
           </div>
@@ -371,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/07/08/20180708/" rel="prev" title="cookie与session">
-                cookie与session <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -431,17 +458,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -505,22 +523,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#现状"><span class="nav-number">1.</span> <span class="nav-text">现状</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#给自己一点计划"><span class="nav-number">2.</span> <span class="nav-text">给自己一点计划</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
