@@ -354,9 +354,8 @@
 
       
         
-          <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>      <a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
-<p>####关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</p>
-<p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)<br></p>
+          <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>    　<a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
+<h4 id="关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面"><a href="#关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面" class="headerlink" title="关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面"></a>关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</h4><p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)<br></p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2018/09/04/20180904/#more" rel="contents">
