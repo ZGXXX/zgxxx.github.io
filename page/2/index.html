@@ -262,6 +262,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/08/12/20180812/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/08/12/20180812/" itemprop="url">手残sudo -R 777 /etc(/usr)后怎么办</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-08-12T13:11:52+08:00">
+                2018-08-12 13:11:52
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>再也不敢随便给权限，更加不能随便-R了<br>执行<code>sudo -R 777 /etc(/usr)</code>后sudo就不能使用了，会出现错误：<code>sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set</code><br>（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位）</p>
+<p>填坑过程：百度+Google<br>首先重启系统，按esc进入Ubuntu<br>grub菜单（系统不同进入方法不同），反正找到recovery mode，选择root，回车进入命令行输入<code>：mount -o remount,rw /</code>（重新挂载，让我/路径文件系统为可读可写模式）</p>
+<pre><code>chown root:root /usr/bin/sudo
+
+chmod 4755 /usr/bin/sudo
+</code></pre><p>reboot重新开机后sudo出现另一个错误：</p>
+<pre><code>sudo: error in /etc/sudo.conf, line 0 while loading plugin &apos;sudoers_policy&apos;
+sudo: /usr/lib/sudo/sudoers.so must only be writable by owner
+sudo: fatal error, unable to load plugins
+</code></pre><p>解决：(依然需要进入recovery)</p>
+<pre><code>$ chmod 644 /usr/lib/sudo/sudoers.so
+
+$ chown -R root /usr/lib/sudo
+</code></pre><p>不知道啥原理，但是感谢<a href="https://blog.csdn.net/lileihappy/article/details/79214156提供的参考" target="_blank" rel="noopener">https://blog.csdn.net/lileihappy/article/details/79214156提供的参考</a><br>(吐槽下百度有些答案:<br>    Ctrl+Alt+F1进入窗口模式<br>    sudo -s(sudo都不能用了还来这个)<br>    chown root:root /usr/bin/sudo<br>    chmod 4755 /usr/bin/sudo<br>    reboot<br>)</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/28/20180728/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -832,158 +987,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/26/20180527/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/26/20180527/" itemprop="url">成功使用Hexo+github搭建个人博客</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-26T23:08:35+08:00">
-                2018-05-26 23:08:35
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习收集/" itemprop="url" rel="index">
-                    <span itemprop="name">学习收集</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天跟着网上的教程完成个人博客的搭建，主要是参考这一篇博客园教程：<a href="https://www.cnblogs.com/fengxiongZz/p/7707219.html" target="_blank" rel="noopener">hexo+github搭建</a> </p>
-<h3 id="搭建主要过程"><a href="#搭建主要过程" class="headerlink" title="搭建主要过程"></a>搭建主要过程</h3><p><a href="https://www.cnblogs.com/fengxiongZz/p/7707219.html" target="_blank" rel="noopener">hexo+github搭建</a> 这里面介绍的非常详细了<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/26/20180527/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -1033,7 +1041,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
