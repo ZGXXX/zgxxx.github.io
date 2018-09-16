@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="##抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方">
+<meta name="description" content="抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方法就">
 <meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PHP之道--《编程范式》篇">
 <meta property="og:url" content="http://yoursite.com/2018/09/16/20180916/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="##抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方">
+<meta property="og:description" content="抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方法就">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-16T11:24:08.721Z">
+<meta property="og:updated_time" content="2018-09-16T11:30:35.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP之道--《编程范式》篇">
-<meta name="twitter:description" content="##抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方">
+<meta name="twitter:description" content="抽象类PHP 5 支持抽象类和抽象方法。定义为抽象的类不能被实例化。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。 继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方法就">
 
 
 
@@ -352,19 +352,17 @@
       
 
       
-        <p>##抽象类<br>PHP 5 支持抽象类和抽象方法。<strong>定义为抽象的类不能被实例化</strong>。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。</p>
-<p><strong>继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。</strong>例如某个抽象方法被声明为受保护的，那么子类中实现的方法就应该声明为受保护的或者公有的，而不能定义为私有的。此外方法的调用方式必须匹配，即类型和所需参数数量必须一致。例如，子类定义了一个可选参数，而父类抽象方法的声明里没有，则两者的声明并无冲突。 这也适用于 PHP 5.4 起的构造函数。在 PHP 5.4 之前的构造函数声明可以不一样的。</p>
-<p>继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方法就应该声明为受保护的或者公有的，而不能定义为私有的。此外方法的调用方式必须匹配，即类型和所需参数数量必须一致。例如，子类定义了一个可选参数，而父类抽象方法的声明里没有，则两者的声明并无冲突。 这也适用于 PHP 5.4 起的构造函数。在 PHP 5.4 之前的构造函数声明可以不一样的。</p>
-<p>##接口<br>使用接口（interface），可以指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。<br>接口是通过 interface 关键字来定义的，就像定义一个标准的类一样，但其中定义所有的方法都是空的。</p>
+        <h2 id="抽象类"><a href="#抽象类" class="headerlink" title="抽象类"></a>抽象类</h2><p>PHP 5 支持抽象类和抽象方法。<strong>定义为抽象的类不能被实例化</strong>。任何一个类，如果它里面至少有一个方法是被声明为抽象的，那么这个类就必须被声明为抽象的。被定义为抽象的方法只是声明了其调用方式（参数），不能定义其具体的功能实现。</p>
+<p><strong>继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。</strong>例如某个抽象方法被声明为受保护的，那么子类中实现的方法就应该声明为受保护的或者公有的，而不能定义为私有的。此外方法的调用方式必须匹配，即类型和所需参数数量必须一致。例如，子类定义了一个可选参数，而父类抽象方法的声明里没有，则两者的声明并无冲突。 这也适用于 PHP 5.4 起的构造函数。在 PHP 5.4 之前的构造函数声明可以不一样的。<br><a id="more"></a><br>继承一个抽象类的时候，子类必须定义父类中的所有抽象方法；另外，这些方法的访问控制必须和父类中一样（或者更为宽松）。例如某个抽象方法被声明为受保护的，那么子类中实现的方法就应该声明为受保护的或者公有的，而不能定义为私有的。此外方法的调用方式必须匹配，即类型和所需参数数量必须一致。例如，子类定义了一个可选参数，而父类抽象方法的声明里没有，则两者的声明并无冲突。 这也适用于 PHP 5.4 起的构造函数。在 PHP 5.4 之前的构造函数声明可以不一样的。</p>
+<h2 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h2><p>使用接口（interface），可以指定某个类必须实现哪些方法，但不需要定义这些方法的具体内容。<br>接口是通过 interface 关键字来定义的，就像定义一个标准的类一样，但其中定义所有的方法都是空的。</p>
 <p>接口中定义的所有方法都必须是公有，这是接口的特性。<br>要实现一个接口，使用 implements 操作符。类中必须实现接口中定义的所有方法，否则会报一个致命错误。类可以实现多个接口，用逗号来分隔多个接口的名称。</p>
 <p>Note:<br>实现多个接口时，接口中的方法不能有重名。</p>
 <p>Note:接口也可以继承，通过使用 extends 操作符。</p>
 <p>Note:类要实现接口，必须使用和接口中所定义的方法完全一致的方式。否则会导致致命错误。</p>
 <p>Note:接口中也可以定义常量。接口常量和类常量的使用完全相同，但是不能被子类或子接口所覆盖。</p>
-<p>##Trait（灵活）</p>
-<p>自 PHP 5.4.0 起，PHP 实现了一种代码复用的方法，称为 trait。</p>
+<h2 id="Trait（灵活）"><a href="#Trait（灵活）" class="headerlink" title="Trait（灵活）"></a>Trait（灵活）</h2><p>自 PHP 5.4.0 起，PHP 实现了一种代码复用的方法，称为 trait。</p>
 <p>Trait 是为类似 PHP 的单继承语言而准备的一种代码复用机制。Trait 为了减少单继承语言的限制，使开发人员能够自由地在不同层次结构内独立的类中复用 method。Trait 和 Class 组合的语义定义了一种减少复杂性的方式，避免传统多继承和 Mixin 类相关典型问题。</p>
-<p>##重载<br>PHP所提供的”重载”（overloading）是指动态地”创建”类属性和方法。我们是通过魔术方法（magic methods）来实现的。<br>所有的重载方法都必须被声明为 public。<br>Note:</p>
+<h2 id="重载"><a href="#重载" class="headerlink" title="重载"></a>重载</h2><p>PHP所提供的”重载”（overloading）是指动态地”创建”类属性和方法。我们是通过魔术方法（magic methods）来实现的。<br>所有的重载方法都必须被声明为 public。<br>Note:</p>
 <p>这些魔术方法的参数都不能通过引用传递。</p>
 <p>Note:</p>
 <p>PHP中的”重载”与其它绝大多数面向对象语言不同。传统的”重载”是用于提供多个同名的类方法，但各方法的参数类型和个数不同。</p>
@@ -375,7 +373,7 @@
 <p>当尝试以调用函数的方式调用一个对象时，__invoke() 方法会被自动调用</p>
 <p>public  __call ( string $name , array $arguments )  (当调用不存在的方法时)</p>
 <p>public static __callStatic ( string $name , array $arguments )  (对非静态方法使用静态调用时)</p>
-<p>##动态调用函数<br><strong>call_user_func</strong> 把第一个参数作为回调函数调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function increment(&amp;$var)</span><br><span class="line">&#123;</span><br><span class="line">    $var++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = 0;</span><br><span class="line">call_user_func(&apos;increment&apos;, $a);</span><br><span class="line">echo $a.&quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">call_user_func_array(&apos;increment&apos;, array(&amp;$a));</span><br><span class="line">echo $a.&quot;\n&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="动态调用函数"><a href="#动态调用函数" class="headerlink" title="动态调用函数"></a>动态调用函数</h2><p><strong>call_user_func</strong> 把第一个参数作为回调函数调用<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">function increment(&amp;$var)</span><br><span class="line">&#123;</span><br><span class="line">    $var++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$a = 0;</span><br><span class="line">call_user_func(&apos;increment&apos;, $a);</span><br><span class="line">echo $a.&quot;\n&quot;;</span><br><span class="line"></span><br><span class="line">call_user_func_array(&apos;increment&apos;, array(&amp;$a));</span><br><span class="line">echo $a.&quot;\n&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure></p>
 <p>输出</p>
 <p>0</p>
 <p>1</p>
@@ -478,8 +476,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -543,6 +550,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#抽象类"><span class="nav-number">1.</span> <span class="nav-text">抽象类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#接口"><span class="nav-number">2.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Trait（灵活）"><span class="nav-number">3.</span> <span class="nav-text">Trait（灵活）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重载"><span class="nav-number">4.</span> <span class="nav-text">重载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#动态调用函数"><span class="nav-number">5.</span> <span class="nav-text">动态调用函数</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
