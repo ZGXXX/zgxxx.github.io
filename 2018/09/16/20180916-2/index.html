@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="踩坑,PHP,Laravel," />
+  <meta name="keywords" content="PHP," />
 
 
 
@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login    　https://segmentfault.com/a/1190000007906164 关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检">
-<meta name="keywords" content="踩坑,PHP,Laravel">
+<meta name="description" content="在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址 PHP内核的角度：123456struct _zval_struct &amp;#123;zvalue_value value; // 存储变量的值zend_uint refcount__gc; //表示引用计数 默认为：1zend_uchar type; // 变量具体的类">
+<meta name="keywords" content="PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Laravel 实现单用户登录">
-<meta property="og:url" content="http://yoursite.com/2018/09/04/20180904/index.html">
+<meta property="og:title" content="PHP之道-- 对象和引用">
+<meta property="og:url" content="http://yoursite.com/2018/09/16/20180916-2/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login    　https://segmentfault.com/a/1190000007906164 关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检">
+<meta property="og:description" content="在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址 PHP内核的角度：123456struct _zval_struct &amp;#123;zvalue_value value; // 存储变量的值zend_uint refcount__gc; //表示引用计数 默认为：1zend_uchar type; // 变量具体的类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-09-04T14:30:56.032Z">
+<meta property="og:updated_time" content="2018-09-16T12:33:33.477Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Laravel 实现单用户登录">
-<meta name="twitter:description" content="需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线参考：https://laravel-china.org/articles/2929/laravel-single-user-login    　https://segmentfault.com/a/1190000007906164 关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检">
+<meta name="twitter:title" content="PHP之道-- 对象和引用">
+<meta name="twitter:description" content="在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址 PHP内核的角度：123456struct _zval_struct &amp;#123;zvalue_value value; // 存储变量的值zend_uint refcount__gc; //表示引用计数 默认为：1zend_uchar type; // 变量具体的类">
 
 
 
@@ -120,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/04/20180904/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/09/16/20180916-2/"/>
 
 
 
 
 
-  <title>Laravel 实现单用户登录 | 自行脑补</title>
+  <title>PHP之道-- 对象和引用 | 自行脑补</title>
   
 
 
@@ -263,7 +263,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/20180904/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/20180916-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Grayson Zhao">
@@ -280,7 +280,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Laravel 实现单用户登录</h1>
+          <h1 class="post-title" itemprop="name headline">PHP之道-- 对象和引用</h1>
         
 
         <div class="post-meta">
@@ -292,8 +292,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T22:21:48+08:00">
-                2018-09-04 22:21:48
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-16T20:33:33+08:00">
+                2018-09-16 20:33:33
               </time>
             
 
@@ -352,11 +352,17 @@
       
 
       
-        <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>    　<a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
-<h4 id="关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面"><a href="#关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面" class="headerlink" title="关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面"></a>关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</h4><p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)<br><a id="more"></a></p>
-<h3 id="关键代码："><a href="#关键代码：" class="headerlink" title="关键代码："></a>关键代码：</h3><p>在登录事件监听handle写一个制作发送token的方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public function handle(LoginEvent $event) &#123;</span><br><span class="line">    $this-&gt;sendCookieToken($member, $request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 制作token,用于单用户登录验证</span><br><span class="line"> */</span><br><span class="line">public function sendCookieToken(Authenticatable $member, Request $request) &#123;</span><br><span class="line">    $time = time();</span><br><span class="line">    $sinleToken = md5($request-&gt;getClientIp().$member-&gt;id.$time);</span><br><span class="line">    \Redis::set($member-&gt;id, $time);</span><br><span class="line">    $request-&gt;session()-&gt;put(&apos;SINGLETOKEN&apos;, $sinleToken);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>检查登录中间件进行验证：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">public function handle($request, Closure $next, $guard = null) &#123;</span><br><span class="line">   </span><br><span class="line">     if (!Auth::guard(&apos;web&apos;)-&gt;check()) &#123;</span><br><span class="line">          if ($request-&gt;ajax() || $request-&gt;header(&apos;ajax&apos;) == 1) &#123;</span><br><span class="line">             $return = [</span><br><span class="line">                &apos;code&apos; =&gt; ResultCode::CODE_NOT_LOGIN,</span><br><span class="line">                &apos;message&apos; =&gt; &apos;请登录!&apos;,</span><br><span class="line">                &apos;extra&apos; =&gt; [],</span><br><span class="line">                ];</span><br><span class="line">                return response()-&gt;json($return);</span><br><span class="line">         &#125; else &#123;</span><br><span class="line">                return redirect(&apos;/login&apos;);</span><br><span class="line">         &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      if ($this-&gt;isRelogin($request)) &#123;</span><br><span class="line">          \Auth::guard(&apos;web&apos;)-&gt;logout();</span><br><span class="line">          return redirect(&apos;/login&apos;);</span><br><span class="line">        &#125;</span><br><span class="line">   </span><br><span class="line">    return $next($request);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line"> * 比较token,判断是否需要重新登录</span><br><span class="line"> */</span><br><span class="line">protected function isRelogin($request) &#123;</span><br><span class="line">    $member = Auth::user();</span><br><span class="line">    if ($member) &#123;</span><br><span class="line">        // 获取 session 中的 token</span><br><span class="line">        $singletoken = $request-&gt;session()-&gt;get(&apos;SINGLETOKEN&apos;);</span><br><span class="line">        if ($singletoken) &#123;</span><br><span class="line">            // 从 redis 获取 time</span><br><span class="line">            $redisTime = \Redis::get($member-&gt;id);</span><br><span class="line">            // 重新获取加密参数加密</span><br><span class="line">            $ip = $request-&gt;getClientIp();</span><br><span class="line">            $secret = md5($ip . $member-&gt;id . $redisTime);</span><br><span class="line">            if ($singletoken !== $secret) &#123;</span><br><span class="line">                return true;</span><br><span class="line">            &#125;</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    return false;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>当然路由还需根据自己项目来设置</p>
+        <p>在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址</p>
+<p>PHP内核的角度：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">struct _zval_struct &#123;</span><br><span class="line">zvalue_value value; // 存储变量的值</span><br><span class="line">zend_uint refcount__gc; //表示引用计数 默认为：1</span><br><span class="line">zend_uchar type; // 变量具体的类型</span><br><span class="line">zend_uchar is_ref__gc; //表示是否为引用</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>举例：<br>$a = 10;<br>$b = $a;<br>这时$b没有引用，只是将$a的值赋给了$b，那么zval这个结构中的refcount__gc就变为2了，而is_ref__gc还是false,表示未引用，因为内核$a已经开辟了一块内存空间，当$a赋值给$b时，$b的值只指向了$a，这样就省去了重新开辟一块内存，但是当$b值被改变时($a的值不会变)，$b又将会开辟一块新的内存空间，这就是所谓的写时复制。下面就讲下引用：<br>$a = 10;<br>$b = &amp;$a;<br>这个时候，内核中存储$a的结构is_ref__gc标记为true，代表是引用，那么$a和$b都指向了同一个内存地址，当$b=20的时候，$a也会变成20</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$a = &quot;ABC&quot;;</span><br><span class="line">$b = &amp;$a;</span><br><span class="line">echo $a;//这里输出:ABC</span><br><span class="line">echo $b;//这里输出:ABC</span><br><span class="line">$b= &quot;EFG&quot;;</span><br><span class="line">echo $a;//这里$a的值变为EFG 所以输出EFG</span><br><span class="line">echo $b;//这里输出EFG</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="函数的传址调用"><a href="#函数的传址调用" class="headerlink" title="函数的传址调用:"></a>函数的传址调用:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function test(&amp;$a) &#123; 　　</span><br><span class="line">$a = $a+100;</span><br><span class="line">&#125;</span><br><span class="line">$b=1;</span><br><span class="line">echo $b;//输出１</span><br><span class="line">test($b); //这里$b传递给函数的其实是$b的变量内容所处的内存地址，通过在函数里改变$a的值　就可以改变$b的值了</span><br><span class="line">echo &quot;&lt;br&gt;&quot;;</span><br><span class="line">echo $b;//输出101</span><br></pre></td></tr></table></figure>
+<h2 id="函数的引用返回"><a href="#函数的引用返回" class="headerlink" title="函数的引用返回:"></a>函数的引用返回:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function &amp;test() &#123;</span><br><span class="line">static $b = 0;//申明一个静态变量</span><br><span class="line">$b = $b + 1;</span><br><span class="line">echo $b;</span><br><span class="line">return $b;</span><br><span class="line">&#125;</span><br><span class="line">$a=test();//这条语句会输出　$b的值　为１</span><br><span class="line">$a=5;</span><br><span class="line">$a=test();//这条语句会输出　$b的值　为2</span><br><span class="line">$a=&amp;test();//这条语句会输出　$b的值　为3 $a=5;</span><br><span class="line">$a=test();//这条语句会输出　$b的值　为6</span><br></pre></td></tr></table></figure>
+<p>通过$a=&amp;test(); 方式得到的才是函数的引用返回<br>$a=test()方式调用函数，只是将函数的值赋给$a而已，　而$a做任何改变　都不会影响到函数中的$b<br>而通过$a=&amp;test()方式调用函数呢, 他的作用是　将return $b中的　$b变量的内存地址与$a变量的内存地址　指向了同一个地方<br>即产生了相当于这样的效果($a=&b;) 所以改变$a的值　也同时改变了$b的值　所以在执行了<br>$a=&amp;test();<br>$a=5;<br>以后，$b的值变为了5 </p>
+<h2 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">var $abc=&quot;ABC&quot;;</span><br><span class="line">&#125;</span><br><span class="line">$b=new a;</span><br><span class="line">$c=$b;</span><br><span class="line">echo $b-&gt;abc;//这里输出ABC</span><br><span class="line">echo $c-&gt;abc;//这里输出ABC</span><br><span class="line">$b-&gt;abc=&quot;DEF&quot;;</span><br><span class="line">echo $c-&gt;abc;//这里输出DEF</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>在PHP中，对象的复制是通过引用来实现的。<br>上列中$b=new a; $c=$b; 其实等效于$b=new a; $c=&amp;$b;</p>
+<p>PHP中默认就是通过引用来调用对象， 但有时你可能想建立一个对象的副本，并希望原来的对象的改变不影响到副本。<br>为了这样的目的，PHP定义了一个特殊的方法，称为__clone.</p>
 
       
     </div>
@@ -374,11 +380,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/踩坑/" rel="tag"># 踩坑</a>
-          
             <a href="/tags/PHP/" rel="tag"># PHP</a>
-          
-            <a href="/tags/Laravel/" rel="tag"># Laravel</a>
           
         </div>
       
@@ -391,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/09/02/20180902/" rel="next" title="Nginx与PHP的交互">
-                <i class="fa fa-chevron-left"></i> Nginx与PHP的交互
+              <a href="/2018/09/16/20180916/" rel="next" title="PHP之道--《编程范式》篇">
+                <i class="fa fa-chevron-left"></i> PHP之道--《编程范式》篇
               </a>
             
           </div>
@@ -400,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/05/20180905/" rel="prev" title="CSRF攻击与防御">
-                CSRF攻击与防御 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -544,7 +542,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面"><span class="nav-number">1.</span> <span class="nav-text">关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键代码："><span class="nav-number"></span> <span class="nav-text">关键代码：</span></a></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的传址调用"><span class="nav-number">1.</span> <span class="nav-text">函数的传址调用:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数的引用返回"><span class="nav-number">2.</span> <span class="nav-text">函数的引用返回:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象的调用"><span class="nav-number">3.</span> <span class="nav-text">对象的调用</span></a></li></ol></div>
             
 
           </div>
