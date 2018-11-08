@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T13:06:57.512Z">
+<meta property="og:updated_time" content="2018-11-08T12:21:37.244Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="手残sudo -R 777 &#x2F;etc(&#x2F;usr)后怎么办">
 <meta name="twitter:description" content="再也不敢随便给权限，更加不能随便-R了执行sudo -R 777 /etc(/usr)后sudo就不能使用了，会出现错误：sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位） 填坑过程：百度+Google首先重">
@@ -366,6 +366,20 @@ sudo: fatal error, unable to load plugins
 
 $ chown -R root /usr/lib/sudo
 </code></pre><p>不知道啥原理，但是感谢<a href="https://blog.csdn.net/lileihappy/article/details/79214156提供的参考" target="_blank" rel="noopener">https://blog.csdn.net/lileihappy/article/details/79214156提供的参考</a><br>(吐槽下百度有些答案:<br>    Ctrl+Alt+F1进入窗口模式<br>    sudo -s(sudo都不能用了还来这个)<br>    chown root:root /usr/bin/sudo<br>    chmod 4755 /usr/bin/sudo<br>    reboot<br>)</p>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+
+
 
       
     </div>

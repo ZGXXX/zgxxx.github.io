@@ -106,7 +106,7 @@
 <meta property="og:image" content="https://image-static.segmentfault.com/115/776/1157764437-5b90fc91c2cb4_articlex">
 <meta property="og:image" content="https://image-static.segmentfault.com/310/382/3103826051-5b90fd995ba08_articlex">
 <meta property="og:image" content="https://image-static.segmentfault.com/170/055/1700552165-5b90fdab2371e_articlex">
-<meta property="og:updated_time" content="2018-11-05T13:06:57.668Z">
+<meta property="og:updated_time" content="2018-11-08T12:21:37.056Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="打造 Laravel 优美架构 谈可维护性与弹性设计">
 <meta name="twitter:description" content="公司项目可能需要对架构进行重建，老大给了我一个视频让我学习里面的思想，看完后觉得收获很大，主讲人对laravel项目各个层次有很清晰的理解，力求做到职责单一分明，提高可维护性。下面是我看完视频对其内容的大概整理，以及一些自己的见解，有错误的请指出。视频：https://www.youtube.com/watch... (有墙各位懂的)">
@@ -383,7 +383,15 @@
 <h2 id="Presenter（充值业务）"><a href="#Presenter（充值业务）" class="headerlink" title="Presenter（充值业务）:"></a>Presenter（充值业务）:</h2><p>一些比较固定，可以单独调用的，可以用Presenter抽出来，不需要让Model去做，下次修改也单独修改Presenter就行了，<br>例如时间戳转成Y-m-d H:i:s格式，可以单独用Presenter处理后用@inject插入到前端模板，而不是把转化过程写在模板上面<br><img src="https://image-static.segmentfault.com/710/831/710831743-5b90fb4eeb5ce_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/256/257/2562576577-5b90fb61cbad4_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/309/292/3092928320-5b90fb6f4b6f1_articlex" alt="avarar"><br><strong>个人理解：</strong>所以在Controller和View中间可以加一层Presenter，我的理解有点类似：美宜佳商户(Controller)可以给客人(View)充公交卡，这种小事不需要劳费工厂(Model)<br><img src="https://image-static.segmentfault.com/101/500/1015005224-5b90fb84bfc97_articlex" alt="avarar"></p>
 <h2 id="Transformer（快餐小吃人工筛选）"><a href="#Transformer（快餐小吃人工筛选）" class="headerlink" title="Transformer（快餐小吃人工筛选）:"></a>Transformer（快餐小吃人工筛选）:</h2><p>转换器，例如在仓库repository中有一个获取所有用户信息的查询操作：$this-&gt;user-&gt;all();<br>但有些地方我们不需要用到那么多个字段，我只想有name和email字段，难道我要去改all()里面的参数，变成$this-&gt;user-&gt;all([‘name’,’email’])?<br>这样另外的地方又要全部字段，这不就冲突了？这时候Transformer就有用了，其实原理是对$this-&gt;user-&gt;all()获得的数据进行筛选后再输出，加了个筛选器。<br><img src="https://image-static.segmentfault.com/118/447/1184473386-5b90fb994f382_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/337/359/3373598994-5b90fbad466dd_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/192/588/1925884062-5b90fbc15db6e_articlex" alt="avarar"><br>之后要修改结果字段就直接在transform修改即可，当然还可以额外添加需要的字段：array_set()<br><img src="https://image-static.segmentfault.com/344/587/3445871937-5b90fc29f1e19_articlex" alt="avarar"><br><strong>个人理解：</strong>这一块我的理解就是有些客人需要点一些快餐，例如美宜佳里面的车仔面呀，烤肠呀，在卖出商品的时候需要根据客人的需求对小吃进行筛选再卖出去，不可能客人指点要一个烤肠，你把店里全部小吃拿给他，让他自个去筛选，中间卖出去的时候需要Transformer进行筛选再给出商品<br><img src="https://image-static.segmentfault.com/640/163/640163195-5b90fc3dcd04d_articlex" alt="avarar"></p>
 <h2 id="Formatter（包装）"><a href="#Formatter（包装）" class="headerlink" title="Formatter（包装）:"></a>Formatter（包装）:</h2><p>主要用于保持API返回格式的一致（使用方法和transform类似）：<br><img src="https://image-static.segmentfault.com/296/081/2960819929-5b90fc60bc1a6_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/115/776/1157764437-5b90fc91c2cb4_articlex" alt="avarar"><br><img src="https://image-static.segmentfault.com/310/382/3103826051-5b90fd995ba08_articlex" alt="avarar"><br>个人理解：Formatter这一块我的理解就是商品包装，客人买东西，买小吃，你需要对商品先进行包装，当然这个包装肯定需要保持一致<br><img src="https://image-static.segmentfault.com/170/055/1700552165-5b90fdab2371e_articlex" alt="avarar"><br>以上便是我再看完视频后对其进行总结整理，当然理论的说的容易，实际操作起来还有很多未知的问题，还是需要后面继续研究学习。</p>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
       
     </div>
     

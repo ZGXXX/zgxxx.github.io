@@ -88,7 +88,7 @@
 <meta property="og:description" content="前言&amp;emsp; 上一篇博客文章收集了关于Laravel服务容器的相关知识（传送门），我们知道了服务容器主要有绑定和解析两个重要功能，那么Laravel这个框架集齐了如此多功能，我们项目可能还需要另外引入一些功能包，这些绑定必须有一个统一的管理工具，统一绑定在一个地方，这个地方就是服务提供者。">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload.cc/i1/2018/10/27/dwBpYz.png">
-<meta property="og:updated_time" content="2018-11-05T13:06:57.612Z">
+<meta property="og:updated_time" content="2018-11-08T12:21:37.588Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Laravel修炼：服务提供者">
 <meta name="twitter:description" content="前言&amp;emsp; 上一篇博客文章收集了关于Laravel服务容器的相关知识（传送门），我们知道了服务容器主要有绑定和解析两个重要功能，那么Laravel这个框架集齐了如此多功能，我们项目可能还需要另外引入一些功能包，这些绑定必须有一个统一的管理工具，统一绑定在一个地方，这个地方就是服务提供者。">
@@ -380,7 +380,15 @@ artisan make:provider yourServiceProvider</code><br>创建后的文件会存放�
 <p>服务提供者还有一个小问题值的注意，由于php是一门基本语言，在处理请求的时候，都会从入口文件把所有php都执行一遍。为了性能考虑，laravel会在第一次初始化的时候，把所有的服务提供者都缓存到bootstrap/cache/services.php文件里面，所以有时候当你改了一个服务提供者的代码以后，再刷新不一定能看到期望的效果，这有可能就是因为缓存所致。这时把services.php删掉就能看到你要的效果了。</p>
 </blockquote>
 <p>&emsp;再次感 云诸葛这篇文章，看完后收货很大，本文内容较为粗略，想要详细了解可以看这里<a href="https://www.cnblogs.com/lyzg/p/6181055.html#_label2" target="_blank" rel="noopener">laravel框架容器管理的一些要点</a></p>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
       
     </div>
     
@@ -412,8 +420,8 @@ artisan make:provider yourServiceProvider</code><br>创建后的文件会存放�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/10/14/20181013/" rel="next" title="Laravel修炼：服务容器绑定与解析">
-                <i class="fa fa-chevron-left"></i> Laravel修炼：服务容器绑定与解析
+              <a href="/2018/10/07/20181007/" rel="next" title="假期结束">
+                <i class="fa fa-chevron-left"></i> 假期结束
               </a>
             
           </div>
@@ -422,8 +430,8 @@ artisan make:provider yourServiceProvider</code><br>创建后的文件会存放�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/11/07/20181107/" rel="prev" title="laravel5.5+dingo+JWT开发后台API">
-                laravel5.5+dingo+JWT开发后台API <i class="fa fa-chevron-right"></i>
+              <a href="/2018/11/08/20181108/" rel="prev" title="使用postman调试jwt开发的接口">
+                使用postman调试jwt开发的接口 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>

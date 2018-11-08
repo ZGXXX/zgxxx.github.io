@@ -87,7 +87,7 @@
 <meta property="og:site_name" content="自行脑补">
 <meta property="og:description" content="在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址 PHP内核的角度：123456struct _zval_struct &amp;#123;zvalue_value value; // 存储变量的值zend_uint refcount__gc; //表示引用计数 默认为：1zend_uchar type; // 变量具体的类">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-05T13:06:57.124Z">
+<meta property="og:updated_time" content="2018-11-08T12:21:37.376Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PHP之道-- 对象和引用">
 <meta name="twitter:description" content="在PHP 中引用的意思是用不同的名字访问同一个变量内容。与在C语言中的指针不同：例如不能对引用做指针运算，引用并不是实际的内存地址 PHP内核的角度：123456struct _zval_struct &amp;#123;zvalue_value value; // 存储变量的值zend_uint refcount__gc; //表示引用计数 默认为：1zend_uchar type; // 变量具体的类">
@@ -363,7 +363,15 @@
 <h2 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class a&#123;</span><br><span class="line">var $abc=&quot;ABC&quot;;</span><br><span class="line">&#125;</span><br><span class="line">$b=new a;</span><br><span class="line">$c=$b;</span><br><span class="line">echo $b-&gt;abc;//这里输出ABC</span><br><span class="line">echo $c-&gt;abc;//这里输出ABC</span><br><span class="line">$b-&gt;abc=&quot;DEF&quot;;</span><br><span class="line">echo $c-&gt;abc;//这里输出DEF</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
 <p>在PHP中，对象的复制是通过引用来实现的。<br>上列中$b=new a; $c=$b; 其实等效于$b=new a; $c=&amp;$b;</p>
 <p>PHP中默认就是通过引用来调用对象， 但有时你可能想建立一个对象的副本，并希望原来的对象的改变不影响到副本。<br>为了这样的目的，PHP定义了一个特殊的方法，称为__clone.</p>
-
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
       
     </div>
     
