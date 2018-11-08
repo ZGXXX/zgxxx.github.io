@@ -262,6 +262,161 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/21/20180721/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/07/21/20180721/" itemprop="url">PHPExcel读取表格</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-21T22:50:18+08:00">
+                2018-07-21 22:50:18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>先引入类IOFactory.php</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">require_once</span> <span class="string">'../PHPExcel/IOFactory.php'</span>;</span><br><span class="line">$filePath = <span class="string">"test.xlsx"</span>;  <span class="comment">// 测试文件</span></span><br></pre></td></tr></table></figure>
+<p>加载测试文件</p>
+<ol>
+<li>$inputFileType = PHPExcel_IOFactory::identify($filePath) 判断文件类型</li>
+<li>$objReader = PHPExcel_IOFactory::createReader($inputFileType); 实例化类型对象</li>
+<li>$objPHPExcel = $objReader-&gt;load($filePath); 加载文件</li>
+</ol>
+<p>下面主要判断Excel2007和Excel5类型,即xlsx/xlsm/xltx/xltm和xls/xlt格式文件</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    $inputFileType = PHPExcel_IOFactory::identify($filePath);</span><br><span class="line">    <span class="keyword">if</span> ($inputFileType !== <span class="string">"Excel5"</span> &amp;&amp; $inputFileType !== <span class="string">"Excel2007"</span> ) &#123;</span><br><span class="line">        unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">"请确保导入的文件格式正确!"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    $objReader = PHPExcel_IOFactory::createReader($inputFileType);</span><br><span class="line">    $objPHPExcel = $objReader-&gt;load($filePath);</span><br><span class="line">&#125; <span class="keyword">catch</span>(<span class="keyword">Exception</span> $e) &#123;</span><br><span class="line">    unlink($filePath) &amp;&amp; str_alert(<span class="number">-1</span>,<span class="string">'加载文件发生错误：”'</span>.pathinfo($filePath,PATHINFO_BASENAME).<span class="string">'”: '</span>.$e-&gt;getMessage());</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/07/21/20180721/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/20180708/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -726,7 +881,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
