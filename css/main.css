@@ -284,7 +284,7 @@ a {
   word-wrap: break-word;
 }
 a:hover {
-  color: #222;
+  color: #ec0101;
   border-bottom-color: #222;
 }
 blockquote {
@@ -1870,11 +1870,12 @@ pre .javascript .function {
   margin-left: 10px;
 }
 .sidebar-nav .sidebar-nav-active {
-  color: #fc6423;
-  border-bottom-color: #fc6423;
+  color: #0d556b;
+  border-bottom-color: #0eacc5;
 }
 .sidebar-nav .sidebar-nav-active:hover {
   color: #fc6423;
+  border-bottom-color: #c5000a;
 }
 .sidebar-panel {
   display: none;
@@ -2744,7 +2745,7 @@ pre .javascript .function {
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #222;
+  background: #2b6d79;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
