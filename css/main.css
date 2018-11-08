@@ -277,10 +277,10 @@ p {
   margin: 0 0 20px 0;
 }
 a {
-  color: #555;
+  color: #4db8c3;
   text-decoration: none;
   outline: none;
-  border-bottom: 1px solid #999;
+  /*border-bottom: 1px solid #999;*/
   word-wrap: break-word;
 }
 a:hover {
@@ -2772,6 +2772,9 @@ pre .javascript .function {
 }
 .site-nav {
   border-top: none;
+}
+.site-nav a{
+  color: #555;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-nav {
