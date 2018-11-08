@@ -1912,8 +1912,8 @@ pre .javascript .function {
   border-bottom-color: #ccc;
 }
 .post-toc ol a:hover {
-  color: #000;
-  border-bottom-color: #000;
+  color: #f93a3a;
+  border-bottom-color: #f93a3a;
 }
 .post-toc .nav-item {
   overflow: hidden;
