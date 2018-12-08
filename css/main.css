@@ -277,14 +277,14 @@ p {
   margin: 0 0 20px 0;
 }
 a {
-  color: #4db8c3;
+  color: #555;
   text-decoration: none;
   outline: none;
-  /*border-bottom: 1px solid #999;*/
+  border-bottom: 1px solid #999;
   word-wrap: break-word;
 }
 a:hover {
-  color: #ec0101;
+  color: #222;
   border-bottom-color: #222;
 }
 blockquote {
@@ -1823,7 +1823,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #dbff60;
+  background: #2e0b4d;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -1870,12 +1870,11 @@ pre .javascript .function {
   margin-left: 10px;
 }
 .sidebar-nav .sidebar-nav-active {
-  color: #0d556b;
-  border-bottom-color: #0eacc5;
+  color: #fc6423;
+  border-bottom-color: #fc6423;
 }
 .sidebar-nav .sidebar-nav-active:hover {
   color: #fc6423;
-  border-bottom-color: #c5000a;
 }
 .sidebar-panel {
   display: none;
@@ -1912,8 +1911,8 @@ pre .javascript .function {
   border-bottom-color: #ccc;
 }
 .post-toc ol a:hover {
-  color: #f93a3a;
-  border-bottom-color: #f93a3a;
+  color: #000;
+  border-bottom-color: #000;
 }
 .post-toc .nav-item {
   overflow: hidden;
@@ -2745,7 +2744,7 @@ pre .javascript .function {
 .site-meta {
   padding: 20px 0;
   color: #fff;
-  background: #2b6d79;
+  background: #222;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-meta {
@@ -2773,9 +2772,6 @@ pre .javascript .function {
 }
 .site-nav {
   border-top: none;
-}
-.site-nav a{
-  color: #555;
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .site-nav {
@@ -3123,9 +3119,5 @@ pre .javascript .function {
   }
   .pagination {
     margin: 8px 0 0;
-  }
-
-  .post-category a{
-    color: #555;
   }
 }
