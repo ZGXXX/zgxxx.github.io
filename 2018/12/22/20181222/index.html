@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://upload.cc/i1/2018/12/21/MRgsN2.png">
 <meta property="og:image" content="https://upload.cc/i1/2018/12/21/CWXpk9.png">
-<meta property="og:updated_time" content="2018-12-22T11:31:31.581Z">
+<meta property="og:updated_time" content="2018-12-22T11:45:26.084Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="小程序开发初体验">
 <meta name="twitter:description" content="前言&amp;emsp; 已经有一个多月没更新博客了,这个月确实很忙。毕业以来第一次完整负责一个项目，第一次做小程序，第一次部署正式环境，第一次周六加班（我们公司确实不怎么加班哈哈），这段时间确实又让我收获颇多，起码不再像几个月前那样，一个刚毕业的人四处充满疑惑，小心翼翼的打代码，生怕给别人带来麻烦。 &amp;emsp; 可能因为性格慢热，在熟悉了环境，熟悉了同事，也得到老大的认可的情况下，我开始充满信心和热情">
@@ -315,8 +315,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T19:31:31+08:00">
-                2018-12-22 19:31:31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T19:45:26+08:00">
+                2018-12-22 19:45:26
               </time>
             
 
@@ -377,27 +377,22 @@
       
         <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp; 已经有一个多月没更新博客了,这个月确实很忙。毕业以来第一次完整负责一个项目，第一次做小程序，第一次部署正式环境，第一次周六加班（我们公司确实不怎么加班哈哈），这段时间确实又让我收获颇多，起码不再像几个月前那样，一个刚毕业的人四处充满疑惑，小心翼翼的打代码，生怕给别人带来麻烦。</p>
 <p>&emsp; 可能因为性格慢热，在熟悉了环境，熟悉了同事，也得到老大的认可的情况下，我开始充满信心和热情去完成我的工作，有疑问的环节依然谦虚的请教，有不满意的地方也平和的提出来。当然，我依旧还有很多地方待提高和完善，知识学习是一方面，还有一方面是自己的脾气，就比如这次小程序上线那天，小程序码识别失败，那天早上我也很着急，排查问题都搞定自己焦头烂耳，我的测试同事过来询问我还要多久才能修复，瞬间我便管不住自己的情绪，带着怒气问为什么你们测试没测出来？后面想想确实是自己的锅，小程序码本来就不能在体验版上测，因为还没发布。今后还需好好管理下自己的脾气……<br>下面是开发小程序的过程踩过的一些坑：<br><a id="more"></a></p>
-<p>体验版某个页面只有打开调试才能请求数据，这种跟后台域名配置有关，例如需要用到微信头像请求<a href="https://wx.qlogo.cn" target="_blank" rel="noopener">https://wx.qlogo.cn</a>, 会显示这个域名不合法，需在后台downloadFile，uploadFile合法域名处加上，然后重启项目</p>
-<hr>
-<p> 拍照上传图片发现有些手机上传图片失败没反应，是后台上传图片失败，文件过大，修改小程序前端拍照图片质量，改为normal就可以，heigh可能过大导致后台php请求文件过大失败(报错413 Request Entity Too Large)</p>
+<h4 id="体验版某个页面只有打开调试才能请求数据"><a href="#体验版某个页面只有打开调试才能请求数据" class="headerlink" title="体验版某个页面只有打开调试才能请求数据"></a>体验版某个页面只有打开调试才能请求数据</h4><p>这种情况跟后台域名配置有关，例如需要用到微信头像请求<a href="https://wx.qlogo.cn" target="_blank" rel="noopener">https://wx.qlogo.cn</a>, 会显示这个域名不合法，需在后台downloadFile，uploadFile合法域名处加上，然后重启项目</p>
+<h4 id="真机上传图片失败"><a href="#真机上传图片失败" class="headerlink" title="真机上传图片失败"></a>真机上传图片失败</h4><p>拍照上传图片发现有些手机上传图片失败没反应，是后台上传图片失败，文件过大，修改小程序前端拍照图片质量，改为normal就可以，heigh可能过大导致后台php请求文件过大失败(报错413 Request Entity Too Large)</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">takePhoto(&#123;</span><br><span class="line">    quality: &quot;normal&quot;,</span><br></pre></td></tr></table></figure>
 <p>如果要从服务端解决：</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><img src="https://upload.cc/i1/2018/12/21/MRgsN2.png" alt="服务端解决413报错"></h2><p>在上传某个图片的操作中，一开始请求时间很长，五六秒，查看原因是前端需要请求一个微信头像<a href="https://wx.qlogo.cn,这个请求持续四五秒左右，后面google了一下解决方法：http://www.cnblogs.com/mysic/p/5421754.html" target="_blank" rel="noopener">https://wx.qlogo.cn,这个请求持续四五秒左右，后面google了一下解决方法：http://www.cnblogs.com/mysic/p/5421754.html</a></p>
+<p><img src="https://upload.cc/i1/2018/12/21/MRgsN2.png" alt="服务端解决413报错"></p>
+<h4 id="真机上传图片过慢"><a href="#真机上传图片过慢" class="headerlink" title="真机上传图片过慢"></a>真机上传图片过慢</h4><p>在上传某个图片的操作中，一开始请求时间很长，差不多五六秒，查看原因是前端需要请求一个微信头像<a href="https://wx.qlogo.cn，" target="_blank" rel="noopener">https://wx.qlogo.cn，</a> 这个请求持续四五秒左右，后面google了一下解决方法：<a href="http://www.cnblogs.com/mysic/p/5421754.html" target="_blank" rel="noopener">http://www.cnblogs.com/mysic/p/5421754.html</a></p>
 <p>即后台添加ini_set(‘default_socket_timeout’, 1);限制请求超过1秒就停止，这样请求完微信头像信息立即关闭连接，响应主体connection:keep-alive会变成close</p>
-<hr>
-<p>某一项置顶排序：select * from <code>card.pvc123.com</code>.card where <code>user_id</code> in (‘025c0f52d2027beed4’, ‘025c1083c7035501ec’, ‘025c10c14702696714’)<br>  and <code>type</code> = 0 <strong>order by  user_id=’025c1083c7035501ec’ desc, user_id=’025c10c14702696714’ desc,  <code>pinyin</code> asc</strong></p>
-<hr>
-<p>当mysql某个字段是时间，date,timestamp等，如果默认值是’0000-00-00 00:00:00’ 或CURRENT_TIMESTAMP，使用is not null，is null查询数据不正确，虽然你的数据库看到的时间是空的，但是实际它其实有数据，相当于空字符串，只能用is true来判断。“is true”不等于“ = true”,在laravel用where（’some’, ‘true’）拿到的sql语句是=true，不是is true</p>
+<h4 id="mysql排序"><a href="#mysql排序" class="headerlink" title="mysql排序"></a>mysql排序</h4><p>select * from <code>card.pvc123.com</code>.card where <code>user_id</code> in (‘025c0f52d2027beed4’, ‘025c1083c7035501ec’, ‘025c10c14702696714’)<br>  and <code>type</code> = 0 <strong>order by  user_id=’025c1083c7035501ec’ desc, user_id=’025c10c14702696714’ desc,  <code>pinyin</code> asc</strong></p>
+<h4 id="mysql时间字段判断是否为空"><a href="#mysql时间字段判断是否为空" class="headerlink" title="mysql时间字段判断是否为空"></a>mysql时间字段判断是否为空</h4><p>当mysql某个字段是时间，date,timestamp等，如果默认值是’0000-00-00 00:00:00’ 或CURRENT_TIMESTAMP，使用is not null，is null查询数据不正确，虽然你的数据库看到的时间是空的，但是实际它其实有数据，相当于空字符串，只能用is true来判断。“is true”不等于“ = true”,在laravel用where（’some’, ‘true’）拿到的sql语句是=true，不是is true</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">select * from `card.pvc123.com`.user_relation where `user_id` = &apos;025c1083c7035501ec&apos; and `type` = 2 and `apply_time` is true （laravel whereRaw(&apos;apply_time is true&apos;)）</span><br><span class="line">select * from `card.pvc123.com`.user_relation where `user_id` = &apos;025c1083c7035501ec&apos; and `type` = 2 and `apply_time` = true （laravel where（&apos;apply_time&apos;, &apos;true&apos;）得到的）</span><br></pre></td></tr></table></figure>
-<hr>
-<p>问题：真机线上环境在某个页面更新了数据，没有立即显示更新成功，而是卡一小会，再退出页面，这种情况很可能是前端页面报错，但是并没有停止页面继续执行跳转，所以在报错的时候产生卡顿。注意：有时候本地开发pc端一切正常，页面不报错，但是到了移动端可能就因为机型的差别，导致前端某个地方找不到某个属性或者其他报错。</p>
-<hr>
-<p>takephoto拍照质量问题(ios拍照或者生成图片都很大，一般都有七八百k)</p>
-<hr>
-<p>涉及到图片上传的，貌似只要是ios图片就会很大，几乎是安卓的10倍，很多地方都要进行压缩，canvasToTempFilePath，takephoto，compressImage等小程序自带功能都有quality属性，ios尽量将其压缩，安卓相对可以大一点，app.systemInfo.platform可以用来区分系统</p>
-<hr>
-<p>小程序码是个大坑，特别是带参数的，必须在正式环境测试，因为每次扫描的都是跳到正式发布的页面去，本地根本测试不了</p>
-<hr>
+<h4 id="真机请求某个页面卡顿后才跳转"><a href="#真机请求某个页面卡顿后才跳转" class="headerlink" title="真机请求某个页面卡顿后才跳转"></a>真机请求某个页面卡顿后才跳转</h4><p>真机线上环境在某个页面更新了数据，没有立即显示更新成功，而是卡一小会，再退出页面，这种情况是前端页面报错，但是并没有停止页面继续执行跳转，所以在报错的时候产生卡顿。注意：有时候本地开发pc端一切正常，页面不报错，但是到了移动端可能就因为机型的差别，导致前端某个地方找不到某个属性或者其他报错。</p>
+<h4 id="拍照质量问题"><a href="#拍照质量问题" class="headerlink" title="拍照质量问题"></a>拍照质量问题</h4><p>takephoto拍照质以及涉及到图片上传的，貌似只要是ios图片就会很大，几乎是安卓的10倍，很多地方都要进行压缩，canvasToTempFilePath，takephoto，compressImage等小程序自带功能都有quality属性，ios尽量将其压缩，安卓相对可以大一点，app.systemInfo.platform可以用来区分系统</p>
+<blockquote>
+<p>ios拍照或者生成图片都很大，一般都有七八百k</p>
+</blockquote>
+<h4 id="小程序码"><a href="#小程序码" class="headerlink" title="小程序码"></a>小程序码</h4><p>小程序码是个大坑，特别是带参数的，必须在正式环境测试，因为每次扫描的都是跳到正式发布的页面去，本地根本测试不了</p>
 <p>使用集成包开发有时候也有坑。比如我使用easywechat，这确实是一个很叼的包，很方便，也是腾讯一个大神开发的，在我使用小程序码的时候，一开始我是用</p>
   <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$app-&gt;app_code-&gt;get(string $path, array $optional = []);</span><br></pre></td></tr></table></figure>
 <p>  开发的时候一切没问题，路径也正常跳转，但是后来发现这个方法对应小程序原生方法getWXACode，是有数量限制的，业务需求必须使用另一个没有数量限制的getWXACodeUnlimit，在easywechat里对应</p>
@@ -584,7 +579,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">2.</span> <span class="nav-text"></span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#体验版某个页面只有打开调试才能请求数据"><span class="nav-number">1.0.1.</span> <span class="nav-text">体验版某个页面只有打开调试才能请求数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#真机上传图片失败"><span class="nav-number">1.0.2.</span> <span class="nav-text">真机上传图片失败</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#真机上传图片过慢"><span class="nav-number">1.0.3.</span> <span class="nav-text">真机上传图片过慢</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql排序"><span class="nav-number">1.0.4.</span> <span class="nav-text">mysql排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql时间字段判断是否为空"><span class="nav-number">1.0.5.</span> <span class="nav-text">mysql时间字段判断是否为空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#真机请求某个页面卡顿后才跳转"><span class="nav-number">1.0.6.</span> <span class="nav-text">真机请求某个页面卡顿后才跳转</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#拍照质量问题"><span class="nav-number">1.0.7.</span> <span class="nav-text">拍照质量问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小程序码"><span class="nav-number">1.0.8.</span> <span class="nav-text">小程序码</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
