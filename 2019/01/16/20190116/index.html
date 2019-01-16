@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="辅助工具,Web知识," />
+  <meta name="keywords" content="Linux,踩坑,PHP," />
 
 
 
@@ -79,23 +79,18 @@
 
 
 
-<meta name="description" content="前言Nginx是俄国人最早开发的Webserver，现已风靡全球，基本上LNMP成了当下的标配，下面主要根据网上收集的资料，对Nginx如何与php完成交互进行介绍。">
-<meta name="keywords" content="辅助工具,Web知识">
+<meta name="description" content="前言最近想要学习一下swoole，虽然机子上装的是php7.0，但是考虑到一些有关swoole的轮子要依赖更高版本（例如swooletw)，所以就在机子上升级了php7.2，下面是在网上搜索或者自己折腾出来的一些笔记。">
+<meta name="keywords" content="Linux,踩坑,PHP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Nginx与PHP的交互">
-<meta property="og:url" content="http://yoursite.com/2018/09/02/20180902/index.html">
+<meta property="og:title" content="ubuntu多版本php切换">
+<meta property="og:url" content="http://yoursite.com/2019/01/16/20190116/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="前言Nginx是俄国人最早开发的Webserver，现已风靡全球，基本上LNMP成了当下的标配，下面主要根据网上收集的资料，对Nginx如何与php完成交互进行介绍。">
+<meta property="og:description" content="前言最近想要学习一下swoole，虽然机子上装的是php7.0，但是考虑到一些有关swoole的轮子要依赖更高版本（例如swooletw)，所以就在机子上升级了php7.2，下面是在网上搜索或者自己折腾出来的一些笔记。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://img0.ph.126.net/gI0rSwr7I-Sf8BXX1fqQ1Q==/6597835026751908513.png">
-<meta property="og:image" content="http://img2.ph.126.net/NgIDW3ZKuD1mq4rayNWt7Q==/1401745384119579089.png">
-<meta property="og:image" content="http://img1.ph.126.net/BT2EVYWLQvuxzvVZN90DAA==/6632659858537940503.png">
-<meta property="og:image" content="http://img2.ph.126.net/UYgvoyQNdW3y23hIxu_phg==/6632677450723985162.png">
-<meta property="og:updated_time" content="2018-11-08T12:21:37.824Z">
+<meta property="og:updated_time" content="2019-01-16T13:21:51.650Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Nginx与PHP的交互">
-<meta name="twitter:description" content="前言Nginx是俄国人最早开发的Webserver，现已风靡全球，基本上LNMP成了当下的标配，下面主要根据网上收集的资料，对Nginx如何与php完成交互进行介绍。">
-<meta name="twitter:image" content="http://img0.ph.126.net/gI0rSwr7I-Sf8BXX1fqQ1Q==/6597835026751908513.png">
+<meta name="twitter:title" content="ubuntu多版本php切换">
+<meta name="twitter:description" content="前言最近想要学习一下swoole，虽然机子上装的是php7.0，但是考虑到一些有关swoole的轮子要依赖更高版本（例如swooletw)，所以就在机子上升级了php7.2，下面是在网上搜索或者自己折腾出来的一些笔记。">
 
 
 
@@ -125,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/09/02/20180902/"/>
+  <link rel="canonical" href="http://yoursite.com/2019/01/16/20190116/"/>
 
 
 
 
 
-  <title>Nginx与PHP的交互 | 自行脑补</title>
+  <title>ubuntu多版本php切换 | 自行脑补</title>
   
 
 
@@ -288,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/02/20180902/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/16/20190116/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Grayson Zhao">
@@ -305,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Nginx与PHP的交互</h1>
+          <h1 class="post-title" itemprop="name headline">ubuntu多版本php切换</h1>
         
 
         <div class="post-meta">
@@ -317,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-02T17:30:15+08:00">
-                2018-09-02 17:30:15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-16T21:21:51+08:00">
+                2019-01-16 21:21:51
               </time>
             
 
@@ -340,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习收集/" itemprop="url" rel="index">
-                    <span itemprop="name">学习收集</span>
+                  <a href="/categories/Linux/" itemprop="url" rel="index">
+                    <span itemprop="name">Linux</span>
                   </a>
                 </span>
 
@@ -377,23 +372,27 @@
       
 
       
-        <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>Nginx是俄国人最早开发的Webserver，现已风靡全球，基本上LNMP成了当下的标配，下面主要根据网上收集的资料，对Nginx如何与php完成交互进行介绍。</p>
-<a id="more"></a>
-<h3 id="正题"><a href="#正题" class="headerlink" title="正题"></a>正题</h3><p>nginx server简单配置<br><img src="http://img0.ph.126.net/gI0rSwr7I-Sf8BXX1fqQ1Q==/6597835026751908513.png" alt="avatar"></p>
-<p>nginx配置中注意到有fastcgi* 开头的配置，以及include引入的fastcgi.conf文件，这个文件也是有一堆fastcgi开头的配置项，这些配置项基本不改变，单独用.conf文件保存，可在多处引用<br><img src="http://img2.ph.126.net/NgIDW3ZKuD1mq4rayNWt7Q==/1401745384119579089.png" alt="avatar"></p>
-<p>通常我们都知道了Nginx与PHP打交道主要就是FastCGI，下面来了解什么事FastCGI,它与Nginx和PHP有什么关系。</p>
-<p>CGI是通用网关协议，FastCGI则是一种常住进程的CGI模式程序。我们所熟知的PHP-FPM的全称是PHP FastCGI Process Manager，即PHP-FPM会通过用户配置来管理一批FastCGI进程，例如在PHP-FPM管理下的某个FastCGI进程挂了，PHP-FPM会根据用户配置来看是否要重启补全，PHP-FPM更像是管理器，而真正衔接Nginx与PHP的则是FastCGI进程。（下图，FastCGI在请求流中的位置）<br><img src="http://img1.ph.126.net/BT2EVYWLQvuxzvVZN90DAA==/6632659858537940503.png" alt="avatar"><br>如上图所示，FastCGI的下游，是CGI-APP，在我们的LNMP架构里，这个CGI-APP就是PHP程序。而FastCGI的上游是Nginx，他们之间有一个通信载体，即图中的socket。在我们上文图的配置文件中，fastcgi_pass所配置的内容，便是告诉Nginx你接收到用户请求以后，你该往哪里转发，在我们图中是转发到本机的一个socket文件，这里fastcgi_pass也常配置为一个http接口地址（这个可以在php-fpm.conf中配置）。而上图中的Pre-fork，则对应着我们PHP-FPM的启动，也就是在我们启动PHP-FPM时便会根据用户配置启动诸多FastCGI触发器（FastCGI Wrapper）。</p>
-<p>对FastCGI在Nginx+PHP的模式中的定位有了一定了解后，我们再来了解下Nginx中为何能写很多fastcgi_*的配置项。这是因为Nginx的一个默认内置module实现了FastCGI的Client。<br><img src="http://img2.ph.126.net/UYgvoyQNdW3y23hIxu_phg==/6632677450723985162.png" alt="avatar"><br>从图中可以看到，fastcgi_param所声明的内容，将会被传递给“FastCGI server”，那这里指的就是fastcgi_pass所指向的server，也就是我们Nginx+PHP模式下的PHP-FPM所管理的FastCGI进程，或者说是那个socket文件载体。这时，有的同学会问：“为什么PHP-FPM管理的那些FastCGI进程要关心这些参数呢？”，好问题，我们一起想想我们做PHP应用开发时候有没有用到$_SERVER这个全局变量，它里面包含了很多服务器的信息，比如包含了用户的IP地址。同学们不想想我们的PHP身处socket文件之后，为什么能得到远端用户的IP呢？上图中的一个fastcgi_param配置REMOTE_ADDR这不正是我们在PHP中用$_SERVER[‘REMOTE_ADDR’]取到的用户IP么。的确，Nginx这个模块里fastcgi_param参数，就是考虑后端程序有时需要获取Webserver外部的变量以及服务器情况。</p>
-<h3 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h3><p>Nginx+PHP的工程模式下，两位主角分工明确，Nginx负责承载HTTP请求的响应与返回，以及超时控制记录日志等HTTP相关的功能，而PHP则负责处理具体请求要做的业务逻辑，它们俩的这种合作模式也是常见的分层架构设计中的一种，在它们各有专注面的同时，FastCGI又很好的将两块衔接，保障上下游通信交互，这种通过某种协议或规范来衔接好上下游的模式，在我们日常的PHP应用开发中也有这样的思想落地，譬如我们所开发的高性能API，具体的Client到底是PC、APP还是某个其他程序，我们不关心，而这些PC、APP、第三方程序也不关心我们的PHP代码实现，他们按照API的规范来请求做处理即可</p>
-<script>
-var _hmt = _hmt || [];
-(function() {
-  var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
-  var s = document.getElementsByTagName("script")[0]; 
-  s.parentNode.insertBefore(hm, s);
-})();
-</script>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近想要学习一下swoole，虽然机子上装的是php7.0，但是考虑到一些有关swoole的轮子要依赖更高版本（例如swooletw)，所以就在机子上升级了php7.2，下面是在网上搜索或者自己折腾出来的一些笔记。<br><a id="more"></a></p>
+<h3 id="版本升级操作-直接从7-0升级到7-2-："><a href="#版本升级操作-直接从7-0升级到7-2-：" class="headerlink" title="版本升级操作(直接从7.0升级到7.2)："></a>版本升级操作(直接从7.0升级到7.2)：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:ondrej/php</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get upgrade php</span><br><span class="line"># 拓展升级</span><br><span class="line">sudo apt-get install php7.2-mbstring</span><br><span class="line">sudo apt-get install php7.2-gd</span><br><span class="line">sudo apt-get install php7.2-dom</span><br><span class="line">sudo apt-get install php7.2-mysql</span><br><span class="line">sudo apt-get install php7.2-curl</span><br><span class="line">......</span><br></pre></td></tr></table></figure>
+<p>有需要可以安装swoole: <a href="https://wiki.swoole.com/wiki/page/6.html" target="_blank" rel="noopener">https://wiki.swoole.com/wiki/page/6.html</a></p>
+<blockquote>
+<p>这里建议直接用pecl install swoole安装，一步到位，如果手动编译，貌似会出现各种因为版本对应不上的问题。</p>
+</blockquote>
+<h3 id="切换版本："><a href="#切换版本：" class="headerlink" title="切换版本："></a>切换版本：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 禁用7.0版本</span><br><span class="line">sudo a2dismod php7.0</span><br><span class="line"></span><br><span class="line"># 启用7.2版本</span><br><span class="line">sudo a2enmod php7.2</span><br><span class="line"></span><br><span class="line"># 重启nginx(或apache)</span><br><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果出现ERROR: Module php7.0 does not exist! ，执行sudo apt-get install libapache2-mod-php7.0再执行上面操作</p>
+</blockquote>
+<p>这时候在浏览器查看phpinfo()应该就可以看到7.2版本了，但是命令行cli那里还是7.0，需要执行下面操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># 切换cli</span><br><span class="line">sudo update-alternatives --set php /usr/bin/php7.2</span><br></pre></td></tr></table></figure></p>
+<p>这样在命令行执行php -v也能看到7.2版本了</p>
+<blockquote>
+<p>如果有两个版本，其实可以直接用sudo service php7.0-fpm stop/restart来进行切换，当然这只能切换php-fpm，也就是web端，命令行cli端还是不能切换的</p>
+</blockquote>
+<h3 id="Parse-error-syntax-error-unexpected-‘-’-expecting-variable-T-VARIABLE-："><a href="#Parse-error-syntax-error-unexpected-‘-’-expecting-variable-T-VARIABLE-：" class="headerlink" title="Parse error: syntax error, unexpected ‘?’, expecting variable (T_VARIABLE)："></a>Parse error: syntax error, unexpected ‘?’, expecting variable (T_VARIABLE)：</h3><p>升级版本后，我还折腾了php7.1，然后第二天回来启动电脑就发现所以laravel项目都报这样的错，网上搜索后知道是版本问题，但是看了下php -v没问题就是7.2，这时候打算重启php报错，以下的报错就是问题所在了:<br>ERROR: unable to bind listening socket for address ‘127.0.0.1:9001’: Address already in use (98)<br>大致就是端口被占用，然后php fastCGI程序启动失败</p>
+<p>解决方法：<br><strong>ps aux|grep php</strong>查看所有php-fpm进程，发现有个php7.1-fpm进程，拿到进程id，再kill掉就能够重启了。</p>
+<blockquote>
+<p>网上查询的解决方法是killall php-pfm这个命令，执行后只有显示 php-pfm：没有发现操作，这种方法没用，最后使用上面这种查询进程，然后根据进程id杀死进程的方法</p>
+</blockquote>
+
       
     </div>
     
@@ -410,9 +409,11 @@ var _hmt = _hmt || [];
       
         <div class="post-tags">
           
-            <a href="/tags/辅助工具/" rel="tag"># 辅助工具</a>
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
-            <a href="/tags/Web知识/" rel="tag"># Web知识</a>
+            <a href="/tags/踩坑/" rel="tag"># 踩坑</a>
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
           
         </div>
       
@@ -425,8 +426,8 @@ var _hmt = _hmt || [];
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/13/20180813/" rel="next" title="phpcs插件规范代码">
-                <i class="fa fa-chevron-left"></i> phpcs插件规范代码
+              <a href="/2018/12/22/20181222/" rel="next" title="小程序开发初体验">
+                <i class="fa fa-chevron-left"></i> 小程序开发初体验
               </a>
             
           </div>
@@ -434,10 +435,6 @@ var _hmt = _hmt || [];
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/09/04/20180904/" rel="prev" title="Laravel 实现单用户登录">
-                Laravel 实现单用户登录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -573,7 +570,7 @@ var _hmt = _hmt || [];
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正题"><span class="nav-number">2.</span> <span class="nav-text">正题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结尾"><span class="nav-number">3.</span> <span class="nav-text">结尾</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#版本升级操作-直接从7-0升级到7-2-："><span class="nav-number">1.1.</span> <span class="nav-text">版本升级操作(直接从7.0升级到7.2)：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#切换版本："><span class="nav-number">1.2.</span> <span class="nav-text">切换版本：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parse-error-syntax-error-unexpected-‘-’-expecting-variable-T-VARIABLE-："><span class="nav-number">1.3.</span> <span class="nav-text">Parse error: syntax error, unexpected ‘?’, expecting variable (T_VARIABLE)：</span></a></li></ol></li></ol></div>
             
 
           </div>
