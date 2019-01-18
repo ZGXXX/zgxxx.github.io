@@ -79,18 +79,18 @@
 
 
 
-<meta name="description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。">
+<meta name="description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。 传统session认证流程 当用户使用用户名和密码登录之后, 服务器就会生成一">
 <meta name="keywords" content="辅助工具,Web知识">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JWT -- JSON Web Token">
 <meta property="og:url" content="http://yoursite.com/2018/09/25/20180925/index.html">
 <meta property="og:site_name" content="自行脑补">
-<meta property="og:description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。">
+<meta property="og:description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。 传统session认证流程 当用户使用用户名和密码登录之后, 服务器就会生成一">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-08T12:21:37.692Z">
+<meta property="og:updated_time" content="2019-01-18T13:05:30.867Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JWT -- JSON Web Token">
-<meta name="twitter:description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。">
+<meta name="twitter:description" content="前言做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。 传统session认证流程 当用户使用用户名和密码登录之后, 服务器就会生成一">
 
 
 
@@ -372,12 +372,13 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。<br><a id="more"></a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。</p>
 <h2 id="传统session认证流程"><a href="#传统session认证流程" class="headerlink" title="传统session认证流程"></a>传统session认证流程</h2><ol>
 <li>当用户使用用户名和密码登录之后, 服务器就会生成一个 session 文件, session 文件中保存着对这个用户的授权信息,这个文件可以储存在硬盘/内存/数据库中.</li>
 <li>同时还要生成一个对应这个 session 文件的 <strong>sessionid</strong>, 通过 sessionid 就能够找到这个 session 文件.</li>
 <li>然后将 sessionid 发送给客户端, 客户端就将 sessionid 保存起来, 保存的方式有很多种, 目前大多情况是通过 cookie 来保存 sessionid.</li>
-<li>保存之后, 当客户机以后再向服务器发送请求的时候, 请求携带上 sessionid, 这样服务器收到 sessionid 之后,自己就会在服务区上查找对应的 session 文件, 如果查找成功, 就会得到该用户的授权信息, 从而完成一次授权.</li>
+<li>保存之后, 当客户机以后再向服务器发送请求的时候, 请求携带上 sessionid, 这样服务器收到 sessionid 之后,自己就会在服务区上查找对应的 session 文件, 如果查找成功, 就会得到该用户的授权信息, 从而完成一次授权.<a id="more"></a>
+</li>
 </ol>
 <h2 id="session可能存在的问题"><a href="#session可能存在的问题" class="headerlink" title="session可能存在的问题"></a>session可能存在的问题</h2><ol>
 <li>随着用户量的增加, 每个用户都需要在服务器上创建一个 session 文件, 这对服务器造成了压力；</li>
