@@ -282,6 +282,162 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/20190227/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/02/27/20190227/" itemprop="url">PHP对象深拷贝与浅拷贝</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-27T11:38:19+08:00">
+                2019-02-27 11:38:19
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>php对象的赋值是引用赋值，可以参考之前一篇文章<a href="https://zgxxx.github.io/2018/09/16/20180916-2/" target="_blank" rel="noopener">PHP之道–对象和引用</a>;</p>
+<p>深拷贝：赋值完全复制，两个对象完全独立，其中一个对象的属性做出改变时不会影响到另一个。</p>
+<p>浅拷贝：引用赋值，相对于取了一个别名，其中一个对象属性做出修改会影响到另一个。</p>
+<h3 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> $abc=<span class="string">"ABC"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$b=<span class="keyword">new</span> a;</span><br><span class="line">$c=$b;</span><br><span class="line"><span class="keyword">echo</span> $b-&gt;abc;<span class="comment">//这里输出ABC</span></span><br><span class="line"><span class="keyword">echo</span> $c-&gt;abc;<span class="comment">//这里输出ABC</span></span><br><span class="line">$b-&gt;abc=<span class="string">"DEF"</span>;</span><br><span class="line"><span class="keyword">echo</span> $c-&gt;abc;<span class="comment">//这里输出DEF</span></span><br></pre></td></tr></table></figure>
+<p>对象赋值，浅拷贝。上列中\$b=new a; \$c=\$b; 其实等效于\$b=new a; \$c=&amp;$b,也就说取了另一个名字而已，指向的内存空间还是一样的。如果想要完全独立出来一个对象，互不影响，这就涉及到clone深拷贝</p>
+<h3 id="Clone函数"><a href="#Clone函数" class="headerlink" title="Clone函数"></a>Clone函数</h3><p>clone函数在克隆对象时候，普通属性是深拷贝，但原对象的对象属性还是引用赋值，浅拷贝，看代码理解：</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $a = <span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestOne</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $b = <span class="number">1</span>; <span class="comment">//这里就是普通属性</span></span><br><span class="line">    <span class="keyword">public</span> $obj;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;obj = <span class="keyword">new</span> Test();  <span class="comment">//这个obj就是对象属性，它是一个Test的实例</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">$old = <span class="keyword">new</span> TestOne();</span><br><span class="line">$old2 = $old; <span class="comment">//这是完全浅拷贝，和上面对象调用那个例子一样的</span></span><br><span class="line">$new = <span class="keyword">clone</span> $old; <span class="comment">//这里使用了clone函数，普通属性不会被影响，而对象属性会被影响</span></span><br><span class="line"></span><br><span class="line">$new-&gt;b = <span class="number">2</span>; <span class="comment">//改变一下普通属性</span></span><br><span class="line"><span class="keyword">echo</span> $old-&gt;b; <span class="comment">//输出原来的1；说明普通属性是深拷贝</span></span><br><span class="line"></span><br><span class="line">$new-&gt;obj-&gt;a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">echo</span> $old-&gt;obj-&gt;a; <span class="comment">//输出3，说明对象属性是浅拷贝，还是会随着新对象而改变</span></span><br></pre></td></tr></table></figure>
+<p>###魔术方法__clone实现真正深拷贝</p>
+<p>为了实现全部属性的深拷贝，可以使用魔术方法__clone</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $a=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestOne</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $b=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> $obj;</span><br><span class="line">    <span class="comment">//包含了一个对象属性，clone时，它会是浅拷贝</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;obj = <span class="keyword">new</span> Test();</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">    <span class="comment">//方法一：重写clone函数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__clone</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;obj = <span class="keyword">clone</span> <span class="keyword">$this</span>-&gt;obj;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">$old = <span class="keyword">new</span> TestOne();</span><br><span class="line">$new = <span class="keyword">clone</span> $old;</span><br><span class="line"> </span><br><span class="line">$new-&gt;b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">echo</span> $old-&gt;b;<span class="comment">//输出原来的1</span></span><br><span class="line"><span class="keyword">echo</span> PHP_EOL;</span><br><span class="line"><span class="comment">//可以看到，普通属性实现了深拷贝，改变普通属性b，不会对源对象有影响</span></span><br><span class="line"> </span><br><span class="line"><span class="comment">//由于改写了clone函数，现在对象属性也实现了真正的深拷贝，对新对象的改变，不会影响源对象</span></span><br><span class="line">$new-&gt;obj-&gt;a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">echo</span> $old-&gt;obj-&gt;a;<span class="comment">//输出1，不随新对象改变，还是保持了原来的属性</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>###序列化反序列化</p>
+<p>如果每次都要去类里面修改__clone会很不方便，而且还必须把所有对象属性都放在__clone里面保证全部深拷贝。可以使用serialize序列化，unserialize反序列化实现对象深拷贝</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Test</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $a=<span class="number">1</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TestOne</span></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> $b=<span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> $obj;</span><br><span class="line">    <span class="comment">//包含了一个对象属性，clone时，它会是浅拷贝</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;obj = <span class="keyword">new</span> Test();</span><br><span class="line">    &#125;</span><br><span class="line">     </span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line">$m = <span class="keyword">new</span> TestOne();</span><br><span class="line"><span class="comment">//方法二，序列化反序列化实现对象深拷贝</span></span><br><span class="line">$n = serialize($m);</span><br><span class="line">$n = unserialize($n);</span><br><span class="line"> </span><br><span class="line">$n-&gt;b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">echo</span> $m-&gt;b;<span class="comment">//输出原来的1</span></span><br><span class="line"><span class="keyword">echo</span> PHP_EOL;</span><br><span class="line"><span class="comment">//可以看到，普通属性实现了深拷贝，改变普通属性b，不会对源对象有影响</span></span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">$n-&gt;obj-&gt;a = <span class="number">3</span>;</span><br><span class="line"><span class="keyword">echo</span> $m-&gt;obj-&gt;a;<span class="comment">//输出1，不随新对象改变，还是保持了原来的属性,可以看到，序列化和反序列化可以实现对象的深拷贝</span></span><br><span class="line"> </span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>json_encode之后再json_decode,实现赋值也能达到同样效果</p>
+<p>原文参考：<a href="https://www.cnblogs.com/taijun/p/4208008.html" target="_blank" rel="noopener">[PHP中对象的深拷贝与浅拷贝]</a>;</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/19/20190119/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -380,6 +536,153 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/01/19/20190119/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/18/20181222/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/01/18/20181222/" itemprop="url">小程序开发初体验</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-01-18T21:04:41+08:00">
+                2019-01-18 21:04:41
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习收集/" itemprop="url" rel="index">
+                    <span itemprop="name">学习收集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp; 已经有一个多月没更新博客了,这个月确实很忙。毕业以来第一次完整负责一个项目，第一次做小程序，第一次部署正式环境，第一次周六加班（我们公司确实不怎么加班哈哈），这段时间确实又让我收获颇多，起码不再像几个月前那样，一个刚毕业的人四处充满疑惑，小心翼翼的打代码，生怕给别人带来麻烦。</p>
+<p>&emsp; 可能因为性格慢热，在熟悉了环境，熟悉了同事，也得到老大的认可的情况下，我开始充满信心和热情去完成我的工作，有疑问的环节依然谦虚的请教，有不满意的地方也平和的提出来。当然，我依旧还有很多地方待提高和完善，知识学习是一方面，还有一方面是自己的脾气，就比如这次小程序上线那天，小程序码识别失败，那天早上我也很着急，排查问题都搞定自己焦头烂耳，我的测试同事过来询问我还要多久才能修复，瞬间我便管不住自己的情绪，带着怒气问为什么你们测试没测出来？后面想想确实是自己的锅，小程序码本来就不能在体验版上测，因为还没发布。今后还需好好管理下自己的脾气……<br>下面是开发小程序的过程踩过的一些坑：<br></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2019/01/18/20181222/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -577,153 +880,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/20181222/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/22/20181222/" itemprop="url">小程序开发初体验</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T19:49:08+08:00">
-                2018-12-22 19:49:08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习收集/" itemprop="url" rel="index">
-                    <span itemprop="name">学习收集</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp; 已经有一个多月没更新博客了,这个月确实很忙。毕业以来第一次完整负责一个项目，第一次做小程序，第一次部署正式环境，第一次周六加班（我们公司确实不怎么加班哈哈），这段时间确实又让我收获颇多，起码不再像几个月前那样，一个刚毕业的人四处充满疑惑，小心翼翼的打代码，生怕给别人带来麻烦。</p>
-<p>&emsp; 可能因为性格慢热，在熟悉了环境，熟悉了同事，也得到老大的认可的情况下，我开始充满信心和热情去完成我的工作，有疑问的环节依然谦虚的请教，有不满意的地方也平和的提出来。当然，我依旧还有很多地方待提高和完善，知识学习是一方面，还有一方面是自己的脾气，就比如这次小程序上线那天，小程序码识别失败，那天早上我也很着急，排查问题都搞定自己焦头烂耳，我的测试同事过来询问我还要多久才能修复，瞬间我便管不住自己的情绪，带着怒气问为什么你们测试没测出来？后面想想确实是自己的锅，小程序码本来就不能在体验版上测，因为还没发布。今后还需好好管理下自己的脾气……<br>下面是开发小程序的过程踩过的一些坑：<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/22/20181222/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/20181108/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -862,154 +1018,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/20181107/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/11/08/20181107/" itemprop="url">laravel5.5+dingo+JWT开发后台API</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T20:21:37+08:00">
-                2018-11-08 20:21:37
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习收集/" itemprop="url" rel="index">
-                    <span itemprop="name">学习收集</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>dingo api 中文文档： <a href="https://www.bookstack.cn/read/dingo-api-wiki-zh/README.md" target="_blank" rel="noopener">https://www.bookstack.cn/read/dingo-api-wiki-zh/README.md</a><br>Laravel中使用JWT：<a href="https://laravel-china.org/articles/10885/full-use-of-jwt" target="_blank" rel="noopener">https://laravel-china.org/articles/10885/full-use-of-jwt</a><br>辅助文章：               <a href="https://www.jianshu.com/p/62b0c4d75e59" target="_blank" rel="noopener">https://www.jianshu.com/p/62b0c4d75e59</a></p>
-<blockquote>
-<p>参考<a href="https://www.jianshu.com/p/62b0c4d75e59" target="_blank" rel="noopener">https://www.jianshu.com/p/62b0c4d75e59</a> 这篇文章基本就能搭建出环境，我使用的版本跟他一样 “dingo/api”: “2.0.0-alpha1”,”tymon/jwt-auth”: “^1.0.0-rc.1”，不知道别的版本有啥大的区别，但是网上找的其他一些文章使用的是旧的版本，jwt封装的东西路径可能不一样，可能会保错，有些文档还说要手动添加Tymon\JWTAuth\Providers\LaravelServiceProvider::class和Dingo\Api\Provider\LaravelServiceProvider::class，其实新版本不需要。<br></p></blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/11/08/20181107/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1064,7 +1072,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
