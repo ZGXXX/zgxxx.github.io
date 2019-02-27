@@ -378,7 +378,7 @@
 <p>深拷贝：赋值完全复制，两个对象完全独立，其中一个对象的属性做出改变时不会影响到另一个。</p>
 <p>浅拷贝：引用赋值，相对于取了一个别名，其中一个对象属性做出修改会影响到另一个。</p>
 <h3 id="对象的调用"><a href="#对象的调用" class="headerlink" title="对象的调用"></a>对象的调用</h3><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">a</span></span>&#123;</span><br><span class="line">	<span class="keyword">var</span> $abc=<span class="string">"ABC"</span>;</span><br><span class="line">&#125;</span><br><span class="line">$b=<span class="keyword">new</span> a;</span><br><span class="line">$c=$b;</span><br><span class="line"><span class="keyword">echo</span> $b-&gt;abc;<span class="comment">//这里输出ABC</span></span><br><span class="line"><span class="keyword">echo</span> $c-&gt;abc;<span class="comment">//这里输出ABC</span></span><br><span class="line">$b-&gt;abc=<span class="string">"DEF"</span>;</span><br><span class="line"><span class="keyword">echo</span> $c-&gt;abc;<span class="comment">//这里输出DEF</span></span><br></pre></td></tr></table></figure>
-<p>对象赋值，浅拷贝。上列中\$b=new a; \$c=\$b; 其实等效于\$b=new a; \$c=&amp;$b,也就说取了另一个名字而已，指向的内存空间还是一样的。如果想要完全独立出来一个对象，互不影响，这就涉及到clone深拷贝</p>
+<p>对象赋值，浅拷贝。上列中$b=new a; $c=$b; 其实等效于$b=new a; $c=&amp;$b,也就说取了另一个名字而已，指向的内存空间还是一样的。如果想要完全独立出来一个对象，互不影响，这就涉及到clone深拷贝</p>
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2019/02/27/20190227/#more" rel="contents">
