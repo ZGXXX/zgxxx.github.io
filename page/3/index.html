@@ -282,6 +282,157 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/25/20180925/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/25/20180925/" itemprop="url">JWT -- JSON Web Token</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-25T18:06:18+08:00">
+                2018-09-25 18:06:18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习收集/" itemprop="url" rel="index">
+                    <span itemprop="name">学习收集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>做的项目一直都是用最经典session来实现用户认证，今天老大可能在重构H5模块发现session有问题，具体问题到时我再去看看。然后老大让我了解一下JWT,没听过这个东东，也是一脸懵逼，所以自己就在网上开始搜索相关知识，下面是一些网上找到的博客文章，进行收集整理，然后再添加自己的一些见解，具体的转载地址都在下面。</p>
+<h2 id="传统session认证流程"><a href="#传统session认证流程" class="headerlink" title="传统session认证流程"></a>传统session认证流程</h2><ol>
+<li>当用户使用用户名和密码登录之后, 服务器就会生成一个 session 文件, session 文件中保存着对这个用户的授权信息,这个文件可以储存在硬盘/内存/数据库中.</li>
+<li>同时还要生成一个对应这个 session 文件的 <strong>sessionid</strong>, 通过 sessionid 就能够找到这个 session 文件.</li>
+<li>然后将 sessionid 发送给客户端, 客户端就将 sessionid 保存起来, 保存的方式有很多种, 目前大多情况是通过 cookie 来保存 sessionid.</li>
+<li>保存之后, 当客户机以后再向服务器发送请求的时候, 请求携带上 sessionid, 这样服务器收到 sessionid 之后,自己就会在服务区上查找对应的 session 文件, 如果查找成功, 就会得到该用户的授权信息, 从而完成一次授权.</li></ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2018/09/25/20180925/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/20180916-2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -856,153 +1007,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/04/20180904/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/09/04/20180904/" itemprop="url">Laravel 实现单用户登录</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-09-04T20:16:40+08:00">
-                2018-09-04 20:16:40
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/PHP/" itemprop="url" rel="index">
-                    <span itemprop="name">PHP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>需求：同一时间只能有一个人登录账号，后登录者会把前登录者顶下线<br>参考：<a href="https://laravel-china.org/articles/2929/laravel-single-user-login" target="_blank" rel="noopener">https://laravel-china.org/articles/2929/laravel-single-user-login</a><br>    　<a href="https://segmentfault.com/a/1190000007906164" target="_blank" rel="noopener">https://segmentfault.com/a/1190000007906164</a></p>
-<h4 id="关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面"><a href="#关键思路：登录时制作一个token（根据id-ip-time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth-logout-重定向到登录页面" class="headerlink" title="关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面"></a>关键思路：登录时制作一个token（根据id,ip,time），保存在session和redis中，在检查登录的中间件加一个token检验，如果token对不上说明有第二个人在另一个地方登录导致token被改变了，旧的登录者auth::logout(),重定向到登录页面</h4><p>(原本参考laravel-china的文章使用响应后面添加withCookie来存token，后面想到cookie在浏览器关闭后会被删除，于是使用session)<br></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/09/04/20180904/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1057,7 +1061,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1079,7 +1083,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

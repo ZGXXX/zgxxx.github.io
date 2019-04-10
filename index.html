@@ -282,6 +282,188 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/10/20190410/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2019/04/10/20190410/" itemprop="url">一个1年工作经验的PHP程序员是如何被面试官虐的？</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-10T17:49:35+08:00">
+                2019-04-10 17:49:35
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>​    首先需要说明的一点，本人只是一个毕业一年，只有一年工作经验的普通PHPer，能力有限，这篇文章只是将我这几周来的感受和体验分享出来，希望能给许多像我一样，或者互联网行业的新手带来一些收获，当然哪里说的不对或不足还是希望大神们可以加以点评补充。</p>
+<p>​    金三银四，每年这个时候都有很多人想借此机会跳槽或者投身某个行业，目的很明确：需求更好的环境，兑现自己的价值。特别是近十年来非常火爆的互联网行业，无论是刚毕业的，敲代码敲了几年的，还是跨行进入IT行业的，都希望自己能“拿高薪，学知识，享福利”，而如今，高校扩招，IT门槛降低也导致市场太多“低技术，高目标”的幼年程序猿（我也是其中之一），再加上今年互联网寒冬，僧多粥少，想要寻求一个面试机会都不容易，更别说拿offer了。我是不甘心浪费时间在目前这家公司，具体原因不说，所以我下定决心找一份新的工作，一方面证明自己，另一方面想让自己走出舒适圈，给自己多一点挑战。</p>
+<h2 id="狼狈的三月"><a href="#狼狈的三月" class="headerlink" title="狼狈的三月"></a>狼狈的三月</h2><p>​    一开始心高气傲的我，用半天时间把自己的简历整理了一遍，那时候我的简历应该还是不错的（后续文章会详细描述如何优化简历），第二天开始在Boss直聘和拉勾上开始投递简历，一开始投递的是广州地区PHP的1-3年开发岗位，虽然反馈比例不高，但还是很幸运收到几个面试邀请。接着我留了两天时间给自己复习，其实也就是在网上Google一下PHP面试题，打开十几个标签页各种面试题，这就是我所谓的“多刷题”操作，结果可想而知，看的东西很乱导致去面试那天基本忘的七七八八，有很多还只是记住一些答案，压根就没清楚，惨状见下面具体面试。</p>
+<h3 id="准备不充分-–-第一轮不过"><a href="#准备不充分-–-第一轮不过" class="headerlink" title="准备不充分 – 第一轮不过"></a>准备不充分 – 第一轮不过</h3><p>​    第一家，广州琶洲一家环境超级好，福利也不错，主营美颜APP的公司，这也是我最感遗憾的一次面试机会。一开始有笔试，主要内容有点偏向C语言那方面，PHP的几乎没有，仅靠大学的模糊知识写了一些答案，具体的时间有点久忘记了，这里就不详细说笔试内容。主要是第一轮面试：</p>
+<ul>
+<li>第一个问题：Redis的5种数据类型，只答了一个String。</li>
+<li>第二个问题：你知道Redis怎么做到数据落地，同步数据库吗？连数据类型都不知道，我只能说不清楚，没用过。</li>
+<li>第三个问题：如果数据库量很大，你怎么优化？我的回答：做好索引，mysql语句优化。</li>
+<li>第四个问题：在工作中你做了哪些mysql语句优化？我的回答：我用where in（id1,id2…）来做优化。。。</li>
+</ul>
+<blockquote>
+<p>一年的PHP开发中其实我没怎么用过Redis，就简单的用过String（也看出我真的菜）</p>
+<p>其实where in那个是Laravel ORM预加载使用where in来解决N + 1问题（具体可以看Larave手册），where in并不比left join效率高    </p>
+</blockquote>
+<p>​    最后聊了差不多20分钟，就让hr来问我一些问题，例如我对公司的印象等，应该就是走走流程，接着就让我回去等通知，当然也就没通知了。</p>
+<h3 id="基础不过关-–-第二轮不过"><a href="#基础不过关-–-第二轮不过" class="headerlink" title="基础不过关 – 第二轮不过"></a>基础不过关 – 第二轮不过</h3><p>​    第二家，深圳大学旁边一家保险业务的公司，给了我最大的打击。没有笔试题，第一轮是一个差不多和我同龄的年轻小伙来面试，问的问题很简单，基本都是网上那些面试题，比如tcp和udp的区别，三次握手，include/require的区别等，我基本都回答出来了。接着是一个头发相对稀疏，经验应该更加老道的人来面试我：</p>
+<ul>
+<li>我的简历有提到一个JWT相关的知识，所以他让我描述具体的东西，和session的区别等。项目时间有点久，我也就简单的把jwt的东西跟他说，但是明显不能满足他，一直问到底层，那时候我就很慌了，更加想不起来了。</li>
+<li>PHP这些框架是怎么实现文件自动加载的？我回答魔术方法__autoload和include，对方反问了一句再具体一点，还有没有别的？我实在想不出</li>
+<li>写一个链表吧？不会。。。</li>
+</ul>
+<blockquote>
+<p>其实有关JWT的问题，面试官应该是没用过，服务器这边其实有一个私钥Secret字符串用来签名，从而达到前后加密解密验证的效果</p>
+<p>第二个问题应该是还有一个spl_autoload_register可以用来注册多个文件</p>
+<p>第三个链表，后悔大学没好好学数据结构，后续得补一补</p>
+</blockquote>
+<p>最后面试官直接给结果：很抱歉，你的不适合我们公司，希望你之后多去补一补基础知识，不要只停留在会用，要知道为什么可以这样用。</p>
+<p>虽然打击很大，但是也是这个面试让我认清自己，知道自己欠缺的知识面太多，基础太差了。</p>
+<blockquote>
+<p>还是很喜欢这种面试直接给面试结果的。</p>
+</blockquote>
+<h3 id="实践不足，知识面太窄-–-直接不过"><a href="#实践不足，知识面太窄-–-直接不过" class="headerlink" title="实践不足，知识面太窄 – 直接不过"></a>实践不足，知识面太窄 – 直接不过</h3><p>​    第三家，面试官是大牛，之前和韩天峰大神一起做朋友网的，人很好，很亲切。没有笔试，没有自我介绍，主要问我的工作经历，印象比较深的是：有没有抓过包，用什么工具，对TCP的理解，有没有用一些语言来实现TCP的过程。。。无奈自己真的没实践过，知识面太窄了，仅仅知道一点死记硬背的知识，聊了20分钟，就走了，也没结果了。</p>
+<h3 id="白高兴的offer-–-幸运过了"><a href="#白高兴的offer-–-幸运过了" class="headerlink" title="白高兴的offer – 幸运过了"></a>白高兴的offer – 幸运过了</h3><p>​    第四家，也是在深圳，招聘网上看到的公司不小，有100-500人，但发offer却是另外一家公司，网上查了一下貌似是子公司，有点外包性质。没有笔试，一个年轻的小伙子面试的我，主要问我一些有关Laravel的内容，一般手册上都有，我答的也不怎么完整。最后有个问题：你知道哪些设计模式，六大原则是什么？对设计模式我只停留在单例和工厂模式，六大原则也回答不完整。</p>
+<p>​    最后很意外让我过了，我想是公司急需人员。给的薪资也挺满意，心想面试了那么多家终于有一家肯收留我了，也答应了对方下一周就过去上班。第二天回公司第一件事就是找我们总监要辞职，要一个星期后走，结果被告知要走一个月的交接流程，其实那时候我东西基本交接的差不多了，项目也不大，但是公司给的理由是，如果你没有工作交接说明你平时没做事，工作不饱和，会影响后续招人。直接把我整懵逼了，一方面我不敢提前裸辞，很多人都是互联网寒冬，所以就等到拿了offer再提离职，这时候老东家行政放话一定要走一个月流程，新的公司又继续一个星期后到岗，怎么都没得商量。。。最后，我还是放弃那个offer，一方面想到这家公司有点外包性质，另一方面以子公司名字来发offer总让我有点担心，毕竟之前实习的时候，有一家以腾讯的名字来招聘，进去后发现是腾讯汽车代理商。。。</p>
+<h2 id="结尾"><a href="#结尾" class="headerlink" title="结尾"></a>结尾</h2><p>​    以上便是三月份我面试过比较印象深刻的公司，基本都是被虐了，当然无非都是自己没有好好准备，基础不好的问题，导致浪费了很多机会。所以在此还是要告诫大家，如果下定决心要走人，要做好十足的准备，这种准备不应该只是所谓的刷面试题，后续我会另外开一篇文章用来具体讲述我在多次面试失败后，如何花两个星期做到——”有计划， 高效率，优简历“，最后成功拿到自己心仪的offer。</p>
+<blockquote>
+<p>有计划——如果规划好每天的学习目标，主要有操作系统，计算机网络，mysql等近10个方面知识</p>
+<p>高效率——我会介绍我如何高效记住一些核心知识，尽可能覆盖面试知识点</p>
+<p>优简历——面试是第一步，简历是最关键的，我会介绍我是如何优化自己的简历</p>
+</blockquote>
+<p>​    三月份投的简历应该有上百家，反馈的十几家，给面试的应该就只有七八个吧，除了上面说的几家其他的都是一些外包或创业公司，甚至有人找过我要我跟他们一起创业，和一个前端实习生一起开发小程序（笑哭）。总之目前这种市场状况不好，但是还是有机会拿到面试机会的，如果你刚毕业，最好走校招，如果你和我一样，一两年工作经验，更应该好好准备，而不是埋怨环境不好，只想不做。当然，一些985，211的大神就应该找大厂或者考研，目标更远大一点，我是比较考虑现实的人，目前我的实力和教育背景想要去大厂是很困难的，所以只能在条件不至于太差的中小型公司寻求成长。程序员更应该用实际行动来证明自己，脚踏实地，不要眼高手低，这便是我的个人想法。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/27/20190227/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -861,157 +1043,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/12/22/20181108/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Grayson Zhao">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="自行脑补">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/12/22/20181108/" itemprop="url">使用postman调试jwt开发的接口</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-12-22T18:42:39+08:00">
-                2018-12-22 18:42:39
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/学习收集/" itemprop="url" rel="index">
-                    <span itemprop="name">学习收集</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>上一篇博客文章<a href="https://zgxxx.github.io/2018/11/08/20181107/" target="_blank" rel="noopener">https://zgxxx.github.io/2018/11/08/20181107/</a> 介绍了laravel使用dingo+jwt开发API的几个步骤，那么在实际操作中，我们需要测试API</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$api = app(&apos;Dingo\Api\Routing\Router&apos;);</span><br><span class="line">$api-&gt;version(&apos;v1&apos;, [&apos;namespace&apos; =&gt; &apos;App\Http\Controllers\V1&apos;], function ($api) &#123;</span><br><span class="line">    $api-&gt;post(&apos;register&apos;, &apos;AuthController@register&apos;);</span><br><span class="line">    $api-&gt;post(&apos;login&apos;, &apos;AuthController@login&apos;);</span><br><span class="line">    $api-&gt;post(&apos;logout&apos;, &apos;AuthController@logout&apos;);</span><br><span class="line">    $api-&gt;post(&apos;refresh&apos;, &apos;AuthController@refresh&apos;);</span><br><span class="line">    $api-&gt;post(&apos;me&apos;, &apos;AuthController@me&apos;);</span><br><span class="line">    $api-&gt;get(&apos;test&apos;, &apos;AuthController@test&apos;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>设置了这几个路由，对应的url类似这样：<a href="http://www.yourweb.com/api/me" target="_blank" rel="noopener">http://www.yourweb.com/api/me</a> 使用postman来调试这些API。</p>
-<h2 id="请求API的大致流程"><a href="#请求API的大致流程" class="headerlink" title="请求API的大致流程"></a>请求API的大致流程</h2><p>我们使用jwt代替session，首先是通过登录（jwt的attempt方法验证账号密码），成功后会返回一个JWT，我们把这个字符串统一叫做token,这个token需要我们客户端保存起来，然后后面需要认证的接口就在请求头里带上这个token，后台验证正确后就会进行下一操作，如果token错误，或者过期就返回401或500错误，拒绝后面的操作。</p>
-<blockquote>
-<p>前端可以保存在localStorage,小程序可以 使用wx.setStorageSync保存<br></p></blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/12/22/20181108/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1066,7 +1097,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -1088,7 +1119,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">9</span>
+                  <span class="site-state-item-count">10</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
