@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP,面试," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自行脑补" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言前一篇文章讲述了我在三月份毫无准备就去面试的后果，一开始心态真的爆炸，但是又不服气，一想到每次回来后家人朋友问我面试结果的期待脸，越觉得必须付出的行动来证明自己了。  面经传送门：一个1年工作经验的PHP程序员是如何被面试官虐的？  下面是我花费两个星期做的准备，主要分三部分：  有计划——计划好每天要复习的知识模块（内容较多） 高效率——从整体到细节，着重把知识点“手写”到自己的电脑记录本">
+<meta name="keywords" content="PHP,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自行脑补">
+<meta property="og:url" content="http://yoursite.com/2019/04/12/20190412/index.html">
+<meta property="og:site_name" content="自行脑补">
+<meta property="og:description" content="前言前一篇文章讲述了我在三月份毫无准备就去面试的后果，一开始心态真的爆炸，但是又不服气，一想到每次回来后家人朋友问我面试结果的期待脸，越觉得必须付出的行动来证明自己了。  面经传送门：一个1年工作经验的PHP程序员是如何被面试官虐的？  下面是我花费两个星期做的准备，主要分三部分：  有计划——计划好每天要复习的知识模块（内容较多） 高效率——从整体到细节，着重把知识点“手写”到自己的电脑记录本">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-04-12T09:11:54.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="自行脑补">
+<meta name="twitter:description" content="前言前一篇文章讲述了我在三月份毫无准备就去面试的后果，一开始心态真的爆炸，但是又不服气，一想到每次回来后家人朋友问我面试结果的期待脸，越觉得必须付出的行动来证明自己了。  面经传送门：一个1年工作经验的PHP程序员是如何被面试官虐的？  下面是我花费两个星期做的准备，主要分三部分：  有计划——计划好每天要复习的知识模块（内容较多） 高效率——从整体到细节，着重把知识点“手写”到自己的电脑记录本">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/12/20190412/"/>
+
+
+
+
+
+  <title> | 自行脑补</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">自行脑补</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            影视
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/12/20190412/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline"></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-04-12T16:55:11+08:00">
+                2019-04-12 16:55:11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/PHP/" itemprop="url" rel="index">
+                    <span itemprop="name">PHP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2019/04/12/20190412/" class="leancloud_visitors" data-flag-title="">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>前一篇文章讲述了我在三月份毫无准备就去面试的后果，一开始心态真的爆炸，但是又不服气，一想到每次回来后家人朋友问我面试结果的期待脸，越觉得必须付出的行动来证明自己了。</p>
+<blockquote>
+<p>面经传送门：<a href="https://zgxxx.github.io/2019/04/10/20190410/" target="_blank" rel="noopener">一个1年工作经验的PHP程序员是如何被面试官虐的？</a></p>
+</blockquote>
+<p>下面是我花费两个星期做的准备，主要分三部分：</p>
+<ul>
+<li>有计划——计划好每天要复习的知识模块（内容较多）</li>
+<li>高效率——从整体到细节，着重把知识点“手写”到自己的电脑记录本</li>
+<li>优简历——展示你的项目亮点，难点</li>
+</ul>
+<blockquote>
+<p>下面的文章和网站链接我都会注明出处，如果有问题请联系我，我会及时修改或撤销</p>
+</blockquote>
+<h2 id="有计划"><a href="#有计划" class="headerlink" title="有计划"></a>有计划</h2><p>反思：为什么好多知识看过后不能记住，面试一紧张更加想不起？一方面自己没有深入学习，另一方面复习过程杂乱，和写代码一个道理，如果你的业务逻辑和其他乱七八糟的都放在控制器上，代码一多你要调用某个方法可能就会让你抓狂，所以一般采取controller和server分层，同理，我们最好提前做好计划，分种类，分层次来学习。</p>
+<blockquote>
+<p>复习前如果很迷茫，可以网上Google一下面试知识点，看到的无非都是操作系统，计算机网络，数据结构，mysql，设计模式，Linux，Redis，再者根据你所学语言方面的知识和简历，例如我求职PHP，简历上有写Larvel框架，那就再加PHP基础，框架Laravel，服务器nginx。</p>
+</blockquote>
+<a id="more"></a>
+<h3 id="第一天：操作系统"><a href="#第一天：操作系统" class="headerlink" title="第一天：操作系统"></a>第一天：操作系统</h3><p>如果你是科班出身，那应该对操作系统不陌生，至少在高校里面是学过这门课程的。但估计很多人像我一样，后悔没去好好学这门课，或者工作上用不上就抛弃它了（PHP更是如此），我要说的是操作系统很重要，就以我面试了几家公司来说，基本如果你答出操作系统相关知识点基本都是加分的。</p>
+<ol>
+<li>进程和线程的概念，以及两者的区别</li>
+<li>什么是上下文切换</li>
+<li>多进程和多线程各自的优势（可以Google一下有关php-fpm和nginx进程）</li>
+<li>进程通信方式</li>
+<li>进程基本状态</li>
+<li>抢占式调度和非抢占式调度</li>
+<li>进程线程同步，死锁</li>
+<li>理解协程</li>
+</ol>
+<p>附加帮助我整理这些知识的网站和博客文章：</p>
+<p><a href="https://wdxtub.com/interview/14520847747820.html" target="_blank" rel="noopener">小土刀的面试刷题笔记——操作系统</a></p>
+<p><a href="https://hit-alibaba.github.io/interview/basic/arch/Concurrency.html" target="_blank" rel="noopener">并发技术·笔试面试知识整理</a></p>
+<blockquote>
+<p>这里推荐有精力的朋友可以看下《Linux高性能服务器编程》，粗略看下8，9，10，13，14章，以及《深入理解计算机系统》的第1章和第12章，我就是结合这两本书，记住并理解简单的知识点，后续我还要花时间去深入阅读。</p>
+</blockquote>
+<h3 id="第二天：计算机网络"><a href="#第二天：计算机网络" class="headerlink" title="第二天：计算机网络"></a>第二天：计算机网络</h3><p>计算机网络可以说是大多数程序员需要学习的大课程，特别是PHPer这些web打交道的程序员。当然，计算机网络太底层的东西很枯燥很难懂，我只针对一些比较常见，比较基础的知识面来学习。</p>
+<ol>
+<li>计算机网络体系包括TCP/IP体系结构，五层协议体系结构</li>
+<li>TCP，UDP</li>
+<li>三次握手，四次握手（过程要熟悉，能清晰描述）</li>
+<li>TCP协议如何保证可靠传输（包括重传，流量控制，拥塞控制，定时器等知识点要了解）</li>
+</ol>
+<p>附加帮助我整理这些知识的网站和博客文章：</p>
+<p><a href="https://wdxtub.com/interview/14520847385821.html" target="_blank" rel="noopener">小土刀的面试刷题笔记——网络</a></p>
+<p><a href="https://hit-alibaba.github.io/interview/basic/network/TCP.html" target="_blank" rel="noopener">TCP协议·笔试面试知识整理</a></p>
+<p>复习完这些基础的知识后，试着要去了解稍微底层一点的东西，因为很多面试官喜欢由浅入深地问，如果能答出一两点基本都是加分的</p>
+<p>推荐一篇很好的文章，仔细读完会有很大的收获：</p>
+<p><a href="https://coolshell.cn/articles/11564.html" target="_blank" rel="noopener">TCP 的那些事儿（上）</a></p>
+<h3 id="第三天：数据结构"><a href="#第三天：数据结构" class="headerlink" title="第三天：数据结构"></a>第三天：数据结构</h3><p>很多人在大学里面都学过这门课程，也是很多程序员的启蒙课程，自然很重要，（大学唯一一次挂科就是它了。。。）</p>
+<p>从事PHP工作的朋友应该都用不上它，所以这也是一个很容易被忽视的基础知识点，自然有很多大公司面试的时候很注重这方面的基础，特别是应届毕业生。我复习这方面的知识是重新翻开我大学的课本，把其中比较重要的东西手写几遍。</p>
+<blockquote>
+<p>我不久前面试过一家要我手写链表，结果早就忘了，没写出来</p>
+</blockquote>
+<ol>
+<li>队列，循环队列，栈，单链表等，要理解，最好多手写几遍</li>
+<li>树和图，着重复习二叉树方面的知识，例如前中后遍历；B树，B+树，红黑树最好要了解一下</li>
+<li>排序算法，冒泡排序必须很熟悉，其他几种常见的算法：简单选择排序，直接插入排序，快速排序也要知道</li>
+</ol>
+<blockquote>
+<p>冒泡排序可以了解下如何优化改进，有些面试官会问，如果答不出他会提示你怎么做，考察你的思考能力</p>
+</blockquote>
+<p>关于数据结构的参考资料基本Google一下就有很多（顺便说下，21世纪程序员还是少用某度），大学的课程书是最好的，一般大学的数据结构都是面向学生的，还是很基础，很好理解的。</p>
+<h3 id="第四天：数据库mysql"><a href="#第四天：数据库mysql" class="headerlink" title="第四天：数据库mysql"></a>第四天：数据库mysql</h3><p>说实话，我觉得绝大多数程序员都是在CURD，学那么多东西很大方面也是为了辅助最后的curd。所以数据库知识的重要性毋庸置疑，后面我打算买本《高性能MySQL》来提升自己这方面的能力。</p>
+<ol>
+<li>基础的增删改查操作</li>
+<li>存储引擎MyISAM和InnoDB</li>
+<li>理解索引数据结构，即B+树方面的知识    参考:<a href="https://www.kancloud.cn/kancloud/theory-of-mysql-index/41850" target="_blank" rel="noopener">InnoDB索引实现·MySQL索引背后的数据结构及算法原理·看云</a></li>
+<li>mysql语句优化，着重索引优化，explain查看索引情况    参考:<a href="https://segmentfault.com/a/1190000009717352" target="_blank" rel="noopener">Mysql索引优化</a></li>
+<li>事务四大特性</li>
+<li>隔离级别</li>
+<li>脏读，不可重复读，幻读</li>
+<li>了解共享锁，排他锁，死锁</li>
+<li>了解主从复制原理，分库分表</li>
+</ol>
+<h3 id="第五天：nginx和PHP-fpm"><a href="#第五天：nginx和PHP-fpm" class="headerlink" title="第五天：nginx和PHP-fpm"></a>第五天：nginx和PHP-fpm</h3><p>nginx和php-fpm应该算是PHP程序员接触比较多，但是可能没有去深入了解过，有些面试官喜欢结合nginx，php-fpm和操作系统进程方面的知识来考察。</p>
+<ol>
+<li>日常用到的nginx配置语法，常用的变量</li>
+<li>nginx常见的参数优化    参考:<a href="https://segmentfault.com/a/1190000011405320" target="_blank" rel="noopener">Nginx高并发下的优化</a></li>
+<li>nginx负载均衡，访问控制，防盗链，设置静态文件过期时间等</li>
+<li>php-fpm工作流程</li>
+<li>php-fpm进程管理（静态和动态）</li>
+</ol>
+<p>可以Google了解下php-fpm和nginx各自的进程管理模式，参考文章：<a href="https://segmentfault.com/q/1010000003901360" target="_blank" rel="noopener">Nginx内部有使用多线程吗？</a></p>
+<p>面试过程可能会问到网站负载低，访问慢怎么排查，参考：<a href="https://blog.51cto.com/wwdhks/798321" target="_blank" rel="noopener">论坛偶尔出现负载低但是访问很慢排查思路</a></p>
+<h3 id="第六天：redis"><a href="#第六天：redis" class="headerlink" title="第六天：redis"></a>第六天：redis</h3><p>工作项目不大，用到redis的地方并不多，所以一直也没去学习redis，但是从面试情况看来，被问到redis的概率还是很大的，毕竟这款基于内存的数据库功能强大，市场占用率很高。</p>
+<ol>
+<li>与memcached的区别</li>
+<li>5种基本的数据结构以及各自的使用场景，最好能结合自己项目来描述</li>
+<li>持久化，RDB和AOF   参考： <a href="https://juejin.im/post/5c98d656e51d4542e812f2ee" target="_blank" rel="noopener">面试中经常被问到的 Redis 持久化与恢复</a></li>
+<li>如何与mysql保持数据一致    参考：<a href="https://juejin.im/post/5c96fb795188252d5f0fdff2?utm_source=coffeephp.com" target="_blank" rel="noopener">Redis和mysql数据怎么保持数据一致的？</a></li>
+</ol>
+<h3 id="第七天：Laravel"><a href="#第七天：Laravel" class="headerlink" title="第七天：Laravel"></a>第七天：Laravel</h3><p>由于我自己是一直用Laravel框架开发的，简历里面的项目也多处标明Larvel，所以这里就介绍Larvel相关的知识，你对哪个框架熟悉就去做相应的复习，基本Google和手册都有。</p>
+<ol>
+<li>Laravel生命周期</li>
+<li>什么是服务容器，服务提供器，Facade门面</li>
+<li>依赖注入</li>
+<li>中间件，异常处理，ORM等手册上的知识</li>
+</ol>
+<h3 id="第八天：设计模式"><a href="#第八天：设计模式" class="headerlink" title="第八天：设计模式"></a>第八天：设计模式</h3><p>看一个人的代码水平，可以从是否灵活使用设计模式看出来的。写代码也是一门艺术，好的代码低耦合，易扩展，设计模式的理解和使用也决定了你的代码水平。这里推荐一本《大话设计模式》，目前我只看了一点点，对于我这样的菜鸟觉得还不错，后面需抽点时间好好看看。</p>
+<ol>
+<li>六大原则，着重理解，最好能清晰口述</li>
+<li>结合你的项目经验描述几个设计模式。常见的有单例，三大工厂，观察者，策略等</li>
+</ol>
+<blockquote>
+<p>有一次面试官问我简单工厂模式是不是符合六大原则之一开闭原则？我答不出来，随便选了个符合。。。实际简单工厂是不符合开闭原则的，这就涉及到你开闭原则的理解。</p>
+</blockquote>
+<h3 id="第九天：PHP内核基础知识"><a href="#第九天：PHP内核基础知识" class="headerlink" title="第九天：PHP内核基础知识"></a>第九天：PHP内核基础知识</h3><p>真正要读懂PHP内核的人应该很少，大多数人都没时间和精力去研究底层，毕竟PHP一直以开发效率高著称，只要底层有人写好给广大程序员用就好了。确实是这样，但是我记得有个面试过我的大佬跟我说，很多东西不要只会用，要多想想为什么可以这样用，PHP语言我觉得也是一样，虽然现在能力有限，但我可以提前把一些比较基础，容易理解的底层知识学习一下，这不也是一种自我提升？面试的时候你也可以拿出来炫一下，说错也没关系，至少你展示出你的好学，你的认知层面。</p>
+<ol>
+<li>PHP的生命周期和zend引擎</li>
+<li>变量存储结构</li>
+<li>写时复制和引用</li>
+</ol>
+<p>参考文章：</p>
+<p><a href="http://php-internals.com/book/?p=chapt02/02-01-php-life-cycle-and-zend-engine" target="_blank" rel="noopener">深入理解PHP内核</a></p>
+<p><a href="https://www.kancloud.cn/lifei6671/php-kernel/674581" target="_blank" rel="noopener">PHP内核剖析</a></p>
+<h3 id="第十天：根据你的简历内容做复习"><a href="#第十天：根据你的简历内容做复习" class="headerlink" title="第十天：根据你的简历内容做复习"></a>第十天：根据你的简历内容做复习</h3><p>面试都是拿着你的简历来问问题的，你的简历内容会直接影响面试内容的走向，所以简历写完还要做响应的复习。</p>
+<p>我的简历有涉及rabbitMQ,elasticsearch等知识，我就对其进行简单的复习。</p>
+<p>另外很重要的一点：提前想好怎么描述你做过的项目，其中遇到什么问题，怎么解决，尽量把你好的一面展示出来，这些都可以提前写下了的，好记性不如烂笔头，下面第二部分会说到。</p>
+<h2 id="高效率"><a href="#高效率" class="headerlink" title="高效率"></a>高效率</h2><p>复习的内容实在是太多了，单单写上一部分内容都快把我的键盘打烂，手写断了。虽然有了十全的计划，但如何高效率去记住上面那么多东西是一个大问题，看看我是怎么做的。</p>
+<ul>
+<li>例如第一天复习操作系统的知识，我是早上Google了一下有关操作系统的面试知识点，然后打开几个标签页，选取内容比较齐全的。所谓“好记性不如烂笔头”，没有烂笔头，只有烂键盘，所以我选择把这些知识点一一整理到自己的电脑上，自己平时有写博客，用markdown比较多（推荐Typora），所以每天就用一个md文件把知识整理下来，基本都是手打的，很少复制黏贴。这样做，一方面让自己印象深刻，另一方面锻炼自己摘取核心内容，描述能力，这也是我能写下这么多内容的原因。</li>
+<li>每天晚上计划好明天的复习内容，可以选择睡前回顾今天学习的知识，也可以在第二天早上回顾一遍</li>
+<li>最好选择一个安静的地方，能让你认真学习的环境，我由于提交了离职申请需要一个月才能走，交接项目也很快，所以每天都在公司有计划的复习（远离手机）</li>
+</ul>
+<p>总之，真想要离职，找一份好工作，必须对自己狠一点，找到心仪的工作再好好去放松几天。其实有不少人一直在埋怨大环境不好，确实是，但有何用，想为自己菜，自己不努力找一个借口？王小波说的好：人的一切痛苦，本质上都是对自己无能的愤怒。当然运气也很重要，保持乐观，别轻易放弃。</p>
+<h2 id="优简历"><a href="#优简历" class="headerlink" title="优简历"></a>优简历</h2><p>简历不用多说，就是很重要，怎么写？其实我也是参考一篇文章的：<a href="https://segmentfault.com/a/1190000018378234" target="_blank" rel="noopener">我本以为你们会写简历</a></p>
+<p>概括一下：</p>
+<ol>
+<li><p>基本的，用PDF格式，个人信息写完整，别写精通</p>
+</li>
+<li><p>技能亮点，围绕 <em>熟悉 , 有所 , 掌握 , 了解 , 有一定心得</em>  等</p>
+<p>不要这样：</p>
+<blockquote>
+<p>熟悉PHP , 熟悉YiiLavarel框架 ( 复制粘贴 , CURD , 就是干! )<br>熟悉Linux使用 , 可以搭建XXXX环境 ( 会敲cd , ls命令 , 会apt install nginx )<br>熟悉git或svn版本管理的使用 ( 会git push , 会git pull )<br>熟悉MySQL以及对数据库的优化 ( 会select update 和 delete , 会添加索引 )<br>熟悉Redis或Memcache的使用 ( 会set key , 会get key )</p>
+</blockquote>
+<p>最好这样：</p>
+<blockquote>
+<p>PHP : 熟悉PHP语法 , 熟悉PHP面向对象 , 可以根据业务逻辑结合合适的设计模式 . 熟悉PHP SPL标准库 , 对PHP的一些高级用法有所心得体验 , 诸如pcntl多进程模块 , socket模块 . 对SWOOLE所有涉猎 , 有一些自己的积累和经验 . 对于底层 , ZendVM如何如何 。<br>Redis : 熟悉Redis常用数据结构的使用 , 可结合业务场景选择合适的数据结构 . 熟悉Redis集群 , 对集群实现方案原理有一定掌握 , 对于市面常用的集中集群方案的优缺点比较了解 . 对于底层 , 对Redis SET等底层数据结构的实现有所掌握。</p>
+</blockquote>
+</li>
+<li><p>一定要写项目亮点和难点</p>
+<blockquote>
+<p>大多数人都是这么写的 : 负责用户登录注册模块 , 后台管理 , 多角色权限控制 , 负责广告业务模块的管理和筛查(太普通，太泛了)</p>
+</blockquote>
+</li>
+</ol>
+<ul>
+<li>亮点 . 你觉得这个项目中哪一部分值得自豪或学到新东西了 . 比如项目中用到ECDH , 使用了MySQL中间件等等。</li>
+<li>难点 . 你觉得这个项目哪一部分当时难了你几天 , 然后你通过自己努力解决了以及解决方案是什么。</li>
+</ul>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>面试并不简单，不要太轻敌，做好准备，打好基础是关键。毫无准备就去投简历面试大多是浪费时间，甚至浪费进入好公司的机会。还是那句话程序员应该脚踏实地，不要眼高手低，用实际行动证明自己。</p>
+<p>我是即将入职广州一家游戏公司PHP开发岗位的程序员，2018年毕业，毕业到现在确实收获了不少，也让我看清自己，需要恶补的知识还有很多很多。欢迎大家关注我的个人博客<a href="https://zgxxx.github.io/" target="_blank" rel="noopener">https://zgxxx.github.io/</a>，比较简陋，还是希望能和万千大神交流技术问题，一起成长。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/20190410/" rel="next" title="一个1年工作经验的PHP程序员是如何被面试官虐的？">
+                <i class="fa fa-chevron-left"></i> 一个1年工作经验的PHP程序员是如何被面试官虐的？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjg1MC8xMzM4Ng"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg"
+                alt="Grayson Zhao" />
+            
+              <p class="site-author-name" itemprop="name">Grayson Zhao</p>
+              <p class="site-description motion-element" itemprop="description">难以描述，自行脑补</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#有计划"><span class="nav-number">2.</span> <span class="nav-text">有计划</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#第一天：操作系统"><span class="nav-number">2.1.</span> <span class="nav-text">第一天：操作系统</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第二天：计算机网络"><span class="nav-number">2.2.</span> <span class="nav-text">第二天：计算机网络</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第三天：数据结构"><span class="nav-number">2.3.</span> <span class="nav-text">第三天：数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第四天：数据库mysql"><span class="nav-number">2.4.</span> <span class="nav-text">第四天：数据库mysql</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第五天：nginx和PHP-fpm"><span class="nav-number">2.5.</span> <span class="nav-text">第五天：nginx和PHP-fpm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第六天：redis"><span class="nav-number">2.6.</span> <span class="nav-text">第六天：redis</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第七天：Laravel"><span class="nav-number">2.7.</span> <span class="nav-text">第七天：Laravel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第八天：设计模式"><span class="nav-number">2.8.</span> <span class="nav-text">第八天：设计模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第九天：PHP内核基础知识"><span class="nav-number">2.9.</span> <span class="nav-text">第九天：PHP内核基础知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#第十天：根据你的简历内容做复习"><span class="nav-number">2.10.</span> <span class="nav-text">第十天：根据你的简历内容做复习</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高效率"><span class="nav-number">3.</span> <span class="nav-text">高效率</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优简历"><span class="nav-number">4.</span> <span class="nav-text">优简历</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Grayson Zhao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("fVloEtoTn7ddoJHeNbvWEGSL-gzGzoHsz", "MziEVqImw6rIC8dG60J2Nu8B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
