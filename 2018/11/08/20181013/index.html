@@ -1,0 +1,975 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="PHP,Laravel," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="自行脑补" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="前言&amp;emsp; 老实说，第一次老大让我看laravel框架手册的那天早上，我是很绝望的，因为真的没接触过，对我这种渣渣来说，laravel的入门门槛确实有点高了，但还是得硬着头皮看下去（虽然到现在我还有很多没看懂，也没用过）。 &amp;emsp; 后面慢慢根据公司项目的代码对laravel也慢慢熟悉起来了，但还是停留在一些表面的功能，例如依赖注入，ORM操作，用户认证这些和我项目业务逻辑相关的操作，然">
+<meta name="keywords" content="PHP,Laravel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Laravel修炼：服务容器绑定与解析">
+<meta property="og:url" content="http://yoursite.com/2018/11/08/20181013/index.html">
+<meta property="og:site_name" content="自行脑补">
+<meta property="og:description" content="前言&amp;emsp; 老实说，第一次老大让我看laravel框架手册的那天早上，我是很绝望的，因为真的没接触过，对我这种渣渣来说，laravel的入门门槛确实有点高了，但还是得硬着头皮看下去（虽然到现在我还有很多没看懂，也没用过）。 &amp;emsp; 后面慢慢根据公司项目的代码对laravel也慢慢熟悉起来了，但还是停留在一些表面的功能，例如依赖注入，ORM操作，用户认证这些和我项目业务逻辑相关的操作，然">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-11-08T12:21:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Laravel修炼：服务容器绑定与解析">
+<meta name="twitter:description" content="前言&amp;emsp; 老实说，第一次老大让我看laravel框架手册的那天早上，我是很绝望的，因为真的没接触过，对我这种渣渣来说，laravel的入门门槛确实有点高了，但还是得硬着头皮看下去（虽然到现在我还有很多没看懂，也没用过）。 &amp;emsp; 后面慢慢根据公司项目的代码对laravel也慢慢熟悉起来了，但还是停留在一些表面的功能，例如依赖注入，ORM操作，用户认证这些和我项目业务逻辑相关的操作，然">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/11/08/20181013/"/>
+
+
+
+
+
+  <title>Laravel修炼：服务容器绑定与解析 | 自行脑补</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">自行脑补</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-books">
+          <a href="/books/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-book"></i> <br />
+            
+            读书
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-movies">
+          <a href="/movies" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-film"></i> <br />
+            
+            影视
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/08/20181013/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Grayson Zhao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="自行脑补">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Laravel修炼：服务容器绑定与解析</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-08T20:21:37+08:00">
+                2018-11-08 20:21:37
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/学习收集/" itemprop="url" rel="index">
+                    <span itemprop="name">学习收集</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/11/08/20181013/" class="leancloud_visitors" data-flag-title="Laravel修炼：服务容器绑定与解析">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>&emsp; 老实说，第一次老大让我看laravel框架手册的那天早上，我是很绝望的，因为真的没接触过，对我这种渣渣来说，laravel的入门门槛确实有点高了，但还是得硬着头皮看下去（虽然到现在我还有很多没看懂，也没用过）。</p>
+<p>&emsp; 后面慢慢根据公司项目的代码对laravel也慢慢熟悉起来了，但还是停留在一些表面的功能，例如依赖注入，ORM操作，用户认证这些和我项目业务逻辑相关的操作，然后对于一些架构基础的，例如服务提供器，服务容器，中间件，Redis等这些一开始就要设置好的东西，我倒是没实际操作过（因为老大一开始就做好了），所以看手册还是有点懵。</p>
+<p>&emsp; 所以有空的时候逛逛论坛，搜下Google就发现许多关于laravel核心架构的介绍，以及如何使用的网站（确实看完后再去看手册就好理解多了），下面就根据一个我觉得不错的网站上面的教学来记录一下laravel核心架构的学习<br>网站地址：<a href="https://laraweb.net/" target="_blank" rel="noopener">https://laraweb.net/</a> 这是一个日本的网站，我觉得挺适合新手的，内容用浏览器翻译过来就ok了，毕竟日文直翻过来很好理解的</p>
+<a id="more"></a>
+<h2 id="关于服务容器"><a href="#关于服务容器" class="headerlink" title="关于服务容器"></a>关于服务容器</h2><p>&emsp; 手册上是这样介绍的：Laravel 服务容器是用于管理类的依赖和执行依赖注入的工具。依赖注入这个花俏名词实质上是指：类的依赖项通过构造函数，或者某些情况下通过「setter」方法「注入」到类中。。。。。。（真的看不懂啥意思）</p>
+<p>&emsp; 服务容器是用于管理类（服务）的实例化的机制。直接看看服务容器怎么用</p>
+<p>&emsp; 1.在服务容器中注册类（bind）</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">$this</span>-&gt;app-&gt;bind(<span class="string">'sender'</span>,<span class="string">'MailSender'</span>);</span><br><span class="line"><span class="comment">//$this-&gt;app成为服务容器。</span></span><br></pre></td></tr></table></figure>
+<p>&emsp; 2.从服务容器生成类（make）<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$sender = <span class="keyword">$this</span>-&gt;app-&gt;make(<span class="string">'sender'</span>);</span><br><span class="line"><span class="comment">//从服务容器（$this-&gt;app）创建一个sender类。</span></span><br><span class="line">在这种情况下，将返回MailSender的实例。</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 这是服务容器最简单的使用，下面是对服务容器的详细介绍（主要参考：<a href="https://www.cnblogs.com/lyzg/p/6181055.html#_label2）" target="_blank" rel="noopener">https://www.cnblogs.com/lyzg/p/6181055.html#_label2）</a></p>
+<h3 id="laravel容器基本认识"><a href="#laravel容器基本认识" class="headerlink" title="laravel容器基本认识"></a>laravel容器基本认识</h3><p>&emsp; 一开始，index.php 文件加载 Composer 生成定义的自动加载器，然后从 bootstrap/app.php 脚本中检索 Laravel 应用程序的实例。Laravel 本身采取的第一个动作是创建一个 application/ service container 的实例。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$app = <span class="keyword">new</span> Illuminate\Foundation\Application(</span><br><span class="line">    dirname(<span class="keyword">__DIR__</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 这个文件在每一次请求到达laravel框架都会执行，所创建的$app即是laravel框架的应用程序实例，它在整个请求生命周期都是唯一的。laravel提供了很多服务，包括认证，数据库，缓存，消息队列等等，$app作为一个容器管理工具，负责几乎所有服务组件的实例化以及实例的生命周期管理。当需要一个服务类来完成某个功能的时候，仅需要通过容器解析出该类型的一个实例即可。从最终的使用方式来看，laravel容器对服务实例的管理主要包括以下几个方面：</p>
+<ul>
+<li><strong>服务的绑定与解析</strong></li>
+<li><strong>服务提供者的管理</strong></li>
+<li><strong>别名的作用</strong></li>
+<li><strong>依赖注入</strong></li>
+</ul>
+<p>先了解如何在代码中获取到容器实例，再学习上面四个关键</p>
+<h4 id="如何在代码中获取到容器实例"><a href="#如何在代码中获取到容器实例" class="headerlink" title="如何在代码中获取到容器实例"></a>如何在代码中获取到容器实例</h4><p>第一种是<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$app = app();</span><br><span class="line"><span class="comment">//app这个辅助函数定义在\vendor\laravel\framework\src\Illuminate\Foundation\helper.php</span></span><br><span class="line">里面，，这个文件定义了很多help函数，并且会通过composer自动加载到项目中。</span><br><span class="line">所以，在参与http请求处理的任何代码位置都能够访问其中的函数，比如app()。</span><br></pre></td></tr></table></figure></p>
+<p>第二种是<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Route::get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> <span class="params">()</span> </span>&#123;</span><br><span class="line">    dd(App::basePath());</span><br><span class="line">    <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//这个其实是用到Facade，中文直译貌似叫门面，在config/app.php中，</span></span><br><span class="line">有一节数组aliases专门用来配置一些类型的别名，第一个就是<span class="string">'App'</span> =&gt; Illuminate\Support\Facades\App::class,</span><br><span class="line">具体的Google一下laravel有关门面的具体实现方式</span><br></pre></td></tr></table></figure></p>
+<p>第三种是</p>
+<p>&emsp; 在服务提供者里面直接使用$this-&gt;app。服务提供者后面还会介绍，现在只是引入。因为服务提供者类都是由laravel容器实例化的，这些类都继承自Illuminate\Support\ServiceProvider，它定义了一个实例属性$app：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">ServiceProvider</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> $app;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; laravel在实例化服务提供者的时候，会把laravel容器实例注入到这个$app上面。所以我们在服务提供者里面，始终能通过$this-&gt;$app访问到laravel容器实例，而不需要再使用app()函数或者App Facade了。</p>
+<h4 id="如何理解服务绑定与解析"><a href="#如何理解服务绑定与解析" class="headerlink" title="如何理解服务绑定与解析"></a>如何理解服务绑定与解析</h4><p>&emsp; 浅义层面理解，容器既然用来存储对象，那么就要有一个对象存入跟对象取出的过程。这个对象存入跟对象取出的过程在laravel里面称为服务的绑定与解析。</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">app()-&gt;bind(<span class="string">'service'</span>, <span class="string">'this is service1'</span>);</span><br><span class="line"></span><br><span class="line">app()-&gt;bind(<span class="string">'service2'</span>, [</span><br><span class="line">    <span class="string">'hi'</span> =&gt; <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="comment">//say hi</span></span><br><span class="line">    &#125;</span><br><span class="line">]);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Service</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">app()-&gt;bind(<span class="string">'service3'</span>, <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Service();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>&emsp; 还有一个单例绑定singleton，是bind的一种特殊情况（第三个参数为true）,绑定到容器的对象只会被解析一次，之后的调用都返回相同的实例<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">singleton</span><span class="params">($abstract, $concrete = null)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="keyword">$this</span>-&gt;bind($abstract, $concrete, <span class="keyword">true</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 在绑定的时候，我们可以直接绑定已经初始化好的数据（基本类型、数组、对象实例），还可以用匿名函数来绑定。用匿名函数的好处在于，这个服务绑定到容器以后，并不会立即产生服务最终的对象，只有在这个服务解析的时候，匿名函数才会执行，此时才会产生这个服务对应的服务实例。</p>
+<p>&emsp; 实际上，当我们使用singleton，bind方法以及数组形式，（这三个方法是后面要介绍的绑定的方法），进行服务绑定的时候，如果绑定的服务形式，不是一个匿名函数，也会在laravel内部用一个匿名函数包装起来，这样的话， 不轮绑定什么内容，都能做到前面介绍的懒初始化的功能，这对于容器的性能是有好处的。这个可以从bind的源码中看到一些细节：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (! $concrete <span class="keyword">instanceof</span> Closure) &#123;</span><br><span class="line">    $concrete = <span class="keyword">$this</span>-&gt;getClosure($abstract, $concrete);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>看看bind的底层代码<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">bind</span><span class="params">($abstract, $concrete = null, $shared = false)</span></span></span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 第一个参数服务绑定名称，第二个参数服务绑定的结果（也就是闭包，得到实例），第三个参数就表示这个服务是否在多次解析的时候，始终返回第一次解析出的实例（也就是单例绑定singleton）。</p>
+<p>&emsp; 服务绑定还可以通过数组的方式：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">app()[<span class="string">'service'</span>] = <span class="function"><span class="keyword">function</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Service();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>绑定大概就这些，接下来看解析，也就是取出来用</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$service= app()-&gt;make(<span class="string">'service'</span>);</span><br></pre></td></tr></table></figure>
+<p>&emsp; 这个方法接收两个参数，第一个是服务的绑定名称和服务绑定名称的别名，如果是别名，那么就会根据服务绑定名称的别名配置，找到最终的服务绑定名称，然后进行解析；第二个参数是一个数组，最终会传递给服务绑定产生的闭包。</p>
+<p>看源码：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Resolve the given type from the container.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $abstract</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $parameters</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">make</span><span class="params">($abstract, array $parameters = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;resolve($abstract, $parameters);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Resolve the given type from the container.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $abstract</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  array  $parameters</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">resolve</span><span class="params">($abstract, $parameters = [])</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    $abstract = <span class="keyword">$this</span>-&gt;getAlias($abstract);</span><br><span class="line"></span><br><span class="line">    $needsContextualBuild = ! <span class="keyword">empty</span>($parameters) || ! is_null(</span><br><span class="line">        <span class="keyword">$this</span>-&gt;getContextualConcrete($abstract)</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If an instance of the type is currently being managed as a singleton we'll</span></span><br><span class="line">    <span class="comment">// just return an existing instance instead of instantiating new instances</span></span><br><span class="line">    <span class="comment">// so the developer can keep using the same objects instance every time.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;instances[$abstract]) &amp;&amp; ! $needsContextualBuild) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;instances[$abstract];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;with[] = $parameters;</span><br><span class="line"></span><br><span class="line">    $concrete = <span class="keyword">$this</span>-&gt;getConcrete($abstract);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// We're ready to instantiate an instance of the concrete type registered for</span></span><br><span class="line">    <span class="comment">// the binding. This will instantiate the types, as well as resolve any of</span></span><br><span class="line">    <span class="comment">// its "nested" dependencies recursively until all have gotten resolved.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isBuildable($concrete, $abstract)) &#123;</span><br><span class="line">        $object = <span class="keyword">$this</span>-&gt;build($concrete);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        $object = <span class="keyword">$this</span>-&gt;make($concrete);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we defined any extenders for this type, we'll need to spin through them</span></span><br><span class="line">    <span class="comment">// and apply them to the object being built. This allows for the extension</span></span><br><span class="line">    <span class="comment">// of services, such as changing configuration or decorating the object.</span></span><br><span class="line">    <span class="keyword">foreach</span> (<span class="keyword">$this</span>-&gt;getExtenders($abstract) <span class="keyword">as</span> $extender) &#123;</span><br><span class="line">        $object = $extender($object, <span class="keyword">$this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If the requested type is registered as a singleton we'll want to cache off</span></span><br><span class="line">    <span class="comment">// the instances in "memory" so we can return it later without creating an</span></span><br><span class="line">    <span class="comment">// entirely new instance of an object on each subsequent request for it.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isShared($abstract) &amp;&amp; ! $needsContextualBuild) &#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;instances[$abstract] = $object;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;fireResolvingCallbacks($abstract, $object);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Before returning, we will also set the resolved flag to "true" and pop off</span></span><br><span class="line">    <span class="comment">// the parameter overrides for this build. After those two things are done</span></span><br><span class="line">    <span class="comment">// we will be ready to return back the fully constructed class instance.</span></span><br><span class="line">    <span class="keyword">$this</span>-&gt;resolved[$abstract] = <span class="keyword">true</span>;</span><br><span class="line"></span><br><span class="line">    array_pop(<span class="keyword">$this</span>-&gt;with);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $object;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>第一步：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$needsContextualBuild = ! <span class="keyword">empty</span>($parameters) || ! is_null(</span><br><span class="line">    <span class="keyword">$this</span>-&gt;getContextualConcrete($abstract)</span><br><span class="line">);</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 该方法主要是区分，解析的对象是否有参数，如果有参数，还需要对参数做进一步的分析，因为传入的参数，也可能是依赖注入的，所以还需要对传入的参数进行解析；这个后面再分析。</p>
+<p>第二步：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;instances[$abstract]) &amp;&amp; ! $needsContextualBuild) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;instances[$abstract];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 如果是绑定的单例，并且不需要上面的参数依赖。我们就可以直接返回 $this-&gt;instances[$abstract]。</p>
+<p>第三步：<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">$concrete = <span class="keyword">$this</span>-&gt;getConcrete($abstract);</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Get the concrete type for a given abstract.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $abstract</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed   $concrete</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">getConcrete</span><span class="params">($abstract)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (! is_null($concrete = <span class="keyword">$this</span>-&gt;getContextualConcrete($abstract))) &#123;</span><br><span class="line">        <span class="keyword">return</span> $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If we don't have a registered resolver or concrete for the type, we'll just</span></span><br><span class="line">    <span class="comment">// assume each type is a concrete name and will attempt to resolve it as is</span></span><br><span class="line">    <span class="comment">// since the container should be able to resolve concretes automatically.</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">isset</span>(<span class="keyword">$this</span>-&gt;bindings[$abstract])) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;bindings[$abstract][<span class="string">'concrete'</span>];</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $abstract;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 这一步主要是先从绑定的上下文找，是不是可以找到绑定类；如果没有，则再从 $bindings[] 中找关联的实现类；最后还没有找到的话，就直接返回 $abstract 本身。<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// We're ready to instantiate an instance of the concrete type registered for</span></span><br><span class="line"><span class="comment">// the binding. This will instantiate the types, as well as resolve any of</span></span><br><span class="line"><span class="comment">// its "nested" dependencies recursively until all have gotten resolved.</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;isBuildable($concrete, $abstract)) &#123;</span><br><span class="line">    $object = <span class="keyword">$this</span>-&gt;build($concrete);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    $object = <span class="keyword">$this</span>-&gt;make($concrete);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Determine if the given concrete is buildable.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  mixed   $concrete</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $abstract</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> bool</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">isBuildable</span><span class="params">($concrete, $abstract)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">return</span> $concrete === $abstract || $concrete <span class="keyword">instanceof</span> Closure;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>&emsp; 如果之前找到的 $concrete 返回的是 $abstract 值，或者 $concrete 是个闭包，则执行 $this-&gt;build($concrete)，否则，表示存在嵌套依赖的情况，则采用递归的方法执行 $this-&gt;make($concrete)，直到所有的都解析完为止。</p>
+<p><em>$this-&gt;build($concrete)</em></p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Instantiate a concrete instance of the given type.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span>  string  $concrete</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> mixed</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@throws</span> \Illuminate\Contracts\Container\BindingResolutionException</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">build</span><span class="params">($concrete)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="comment">// If the concrete type is actually a Closure, we will just execute it and</span></span><br><span class="line">    <span class="comment">// hand back the results of the functions, which allows functions to be</span></span><br><span class="line">    <span class="comment">// used as resolvers for more fine-tuned resolution of these objects.</span></span><br><span class="line">    <span class="comment">// 如果传入的是闭包，则直接执行闭包函数，返回结果</span></span><br><span class="line">    <span class="keyword">if</span> ($concrete <span class="keyword">instanceof</span> Closure) &#123;</span><br><span class="line">        <span class="keyword">return</span> $concrete(<span class="keyword">$this</span>, <span class="keyword">$this</span>-&gt;getLastParameterOverride());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 利用反射机制，解析该类。</span></span><br><span class="line">    $reflector = <span class="keyword">new</span> ReflectionClass($concrete);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If the type is not instantiable, the developer is attempting to resolve</span></span><br><span class="line">    <span class="comment">// an abstract type such as an Interface of Abstract Class and there is</span></span><br><span class="line">    <span class="comment">// no binding registered for the abstractions so we need to bail out.</span></span><br><span class="line">    <span class="keyword">if</span> (! $reflector-&gt;isInstantiable()) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;notInstantiable($concrete);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">$this</span>-&gt;buildStack[] = $concrete;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取构造函数</span></span><br><span class="line">    $constructor = $reflector-&gt;getConstructor();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// If there are no constructors, that means there are no dependencies then</span></span><br><span class="line">    <span class="comment">// we can just resolve the instances of the objects right away, without</span></span><br><span class="line">    <span class="comment">// resolving any other types or dependencies out of these containers.</span></span><br><span class="line">    <span class="comment">// 如果没有构造函数，则表明没有传入参数，也就意味着不需要做对应的上下文依赖解析。</span></span><br><span class="line">    <span class="keyword">if</span> (is_null($constructor)) &#123;</span><br><span class="line">        <span class="comment">// 将 build 过程的内容 pop，然后直接构造对象输出。</span></span><br><span class="line">        array_pop(<span class="keyword">$this</span>-&gt;buildStack);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> $concrete;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 获取构造函数的参数</span></span><br><span class="line">    $dependencies = $constructor-&gt;getParameters();</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Once we have all the constructor's parameters we can create each of the</span></span><br><span class="line">    <span class="comment">// dependency instances and then use the reflection instances to make a</span></span><br><span class="line">    <span class="comment">// new instance of this class, injecting the created dependencies in.</span></span><br><span class="line">    <span class="comment">// 解析出所有上下文依赖对象，带入函数，构造对象输出</span></span><br><span class="line">    $instances = <span class="keyword">$this</span>-&gt;resolveDependencies(</span><br><span class="line">        $dependencies</span><br><span class="line">    );</span><br><span class="line"></span><br><span class="line">    array_pop(<span class="keyword">$this</span>-&gt;buildStack);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> $reflector-&gt;newInstanceArgs($instances);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面这一段有关解析make的介绍主要参考：<br><a href="https://juejin.im/post/5b012f796fb9a07ace5925be" target="_blank" rel="noopener">coding01:看 Laravel 源代码了解 Container</a></p>
+<p>&emsp; 这一篇就主要学习laravel的服务容器以及它的绑定和解析，虽然目前能力无法对框架源码每一个地方都弄懂，但通过这几篇优秀的文章，我将其进行整理结合，这过程让我更加理解laravel的一些核心内容，起码别人问起来我多多少少能说出一些，这就是进步。</p>
+<p>&emsp; 后面有关服务提供者，依赖注入，中间件等内容的学习将放在后续的博客文章中</p>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/PHP/" rel="tag"># PHP</a>
+          
+            <a href="/tags/Laravel/" rel="tag"># Laravel</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/11/08/20181107/" rel="next" title="laravel5.5+dingo+JWT开发后台API">
+                <i class="fa fa-chevron-left"></i> laravel5.5+dingo+JWT开发后台API
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/12/22/20181108/" rel="prev" title="使用postman调试jwt开发的接口">
+                使用postman调试jwt开发的接口 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zNjg1MC8xMzM4Ng"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="http://img2.ph.126.net/-g1ogf5cVTi_BVAItmKEPA==/2159476021424600957.jpeg"
+                alt="Grayson Zhao" />
+            
+              <p class="site-author-name" itemprop="name">Grayson Zhao</p>
+              <p class="site-description motion-element" itemprop="description">难以描述，自行脑补</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">10</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于服务容器"><span class="nav-number">2.</span> <span class="nav-text">关于服务容器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#laravel容器基本认识"><span class="nav-number">2.1.</span> <span class="nav-text">laravel容器基本认识</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何在代码中获取到容器实例"><span class="nav-number">2.1.1.</span> <span class="nav-text">如何在代码中获取到容器实例</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何理解服务绑定与解析"><span class="nav-number">2.1.2.</span> <span class="nav-text">如何理解服务绑定与解析</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Grayson Zhao</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+<div>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+本站总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp&nbsp
+本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</div>
+
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("fVloEtoTn7ddoJHeNbvWEGSL-gzGzoHsz", "MziEVqImw6rIC8dG60J2Nu8B");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
