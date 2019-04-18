@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-12T09:20:29.972Z</updated>
+  <updated>2019-04-18T08:08:49.587Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,51 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>常用vim及git操作</title>
+    <link href="http://yoursite.com/2019/04/18/20190418/"/>
+    <id>http://yoursite.com/2019/04/18/20190418/</id>
+    <published>2019-04-18T07:15:54.596Z</published>
+    <updated>2019-04-18T08:08:49.587Z</updated>
+    
+    <content type="html"><![CDATA[<blockquote><p>虽然平时打代码没用vim，但是一般在Linux系统上要操作配置文件基本都要用到vim，完整学习vim可以Google，还可以参考：<a href="https://coolshell.cn/articles/5426.html" target="_blank" rel="noopener">简明 VIM 练级攻略</a>，git的重要性就更不用说了</p></blockquote><h2 id="比较常用的vim命令（normal模式下）"><a href="#比较常用的vim命令（normal模式下）" class="headerlink" title="比较常用的vim命令（normal模式下）"></a>比较常用的vim命令（normal模式下）</h2><ol><li><p>dd    -&gt;    删除当前行，并把删除的行存在剪贴板</p></li><li><p>p    -&gt;    粘贴剪贴板</p></li><li>yy      -&gt;        拷贝当前行</li><li>a    -&gt;    在光标后插入</li><li>o    -&gt;        当前行后插入新行</li><li>O    -&gt;    当前行前插入新行</li><li>0    -&gt;         数字0，移动光标到行头</li><li>^    -&gt;    移动光标到首字符</li><li>$    -&gt;         移动光标到行尾</li><li>u        -&gt;         撤回操作</li><li>.         -&gt;         重复上一次的命令（反撤回）</li><li>gg      -&gt;         到文件头</li><li>G       -&gt;         到文件尾</li><li>e       -&gt;          按单词移动，到下一个单词的结尾</li><li>/        -&gt;         搜索，按n可以查看下一个</li></ol><a id="more"></a><h2 id="比较实用的git命令"><a href="#比较实用的git命令" class="headerlink" title="比较实用的git命令"></a>比较实用的git命令</h2><ol><li><code>git branch dev</code> 创建分支，后面加-d则删除分支</li><li><code>git checkout dev</code> 切换分支</li><li><code>git checkout -b dev</code> 创建并切换分支</li><li><code>git stash</code> 暂时存储</li><li><code>git stash list</code> 查看存储栈</li><li><code>git stash apply</code> 取出存储栈最后一次内容(记录还在list)</li><li><code>git stash pop</code> 取出存储栈最后一次内容(记录不在list)</li><li><code>git log</code>查看历史记录</li><li><code>git reset - - hard HEAD^</code> 回退上一个版本</li><li><code>git reset - - hard 1094a</code> 回退指定版本1094a</li></ol><h2 id="生成两个ssh对应github和gitlab"><a href="#生成两个ssh对应github和gitlab" class="headerlink" title="生成两个ssh对应github和gitlab"></a>生成两个ssh对应github和gitlab</h2><p>参考：<a href="https://segmentfault.com/a/1190000014626841" target="_blank" rel="noopener">如何在同一台电脑上使用github和gitlab</a></p><p><strong>1、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;公司邮箱地址&quot;</code>生成对应的gitlab密钥：<em>id_rsa</em>和<em>id_rsa.pub</em><br><strong>2、</strong> 将gitlab公钥即<em>id_rsa.pub</em>中的内容配置到公司的gitlab上<br><strong>3、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;github地址&quot; -f ~/.ssh/github_rsa</code>生成对应的github密钥：<em>github_rsa</em>和<em>github_rsa.pub</em><br><strong>4、</strong> 将github公钥即<em>github_rsa.pub</em>中的内容配置到自己的github上<br><strong>5、</strong> 进入密钥生成的位置，创建一个<code>config</code>文件，添加配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># gitlab</span><br><span class="line">Host gitlab</span><br><span class="line">    HostName git.xxx.com #这里填你的gitlab的Host</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"># githab</span><br><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>]]></content>
+    
+    <summary type="html">
+    
+      &lt;blockquote&gt;
+&lt;p&gt;虽然平时打代码没用vim，但是一般在Linux系统上要操作配置文件基本都要用到vim，完整学习vim可以Google，还可以参考：&lt;a href=&quot;https://coolshell.cn/articles/5426.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;简明 VIM 练级攻略&lt;/a&gt;，git的重要性就更不用说了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;a href=&quot;#比较常用的vim命令（normal模式下）&quot; class=&quot;headerlink&quot; title=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;/a&gt;比较常用的vim命令（normal模式下）&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;dd    -&amp;gt;    删除当前行，并把删除的行存在剪贴板&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;p    -&amp;gt;    粘贴剪贴板&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;yy      -&amp;gt;        拷贝当前行&lt;/li&gt;
+&lt;li&gt;a    -&amp;gt;    在光标后插入&lt;/li&gt;
+&lt;li&gt;o    -&amp;gt;        当前行后插入新行&lt;/li&gt;
+&lt;li&gt;O    -&amp;gt;    当前行前插入新行&lt;/li&gt;
+&lt;li&gt;0    -&amp;gt;         数字0，移动光标到行头&lt;/li&gt;
+&lt;li&gt;^    -&amp;gt;    移动光标到首字符&lt;/li&gt;
+&lt;li&gt;$    -&amp;gt;         移动光标到行尾&lt;/li&gt;
+&lt;li&gt;u        -&amp;gt;         撤回操作&lt;/li&gt;
+&lt;li&gt;.         -&amp;gt;         重复上一次的命令（反撤回）&lt;/li&gt;
+&lt;li&gt;gg      -&amp;gt;         到文件头&lt;/li&gt;
+&lt;li&gt;G       -&amp;gt;         到文件尾&lt;/li&gt;
+&lt;li&gt;e       -&amp;gt;          按单词移动，到下一个单词的结尾&lt;/li&gt;
+&lt;li&gt;/        -&amp;gt;         搜索，按n可以查看下一个&lt;/li&gt;
+&lt;/ol&gt;
+    
+    </summary>
+    
+      <category term="学习收集" scheme="http://yoursite.com/categories/%E5%AD%A6%E4%B9%A0%E6%94%B6%E9%9B%86/"/>
+    
+    
+      <category term="辅助工具" scheme="http://yoursite.com/tags/%E8%BE%85%E5%8A%A9%E5%B7%A5%E5%85%B7/"/>
+    
+      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
+    
+  </entry>
   
   <entry>
     <title>如何&quot;有计划，高效率，优简历&quot;应对面试？</title>
@@ -522,33 +567,6 @@ var _hmt = _hmt || [];
       <category term="PHP" scheme="http://yoursite.com/tags/PHP/"/>
     
       <category term="PHP工具" scheme="http://yoursite.com/tags/PHP%E5%B7%A5%E5%85%B7/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>手残sudo -R 777 /etc(/usr)后怎么办</title>
-    <link href="http://yoursite.com/2018/08/12/20180812/"/>
-    <id>http://yoursite.com/2018/08/12/20180812/</id>
-    <published>2018-08-12T07:55:02.000Z</published>
-    <updated>2018-11-08T12:21:37.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>再也不敢随便给权限，更加不能随便-R了<br>执行<code>sudo -R 777 /etc(/usr)</code>后sudo就不能使用了，会出现错误：<code>sudo: /usr/bin/sudo must be owned by uid 0 and have the setuid bit set</code><br>（sudo: /usr/bin/sudo 必须属于用户 ID 0(的用户)并且设置 setuid 位）</p><p>填坑过程：百度+Google<br>首先重启系统，按esc进入Ubuntu<br>grub菜单（系统不同进入方法不同），反正找到recovery mode，选择root，回车进入命令行输入<code>：mount -o remount,rw /</code>（重新挂载，让我/路径文件系统为可读可写模式）</p><pre><code>chown root:root /usr/bin/sudochmod 4755 /usr/bin/sudo</code></pre><p>reboot重新开机后sudo出现另一个错误：</p><pre><code>sudo: error in /etc/sudo.conf, line 0 while loading plugin &apos;sudoers_policy&apos;sudo: /usr/lib/sudo/sudoers.so must only be writable by ownersudo: fatal error, unable to load plugins</code></pre><p>解决：(依然需要进入recovery)</p><pre><code>$ chmod 644 /usr/lib/sudo/sudoers.so$ chown -R root /usr/lib/sudo</code></pre><p>不知道啥原理，但是感谢<a href="https://blog.csdn.net/lileihappy/article/details/79214156提供的参考" target="_blank" rel="noopener">https://blog.csdn.net/lileihappy/article/details/79214156提供的参考</a><br>(吐槽下百度有些答案:<br>    Ctrl+Alt+F1进入窗口模式<br>    sudo -s(sudo都不能用了还来这个)<br>    chown root:root /usr/bin/sudo<br>    chmod 4755 /usr/bin/sudo<br>    reboot<br>)</p><script>var _hmt = _hmt || [];(function() {  var hm = document.createElement("script");  hm.src = "https://hm.baidu.com/hm.js?efa3a0b3e4ba396962eddb7275e07e31";  var s = document.getElementsByTagName("script")[0];   s.parentNode.insertBefore(hm, s);})();</script>]]></content>
-    
-    <summary type="html">
-    
-      
-      
-        &lt;p&gt;再也不敢随便给权限，更加不能随便-R了&lt;br&gt;执行&lt;code&gt;sudo -R 777 /etc(/usr)&lt;/code&gt;后sudo就不能使用了，会出现错误：&lt;code&gt;sudo: /usr/bin/sudo must be owned by uid 0 and have t
-      
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://yoursite.com/categories/Linux/"/>
-    
-    
-      <category term="Linux" scheme="http://yoursite.com/tags/Linux/"/>
-    
-      <category term="踩坑" scheme="http://yoursite.com/tags/%E8%B8%A9%E5%9D%91/"/>
     
   </entry>
   
