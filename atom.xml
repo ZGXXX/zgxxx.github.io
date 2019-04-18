@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-04-18T08:08:49.587Z</updated>
+  <updated>2019-04-18T08:22:54.270Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -21,34 +21,86 @@
     <link href="http://yoursite.com/2019/04/18/20190418/"/>
     <id>http://yoursite.com/2019/04/18/20190418/</id>
     <published>2019-04-18T07:15:54.596Z</published>
-    <updated>2019-04-18T08:08:49.587Z</updated>
+    <updated>2019-04-18T08:22:54.270Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>虽然平时打代码没用vim，但是一般在Linux系统上要操作配置文件基本都要用到vim，完整学习vim可以Google，还可以参考：<a href="https://coolshell.cn/articles/5426.html" target="_blank" rel="noopener">简明 VIM 练级攻略</a>，git的重要性就更不用说了</p></blockquote><h2 id="比较常用的vim命令（normal模式下）"><a href="#比较常用的vim命令（normal模式下）" class="headerlink" title="比较常用的vim命令（normal模式下）"></a>比较常用的vim命令（normal模式下）</h2><ol><li><p>dd    -&gt;    删除当前行，并把删除的行存在剪贴板</p></li><li><p>p    -&gt;    粘贴剪贴板</p></li><li>yy      -&gt;        拷贝当前行</li><li>a    -&gt;    在光标后插入</li><li>o    -&gt;        当前行后插入新行</li><li>O    -&gt;    当前行前插入新行</li><li>0    -&gt;         数字0，移动光标到行头</li><li>^    -&gt;    移动光标到首字符</li><li>$    -&gt;         移动光标到行尾</li><li>u        -&gt;         撤回操作</li><li>.         -&gt;         重复上一次的命令（反撤回）</li><li>gg      -&gt;         到文件头</li><li>G       -&gt;         到文件尾</li><li>e       -&gt;          按单词移动，到下一个单词的结尾</li><li>/        -&gt;         搜索，按n可以查看下一个</li></ol><a id="more"></a><h2 id="比较实用的git命令"><a href="#比较实用的git命令" class="headerlink" title="比较实用的git命令"></a>比较实用的git命令</h2><ol><li><code>git branch dev</code> 创建分支，后面加-d则删除分支</li><li><code>git checkout dev</code> 切换分支</li><li><code>git checkout -b dev</code> 创建并切换分支</li><li><code>git stash</code> 暂时存储</li><li><code>git stash list</code> 查看存储栈</li><li><code>git stash apply</code> 取出存储栈最后一次内容(记录还在list)</li><li><code>git stash pop</code> 取出存储栈最后一次内容(记录不在list)</li><li><code>git log</code>查看历史记录</li><li><code>git reset - - hard HEAD^</code> 回退上一个版本</li><li><code>git reset - - hard 1094a</code> 回退指定版本1094a</li></ol><h2 id="生成两个ssh对应github和gitlab"><a href="#生成两个ssh对应github和gitlab" class="headerlink" title="生成两个ssh对应github和gitlab"></a>生成两个ssh对应github和gitlab</h2><p>参考：<a href="https://segmentfault.com/a/1190000014626841" target="_blank" rel="noopener">如何在同一台电脑上使用github和gitlab</a></p><p><strong>1、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;公司邮箱地址&quot;</code>生成对应的gitlab密钥：<em>id_rsa</em>和<em>id_rsa.pub</em><br><strong>2、</strong> 将gitlab公钥即<em>id_rsa.pub</em>中的内容配置到公司的gitlab上<br><strong>3、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;github地址&quot; -f ~/.ssh/github_rsa</code>生成对应的github密钥：<em>github_rsa</em>和<em>github_rsa.pub</em><br><strong>4、</strong> 将github公钥即<em>github_rsa.pub</em>中的内容配置到自己的github上<br><strong>5、</strong> 进入密钥生成的位置，创建一个<code>config</code>文件，添加配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># gitlab</span><br><span class="line">Host gitlab</span><br><span class="line">    HostName git.xxx.com #这里填你的gitlab的Host</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"># githab</span><br><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>虽然平时打代码没用vim，但是一般在Linux系统上要操作配置文件基本都要用到vim，完整学习vim可以Google，还可以参考：<a href="https://coolshell.cn/articles/5426.html" target="_blank" rel="noopener">简明 VIM 练级攻略</a>，git的重要性就更不用说了</p></blockquote><h2 id="比较常用的vim命令（normal模式下）"><a href="#比较常用的vim命令（normal模式下）" class="headerlink" title="比较常用的vim命令（normal模式下）"></a>比较常用的vim命令（normal模式下）</h2><table><thead><tr><th>命令</th><th style="text-align:left">作用</th></tr></thead><tbody><tr><td>dd</td><td style="text-align:left">删除当前行，并把删除的行存在剪贴板</td></tr><tr><td>yy</td><td style="text-align:left">拷贝当前行</td></tr><tr><td>p</td><td style="text-align:left">粘贴剪贴板</td></tr><tr><td>a</td><td style="text-align:left">在光标后插入</td></tr><tr><td>o</td><td style="text-align:left">当前行后插入新行</td></tr><tr><td>O</td><td style="text-align:left">当前行前插入新行</td></tr><tr><td>0</td><td style="text-align:left">数字0，移动光标到行头</td></tr><tr><td>^</td><td style="text-align:left">移动光标到首字符</td></tr><tr><td>$</td><td style="text-align:left">移动光标到行尾</td></tr><tr><td>u</td><td style="text-align:left">撤回操作</td></tr><tr><td>.</td><td style="text-align:left">重复上一次的命令（反撤回）</td></tr><tr><td>gg</td><td style="text-align:left">到文件头</td></tr><tr><td>G</td><td style="text-align:left">到文件尾</td></tr><tr><td>e</td><td style="text-align:left">按单词移动，到下一个单词的结尾</td></tr><tr><td>/</td><td style="text-align:left">搜索，按n可以查看下一个</td></tr></tbody></table><p>以上命令基本够我用了</p><a id="more"></a><h2 id="比较实用的git命令"><a href="#比较实用的git命令" class="headerlink" title="比较实用的git命令"></a>比较实用的git命令</h2><ol><li><code>git branch dev</code> 创建分支，后面加-d则删除分支</li><li><code>git checkout dev</code> 切换分支</li><li><code>git checkout -b dev</code> 创建并切换分支</li><li><code>git stash</code> 暂时存储</li><li><code>git stash list</code> 查看存储栈</li><li><code>git stash apply</code> 取出存储栈最后一次内容(记录还在list)</li><li><code>git stash pop</code> 取出存储栈最后一次内容(记录不在list)</li><li><code>git log</code>查看历史记录</li><li><code>git reset - - hard HEAD^</code> 回退上一个版本</li><li><code>git reset - - hard 1094a</code> 回退指定版本1094a</li></ol><h2 id="生成两个ssh对应github和gitlab"><a href="#生成两个ssh对应github和gitlab" class="headerlink" title="生成两个ssh对应github和gitlab"></a>生成两个ssh对应github和gitlab</h2><p>参考：<a href="https://segmentfault.com/a/1190000014626841" target="_blank" rel="noopener">如何在同一台电脑上使用github和gitlab</a></p><p><strong>1、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;公司邮箱地址&quot;</code>生成对应的gitlab密钥：<em>id_rsa</em>和<em>id_rsa.pub</em><br><strong>2、</strong> 将gitlab公钥即<em>id_rsa.pub</em>中的内容配置到公司的gitlab上<br><strong>3、</strong> 在gitbash中使用<code>ssh-keygen -t rsa -C &quot;github地址&quot; -f ~/.ssh/github_rsa</code>生成对应的github密钥：<em>github_rsa</em>和<em>github_rsa.pub</em><br><strong>4、</strong> 将github公钥即<em>github_rsa.pub</em>中的内容配置到自己的github上<br><strong>5、</strong> 进入密钥生成的位置，创建一个<code>config</code>文件，添加配置：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># gitlab</span><br><span class="line">Host gitlab</span><br><span class="line">    HostName git.xxx.com #这里填你的gitlab的Host</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/id_rsa</span><br><span class="line"># githab</span><br><span class="line">Host github.com</span><br><span class="line">    HostName github.com</span><br><span class="line">    User git</span><br><span class="line">    IdentityFile ~/.ssh/github_rsa</span><br></pre></td></tr></table></figure>]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;虽然平时打代码没用vim，但是一般在Linux系统上要操作配置文件基本都要用到vim，完整学习vim可以Google，还可以参考：&lt;a href=&quot;https://coolshell.cn/articles/5426.html&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;简明 VIM 练级攻略&lt;/a&gt;，git的重要性就更不用说了&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;a href=&quot;#比较常用的vim命令（normal模式下）&quot; class=&quot;headerlink&quot; title=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;/a&gt;比较常用的vim命令（normal模式下）&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;&lt;p&gt;dd    -&amp;gt;    删除当前行，并把删除的行存在剪贴板&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;p    -&amp;gt;    粘贴剪贴板&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;yy      -&amp;gt;        拷贝当前行&lt;/li&gt;
-&lt;li&gt;a    -&amp;gt;    在光标后插入&lt;/li&gt;
-&lt;li&gt;o    -&amp;gt;        当前行后插入新行&lt;/li&gt;
-&lt;li&gt;O    -&amp;gt;    当前行前插入新行&lt;/li&gt;
-&lt;li&gt;0    -&amp;gt;         数字0，移动光标到行头&lt;/li&gt;
-&lt;li&gt;^    -&amp;gt;    移动光标到首字符&lt;/li&gt;
-&lt;li&gt;$    -&amp;gt;         移动光标到行尾&lt;/li&gt;
-&lt;li&gt;u        -&amp;gt;         撤回操作&lt;/li&gt;
-&lt;li&gt;.         -&amp;gt;         重复上一次的命令（反撤回）&lt;/li&gt;
-&lt;li&gt;gg      -&amp;gt;         到文件头&lt;/li&gt;
-&lt;li&gt;G       -&amp;gt;         到文件尾&lt;/li&gt;
-&lt;li&gt;e       -&amp;gt;          按单词移动，到下一个单词的结尾&lt;/li&gt;
-&lt;li&gt;/        -&amp;gt;         搜索，按n可以查看下一个&lt;/li&gt;
-&lt;/ol&gt;
+&lt;h2 id=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;a href=&quot;#比较常用的vim命令（normal模式下）&quot; class=&quot;headerlink&quot; title=&quot;比较常用的vim命令（normal模式下）&quot;&gt;&lt;/a&gt;比较常用的vim命令（normal模式下）&lt;/h2&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;命令&lt;/th&gt;
+&lt;th style=&quot;text-align:left&quot;&gt;作用&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;dd&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;删除当前行，并把删除的行存在剪贴板&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;yy&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;拷贝当前行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;p&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;粘贴剪贴板&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;a&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;在光标后插入&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;当前行后插入新行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;O&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;当前行前插入新行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;数字0，移动光标到行头&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;^&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;移动光标到首字符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;$&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;移动光标到行尾&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;u&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;撤回操作&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;.&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;重复上一次的命令（反撤回）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;gg&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;到文件头&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;G&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;到文件尾&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;e&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;按单词移动，到下一个单词的结尾&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;/&lt;/td&gt;
+&lt;td style=&quot;text-align:left&quot;&gt;搜索，按n可以查看下一个&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;以上命令基本够我用了&lt;/p&gt;
     
     </summary>
     
